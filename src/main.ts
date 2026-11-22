@@ -59,7 +59,7 @@ import { formatNationalPopulation, nowNameForLabel } from "./format.ts";
 import { formatPopulation, PillarLabels, type LabelItem } from "./labels.ts";
 import { layoutPillars } from "./layout.ts";
 import { lerpStates, Pillars, targetStates, type HighlightStyle, type PillarState } from "./pillars.ts";
-import { stackTowns } from "./stack.ts";
+import { checkTopRanks, stackTowns } from "./stack.ts";
 import { Timeline } from "./timeline.ts";
 
 const params = new URLSearchParams(location.search);
@@ -131,6 +131,14 @@ function stackedFor(i: number) {
   const f = FRAMES[i];
   return stackTowns(data.cities, valuesForYear(data, dummy, f.year), f.year, f.stackInto ?? []);
 }
+
+// 町を積んだ年は、画面用に順位を付け直している（src/stack.ts の rerank）。1〜30位がちょうど1つずつあるかを確かめ、崩れていたら知らせる
+// （cities.json に入っている都市の範囲が足りないと崩れる）
+FRAMES.forEach((f, i) => {
+  if (!f.stackInto?.length) return;
+  const problem = checkTopRanks(stackedFor(i).values, TOP_N);
+  if (problem) console.warn(`[japan-top30-cities-navara] ${f.year}年：町を積んだあとの順位が崩れている（${problem}）`);
+});
 
 // 描く位置：重ならないように全年の柱をまとめてずらした位置（データの座標は変えない）。
 // 積んだ町はその年に別の柱として立たないので、その年の値を外してから計算する
