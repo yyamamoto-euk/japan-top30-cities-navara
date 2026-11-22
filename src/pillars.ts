@@ -85,7 +85,7 @@ export function lerpStates(
   return out;
 }
 
-type Applied = PillarState & { visible: boolean };
+type Applied = PillarState & { visible: boolean; ground: number };
 
 /** 入れ替わりの見せ方（src/main.ts で Navara の効果を足したときの id と、光の色・強さ） */
 export type HighlightStyle = {
@@ -110,6 +110,8 @@ export class Pillars {
     ids: Iterable<string>,
     private width: number,
     colorStyle: string,
+    /** 柱の根元の地面の高さ（m）。3D地形を強調して描いているので、その上に立てる（src/ground.ts） */
+    private groundAt: (id: string) => number = () => 0,
   ) {
     const color = new Color().setStyle(colorStyle);
     this.baseColor = color;
@@ -159,12 +161,13 @@ export class Pillars {
       const visible = s.height >= MIN_VISIBLE_HEIGHT && s.opacity > 0.01;
       if (!visible) {
         if (prev?.visible !== false) handle.update({ visible: false });
-        this.applied.set(id, { ...s, visible: false });
+        this.applied.set(id, { ...s, visible: false, ground: prev?.ground ?? 0 });
         continue;
       }
       const update: Parameters<typeof handle.update>[0] = {};
       if (!prev?.visible) update.visible = true;
-      if (!prev || prev.lon !== s.lon || prev.lat !== s.lat) update.geodetic = { lng: s.lon, lat: s.lat, height: 0 };
+      const ground = this.groundAt(id);
+      if (!prev || prev.lon !== s.lon || prev.lat !== s.lat || prev.ground !== ground) update.geodetic = { lng: s.lon, lat: s.lat, height: ground };
       if (!prev || prev.height !== s.height) {
         // geodetic の座標系は Y が上。箱は中心が原点なので、高さの半分だけ持ち上げる
         update.scale = { x: this.width, y: s.height, z: this.width };
@@ -178,7 +181,7 @@ export class Pillars {
         opacity = s.opacity;
       }
       if (Object.keys(update).length > 0) handle.update(update);
-      this.applied.set(id, { ...s, opacity, visible: true });
+      this.applied.set(id, { ...s, opacity, visible: true, ground });
     }
   }
 }

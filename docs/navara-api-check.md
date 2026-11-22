@@ -215,3 +215,17 @@ https://navara.world/docs/ は最新リリース（0.3.1）に、Nightly 版の�
 - 光：`box.emissiveColor`（`Color`）と `box.emissiveIntensity`。SelectiveBloom は発光（emissive）の出力をもとににじませる。発光の色は柱の色に足し合わされるので、青い柱に黄色の光を強く足すと白っぽくなり、弱いと明るい地図の上で見えにくかった。そのため、入った柱は色（`box.color`）そのものをオレンジに変え、光は軽く添えた
 - 輪郭：SelectiveOutline は、半透明（不透明度 0.35）の柱にも付いた
 - 付け外し：`handle.update({ box: { effectIds, emissiveColor, emissiveIntensity, color } })`（部分の更新）
+
+## 3D地形（2026-11-22、0.3.1）
+
+src/main.ts の地形と光、src/ground.ts の柱の根元。型定義（d.ts）、スキルの recipes.md、ライブラリの中身と開発サーバーでの動作で確かめた。
+
+- 地形：`view.addSource({ type: "quantized-mesh", url, maxZoom, requestVertexNormals, requestWaterMask })` と `view.addLayer({ type: "terrain", source, terrain: { ... } })`（スキル `recipes.md`）。背景地図の層より先に足す（層は足した順に描く）
+  - `maxZoom` は Re:Earth Terrain の `layer.json` の `maxzoom`（14）に合わせた
+- 高さの強調：`TerrainMaterial` の `exaggeration`（既定 1）と `exaggerationRelativeHeight`（既定 0）。描く高さは `(h - relativeHeight) * exaggeration + relativeHeight`（`three/dist/index.d.ts:11833` 付近）
+- 地面の高さ：`view.observeTerrainHeightAt({ lat, lng }, cb)`（度。`dist/index.d.ts:13337`）と `view.sampleTerrainHeight({ lat, lng })`。返る高さは強調したあとの、画面に描かれている地面の高さ（楕円体から）。開発サーバーで、松本の辺りで約6,370m（標高約590m＋ジオイド高 約40m の10倍）、東京で約716m だった。カメラが寄って細かい地形が読み込まれると、また呼ばれる
+- 光：法線のある地形は、光が無いと黒くなる（スキル SKILL.md の Lighting）。`view.addLight({ sun: { castShadow, intensity } })` と `view.addLight({ ambient: { intensity } })`（`three-default-descs` の `SunLightConfig`・`AmbientLightConfig`）。太陽の向きは `view.atmosphere.date`（`Date`）から決まるので、日時を固定した。柱は `lit: false` なので光の影響を受けない
+- クレジット：地形のクレジットは `view.attribution` に自動では入らなかった（TileJsonPlugin の背景地図とは違う）。constants.ts の CREDIT_ITEMS で足した
+- 海の波の表現（`requestWaterMask: true`）を付けると画面が真っ黒になった。地形のシェーダーが組み立てられないため。`requestWaterMask: false` にした
+- `requestWaterMask: false` でも、コンソールに地形のシェーダーの組み立ての失敗（MeshLambertMaterial、`transformDirectionByInverseViewMatrix` が無い）が出る。この関数は three.js 0.185 以降の `common.glsl.js` にあり、このリポジトリの three.js 0.184 には無い（`@navaramap/three` 0.3.1 の peerDependencies は `three >= 0.183.0`）。地形と陰影は描かれている
+- 地形を入れると、開いてから地図が出るまでが長くなった（開発サーバーで、地形なし約7秒 → あり約10〜16秒。それまでは黒い画面）

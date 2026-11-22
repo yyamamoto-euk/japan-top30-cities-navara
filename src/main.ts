@@ -1,5 +1,5 @@
 // 画面の組み立て。9つの年（frames.ts）ごとに、人口上位30の都市を柱で見せる。
-// - 背景地図（Re:Earth Papers）の上に、人口に比例した高さの柱（pillars.ts）。年を送ると柱が伸び縮みする（アニメーションは ON・OFF できる）
+// - 3D地形（Re:Earth Terrain。高さは10倍に強調）に背景地図（Re:Earth Papers）を貼り、その上に人口に比例した高さの柱（pillars.ts）。年を送ると柱が伸び縮みする（アニメーションは ON・OFF できる）
 // - 上位30の柱には、人口と当時の名前、（今の名前）のラベル（labels.ts）
 // - 画面の左に年表（timeline.ts）：年・和暦・出来事の一言・日本の総人口。クリックでその年へ
 // - 画面の下に ◀ ▶、今の年と総人口、出典の一行（controls.ts）。左下とⓘにクレジット（credits.ts）
@@ -48,11 +48,17 @@ import {
   PILLAR_GAP,
   PILLAR_WIDTH,
   TOP_N,
+  AMBIENT_INTENSITY,
+  SUN_DATE,
+  SUN_INTENSITY,
+  TERRAIN_EXAGGERATION,
+  TERRAIN_URL,
 } from "./constants.ts";
 import { topChanges } from "./changes.ts";
 import { Controls, loadAnimationSetting } from "./controls.ts";
 import { addCredits } from "./credits.ts";
 import { formatNationalPopulation, nowNameForLabel } from "./format.ts";
+import { GroundHeights } from "./ground.ts";
 import { formatPopulation, PillarLabels, type LabelItem } from "./labels.ts";
 import { layoutPillars } from "./layout.ts";
 import { lerpStates, Pillars, targetStates, type HighlightStyle, type PillarState } from "./pillars.ts";
@@ -93,6 +99,23 @@ if (import.meta.env.DEV) Object.assign(window, { view });
 // 操作・体験設計はあとで見直す（SPEC.md の未決）。止めるときは次の1行を戻す：
 // view.camera.options = { enableSpin: false, enableZoom: false, enableTilt: false };
 view.setCamera(startCamera);
+
+// --- 3D地形（Re:Earth Terrain）。背景地図はこの上に貼る（層は足した順に描くので、地形を先に足す） ---
+// 高さは TERRAIN_EXAGGERATION 倍に強調する。柱とラベルの根元は、強調したあとの地面の高さに合わせる（src/ground.ts）
+const terrain = view.addSource({
+  type: "quantized-mesh",
+  url: TERRAIN_URL,
+  maxZoom: 14, // layer.json の maxzoom
+  requestVertexNormals: true,
+  // 海の波の表現（water mask）は使わない。空の写り込みの用意（写実的な空）が無いと、地形のシェーダーが組み立てられず画面が黒くなる（0.3.1 で確認）
+  requestWaterMask: false,
+});
+const terrainLayer = view.addLayer({ type: "terrain", source: terrain, terrain: { exaggeration: TERRAIN_EXAGGERATION } });
+if (import.meta.env.DEV) Object.assign(window, { terrainLayer }); // 確認用
+// 地形の陰影には光が要る（法線のある面は、光が無いと黒くなる）。柱は光の影響を受けない（pillars.ts の lit: false）
+view.atmosphere.date = SUN_DATE;
+view.addLight({ sun: { castShadow: false, intensity: SUN_INTENSITY } });
+view.addLight({ ambient: { intensity: AMBIENT_INTENSITY } });
 
 // --- 背景地図 ---
 const basemap = await tilejson.addSource({ type: "raster-tile", url: BASEMAP_TILEJSON });
@@ -144,7 +167,13 @@ const style = {
 };
 
 // --- 柱・ラベル・ボタン ---
-const pillars = new Pillars(view, placed.keys(), PILLAR_WIDTH, PILLAR_COLOR);
+// 柱の根元の地面の高さ（src/ground.ts）。地形が読み込まれて高さが変わったら、柱とラベルを置き直す
+const ground = new GroundHeights(view, placed, () => {
+  if (tween.isRunning) return; // 動いている間は、次のフレームで新しい高さが使われる
+  pillars.apply(current);
+  labels.set(labelItemsFor(index, current));
+});
+const pillars = new Pillars(view, placed.keys(), PILLAR_WIDTH, PILLAR_COLOR, (id) => ground.at(id));
 const labels = new PillarLabels(view, overlay, container, LABEL_POSITION, LABEL_FONT_SIZE, LABEL_NAME_SCALE, LABEL_NOW_SCALE);
 const cityById = new Map(data.cities.map((c) => [c.id, c]));
 const tween = new Tween();
@@ -189,7 +218,7 @@ function labelItemsFor(i: number, states: Map<string, PillarState>): LabelItem[]
       id,
       lon: s.lon,
       lat: s.lat,
-      alt: LABEL_POSITION === "top" ? s.height : 0,
+      alt: ground.at(id) + (LABEL_POSITION === "top" ? s.height : 0),
       text: formatPopulation(v.pop),
       name: nameThen,
       nameNow: nowNameForLabel(nameThen, city?.name_now ?? null, LABEL_NOW_DISPLAY),
