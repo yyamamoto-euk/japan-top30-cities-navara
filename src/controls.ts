@@ -119,7 +119,7 @@ export class Controls {
         return span;
       };
       this.changes.append(
-        item("controls__swatch--in", `${changes.prevYear}年から上位30に入った（${changes.in}本）`),
+        item("controls__swatch--in", `${changes.prevYear}年から新たに上位30に入った（${changes.in}本）`),
         item("controls__swatch--out", `外れた（${changes.out}本）`),
       );
     }
