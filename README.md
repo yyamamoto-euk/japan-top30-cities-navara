@@ -2,6 +2,8 @@
 
 明治から令和まで、日本の人口の多い30都市の顔ぶれがどう入れ替わったかを、3D地図の上の柱で見せるアプリです。地図の描画には [Navara](https://navara.world/docs/) を使っています。
 
+*A 3D map that shows Japan's 30 most populous cities as pillars, for nine years from 1886 to 2025 (roughly every 25 years). Cities are counted as the municipalities of each year, and the numbers come from primary statistics such as the Statistical Yearbook of the Empire of Japan, the Japan Statistical Yearbook and the national census. Built with the Navara map engine. Docs are in Japanese; commands and code read as they are.*
+
 ![1886年の画面。左に年表、地図に上位30都市の柱と人口のラベル、下に年の送りボタン](docs/screenshot-1886.webp)
 
 ## 画面
