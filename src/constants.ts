@@ -146,7 +146,8 @@ export const CREDIT_LINE: (string | { text: string; url: string })[][] = [
   // 柱の位置：OpenStreetMap の市役所の点（ODbL）と、OSM に無い市は電子国土基本図（地名情報）（国土地理院。地理院地図の地名検索で取得）。
   // 国土地理院コンテンツ利用規約に従い、加工したこと（をもとに作成）を書く
   ["柱の位置：© ", { text: "OpenStreetMap", url: "https://www.openstreetmap.org/copyright" }, " contributors（ODbL）、", { text: "電子国土基本図（地名情報）（国土地理院）", url: "https://www.gsi.go.jp/kibanjoho/kibanjoho40025.html" }, "をもとに作成"],
-  ["人口：日本帝国統計年鑑・日本統計年鑑・国勢調査ほか（各年の出典）"],
+  // 人口は、1行に収まりやすいよう短くした（2026-11-23）。資料の名前は画面下の出典の行と ⓘ に全部ある
+  ["人口：統計年鑑・国勢調査ほか（各年の出典は画面下とⓘ）"],
 ];
 
 /** Navara の ⓘ ボタンの中に足すクレジット（背景地図のクレジットは TileJsonPlugin が自動で入れる。地形のクレジットは自動では入らないので、ここで足す） */

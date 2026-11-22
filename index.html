@@ -57,7 +57,8 @@
     .controls {
       position: absolute;
       left: 50%;
-      bottom: 24px;
+      /* 左下のクレジットの上に置く。--credit-h はクレジットの実際の高さ（src/credits.ts が測って入れる。折り返しても重ならないように） */
+      bottom: calc(var(--credit-bottom) + var(--credit-h) + 6px);
       transform: translateX(-50%);
       display: flex;
       align-items: center;
@@ -157,7 +158,7 @@
       position: absolute;
       left: 16px;
       top: 16px;
-      bottom: 40px;
+      bottom: calc(var(--credit-bottom) + var(--credit-h) + 19px);
       width: 250px;
       padding: 16px 12px 16px 14px;
       box-sizing: border-box;
@@ -266,11 +267,15 @@
       background: #2f6fd6;
     }
 
-    /* 左下に常に出すクレジット（src/credits.ts） */
+    /* 左下に常に出すクレジット（src/credits.ts）。下端からの距離と、1行のときの高さ（実際の高さは credits.ts が --credit-h に入れ直す） */
+    :root {
+      --credit-bottom: 4px;
+      --credit-h: 17px;
+    }
     .credit-line {
       position: absolute;
       left: 8px;
-      bottom: 4px;
+      bottom: var(--credit-bottom);
       max-width: calc(100vw - 64px);
       padding: 1px 6px;
       border-radius: 4px;

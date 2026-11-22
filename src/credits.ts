@@ -30,4 +30,10 @@ export function addCredits(view: ThreeView<DefaultDescriptions>, parent: HTMLEle
     }
   });
   parent.appendChild(line);
+
+  // 画面下のパネルと左の年表は、このクレジットの上に置く（index.html の --credit-h）。
+  // 文字の大きさや画面の幅で2行に折り返すと高くなるので、高さが変わるたびに測り直す（2026-11-23。折り返したクレジットがパネルの裏に隠れていた）
+  const setHeight = () => document.documentElement.style.setProperty("--credit-h", `${line.offsetHeight}px`);
+  new ResizeObserver(setHeight).observe(line);
+  setHeight();
 }
