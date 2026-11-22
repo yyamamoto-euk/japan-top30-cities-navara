@@ -8,6 +8,14 @@
 - 位置づけ：半分趣味、半分デモ。教育市場向けも検討（高校の地理総合・歴史総合を想定）
 - シンプルな「数字の可視化」にする。問いと章立てはやめた（2026-11-22 yyamaの指示）
 
+## 公開（2026-11-22）
+
+- 公開リポジトリは japan-top30-cities-navara（作業用の private リポジトリとは別。履歴を引き継がない）。置き場所は、ゆくゆく eukarya-biz に移す
+- GitHub Pages で公開できる形にした（vite.config.ts の base "./"、.github/workflows/deploy-pages.yml）。Pages の有効化と、main への push での自動公開は、eukarya-biz に移してから
+- README と見る人向けの文書（conditions.md、data/check/README.md）には、作者の立場（所属など）を書かない
+- 柱の座標と自治体コードに使っている国土数値情報 P34 は非商用なので、商用でも使えるデータに入れ替える方向で候補を調べている（docs/coordinates.md の「P34 を入れ替える場合の候補」）。どれにするかは yyama が決める
+- 利用条件のため再配布できない原本はリポジトリに入れない（data/raw/README.md）
+
 ## 決めたこと
 
 - 各年の上位30を対象にする（100だとラベルが読めず、データ作業も重い）
