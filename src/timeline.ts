@@ -5,8 +5,10 @@
 
 import type { Frame } from "./frames.ts";
 
-/** 年と年の最低限の間隔（px）。1行目（年・和暦）と2行目（出来事）が重ならない高さ */
+/** 年と年の最低限の間隔（px）。出来事が1行のときの高さ。出来事が2行以上の年は、その行の高さ＋ROW_SPACE だけ離す */
 const MIN_GAP = 46;
+/** 行の高さで離すときの、行と行のすき間（px） */
+const ROW_SPACE = 6;
 
 export class Timeline {
   private panel: HTMLElement;
@@ -35,7 +37,7 @@ export class Timeline {
       const item = document.createElement("button");
       item.type = "button";
       item.className = "timeline__item";
-      item.setAttribute("aria-label", `${f.year}年（${f.era}）へ。${f.event}${totalFor(f.year) ? `。総人口 ${totalFor(f.year)}` : ""}`);
+      item.setAttribute("aria-label", `${f.year}年（${f.era}）へ。${f.event.split("\n").join("")}${totalFor(f.year) ? `。総人口 ${totalFor(f.year)}` : ""}`);
       const head = document.createElement("span");
       head.className = "timeline__head";
       const year = document.createElement("span");
@@ -74,20 +76,27 @@ export class Timeline {
       if (active) item.setAttribute("aria-current", "true");
       else item.removeAttribute("aria-current");
     });
+    // 今の年は文字が大きくなり行の高さが変わるので、並べ直す
+    this.layout();
   }
 
-  /** 年の位置を決める：年数に比例させ、近すぎる年は MIN_GAP だけ離す。はみ出した分は上へ戻す */
+  /**
+   * 年の位置を決める：年数に比例させ、近すぎる年は離す。はみ出した分は上へ戻す。
+   * 離す幅は、前の年の行の高さ（出来事が2行以上なら、その分高い）＋ROW_SPACE と MIN_GAP の大きいほう
+   */
   private layout(): void {
     const height = this.list.clientHeight;
     if (height === 0) return;
     const first = this.frames[0].year;
     const span = this.frames[this.frames.length - 1].year - first;
-    const lastTop = Math.max(0, height - MIN_GAP);
+    const heights = this.items.map((item) => item.offsetHeight);
+    const gap = (i: number) => Math.max(MIN_GAP, heights[i] + ROW_SPACE); // i 番目の年と次の年の間
+    const lastTop = Math.max(0, height - Math.max(MIN_GAP, heights[heights.length - 1]));
     const tops = this.frames.map((f) => ((f.year - first) / span) * lastTop);
-    for (let i = 1; i < tops.length; i++) tops[i] = Math.max(tops[i], tops[i - 1] + MIN_GAP);
+    for (let i = 1; i < tops.length; i++) tops[i] = Math.max(tops[i], tops[i - 1] + gap(i - 1));
     if (tops[tops.length - 1] > lastTop) {
       tops[tops.length - 1] = lastTop;
-      for (let i = tops.length - 2; i >= 0; i--) tops[i] = Math.min(tops[i], tops[i + 1] - MIN_GAP);
+      for (let i = tops.length - 2; i >= 0; i--) tops[i] = Math.min(tops[i], tops[i + 1] - gap(i));
     }
     this.items.forEach((item, i) => (item.style.top = `${Math.max(0, tops[i])}px`));
   }
