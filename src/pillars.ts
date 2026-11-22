@@ -7,6 +7,7 @@ import type { BoxMeshDesc } from "@navaramap/three-default-descs";
 
 import type { Change } from "./changes.ts";
 import type { City, YearValue } from "./cities.ts";
+import { PILLAR_LIT } from "./constants.ts";
 import type { PlacedPosition } from "./layout.ts";
 
 /** 1本の柱の見た目 */
@@ -121,7 +122,7 @@ export class Pillars {
         box: { width: 1, height: 1, depth: 1, color, opacity: 1, transparent: false },
         geodetic: { lng: 0, lat: 0, height: 0 },
         scale: { x: width, y: 1, z: width },
-        lit: false,
+        lit: PILLAR_LIT,
         visible: false,
       });
       this.handles.set(id, handle);

@@ -112,7 +112,7 @@ const terrain = view.addSource({
 });
 const terrainLayer = view.addLayer({ type: "terrain", source: terrain, terrain: { exaggeration: TERRAIN_EXAGGERATION } });
 if (import.meta.env.DEV) Object.assign(window, { terrainLayer }); // 確認用
-// 地形の陰影には光が要る（法線のある面は、光が無いと黒くなる）。柱は光の影響を受けない（pillars.ts の lit: false）
+// 地形の陰影には光が要る（法線のある面は、光が無いと黒くなる）。柱も光を受ける（constants.ts の PILLAR_LIT）
 view.atmosphere.date = SUN_DATE;
 view.addLight({ sun: { castShadow: false, intensity: SUN_INTENSITY } });
 view.addLight({ ambient: { intensity: AMBIENT_INTENSITY } });

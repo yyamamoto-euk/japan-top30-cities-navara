@@ -23,6 +23,12 @@ export const PILLAR_GAP = 1_500; // 2026-11-22 に柱の幅と一緒に半分に
 /** 柱の色。仮置き */
 export const PILLAR_COLOR = "#2f6fd6";
 
+/**
+ * 柱に光を当てるか。true なら太陽の光で面ごとに明るさが変わり、細い柱でも箱の形と隣の柱との境目が見える（2026-11-22 yyamaの指示で試す）。
+ * 光は main.ts の太陽の光と全体を明るくする光（SUN_INTENSITY・AMBIENT_INTENSITY）。false に戻すと、どの面も同じ色になる
+ */
+export const PILLAR_LIT = true;
+
 /** 圏外（TOP_N 位より下）の柱の不透明度。0 = 見えない、1 = 不透明。仮置き */
 export const OUTSIDE_OPACITY = 0.35;
 
