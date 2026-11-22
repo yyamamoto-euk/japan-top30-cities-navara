@@ -3,6 +3,7 @@
 // - 上位30の柱には、人口と当時の名前、（今の名前）のラベル（labels.ts）
 // - 画面の左に年表（timeline.ts）：年・和暦・出来事の一言・日本の総人口。クリックでその年へ
 // - 画面の下に ◀ ▶、今の年と総人口、出典の一行（controls.ts）。左下とⓘにクレジット（credits.ts）
+// - 画面の右に、開閉式の一覧（rankList.ts）：今の年の上位30と外れた柱を表で出す
 // - 1925年は、1932年に東京市に入る町を東京の柱に積む（stack.ts）
 // - タッチパッドのピンチでページ全体が拡大されないようにする（地図のカメラだけが動く）
 //
@@ -57,6 +58,7 @@ import { Controls, loadAnimationSetting } from "./controls.ts";
 import { addCredits } from "./credits.ts";
 import { formatNationalPopulation, nowNameForLabel } from "./format.ts";
 import { formatPopulation, PillarLabels, type LabelItem } from "./labels.ts";
+import { RankList, type OutRow, type RankChange, type RankRow } from "./rankList.ts";
 import { layoutPillars } from "./layout.ts";
 import { lerpStates, Pillars, targetStates, type HighlightStyle, type PillarState } from "./pillars.ts";
 import { checkTopRanks, stackTowns } from "./stack.ts";
@@ -181,6 +183,8 @@ function totalFor(year: number): string | null {
   return n ? formatNationalPopulation(n.pop) : null;
 }
 const timeline = new Timeline(container, FRAMES, totalFor, (i) => go(i));
+// 画面の右の一覧：今の年の上位30を表で出す（src/rankList.ts）。最初は閉じている
+const rankList = new RankList(container);
 
 function frameValues(i: number) {
   return stackedFor(i).values;
@@ -218,12 +222,50 @@ function changesFor(i: number) {
   return topChanges(data.cities, i > 0 ? frameValues(i - 1) : null, frameValues(i), FRAMES[i].year, TOP_N);
 }
 
+/** 一覧に出す名前：ラベルと同じ書き方。町を積んだ柱は「東京市（4町を含む）」 */
+function listNames(i: number, id: string, stacked: Map<string, string>) {
+  const city = cityById.get(id);
+  const nameThen = city?.name[String(FRAMES[i].year)] ?? id;
+  const towns = [...stacked.values()].filter((into) => into === id).length;
+  return {
+    name: towns > 0 ? `${nameThen}（${towns}町を含む）` : nameThen,
+    nameNow: nowNameForLabel(nameThen, city?.name_now ?? null, LABEL_NOW_DISPLAY),
+  };
+}
+
+/**
+ * 一覧の行（src/rankList.ts）。順位と人口は画面と同じ値（積んで順位を付け直したあと）。
+ * 前の年からの変化：前の年も上位30なら順位の上下、それ以外（31位より下・値が無い）は「新」。31位より下は年をまたいで比べられないため
+ */
+function rankRowsFor(i: number): { rows: RankRow[]; outRows: OutRow[] } {
+  const { values, stacked } = stackedFor(i);
+  const prev = i > 0 ? frameValues(i - 1) : null;
+  const rows: RankRow[] = [];
+  for (const [id, v] of values) {
+    if (v.rank == null || v.rank > TOP_N) continue;
+    let change: RankChange = null;
+    if (prev) {
+      const p = prev.get(id)?.rank;
+      if (p != null && p <= TOP_N) change = p === v.rank ? { kind: "same", by: 0 } : { kind: p > v.rank ? "up" : "down", by: Math.abs(p - v.rank) };
+      else change = { kind: "new" };
+    }
+    rows.push({ id, rank: v.rank, pop: v.pop, change, ...listNames(i, id, stacked) });
+  }
+  rows.sort((a, b) => a.rank - b.rank);
+  const outRows: OutRow[] = [...changesFor(i)]
+    .filter(([, c]) => c === "out")
+    .map(([id]) => ({ id, rank: values.get(id)?.rank ?? null, pop: values.get(id)!.pop, ...listNames(i, id, stacked) }))
+    .sort((a, b) => b.pop - a.pop);
+  return { rows, outRows };
+}
+
 function showControls(i: number): void {
   const usesDummy = [...frameValues(i).values()].some((v) => v.dummy);
   const changes = changesFor(i);
   const count = (k: "in" | "out") => [...changes.values()].filter((c) => c === k).length;
   controls.show(FRAMES, i, usesDummy, totalFor(FRAMES[i].year), i > 0 ? { in: count("in"), out: count("out"), prevYear: FRAMES[i - 1].year } : null);
   timeline.show(i);
+  rankList.show({ year: FRAMES[i].year, prevYear: i > 0 ? FRAMES[i - 1].year : null, source: FRAMES[i].source, ...rankRowsFor(i) });
 }
 
 // --- 最初のコマ ---
