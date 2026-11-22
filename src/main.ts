@@ -32,6 +32,7 @@ import {
   CHANGE_GLOW_COLOR,
   CHANGE_GLOW_INTENSITY,
   CHANGE_IN_PILLAR_COLOR,
+  CHANGE_OUT_OPACITY,
   CHANGE_OUT_PILLAR_COLOR,
   CITIES_URL,
   DUMMY_URL,
@@ -120,7 +121,7 @@ view.addLight({ ambient: { intensity: AMBIENT_INTENSITY } });
 const basemap = await tilejson.addSource({ type: "raster-tile", url: BASEMAP_TILEJSON });
 view.addLayer({ type: "raster", source: basemap });
 
-// --- 上位30の入れ替わりの見せ方（src/changes.ts）：入った柱はオレンジにして光らせ、外れた柱は赤紫の不透明にする ---
+// --- 上位30の入れ替わりの見せ方（src/changes.ts）：入った柱はオレンジにして光らせ、外れた柱は赤紫の半透明にする ---
 // 光は Navara の SelectiveBloom。柱ごとに box.effectIds でこの id を指定した柱だけにかかる
 const highlightStyle: HighlightStyle = {
   glowEffectId: "change-glow",
@@ -128,6 +129,7 @@ const highlightStyle: HighlightStyle = {
   glowIntensity: CHANGE_GLOW_INTENSITY,
   inColor: CHANGE_IN_PILLAR_COLOR,
   outColor: CHANGE_OUT_PILLAR_COLOR,
+  outOpacity: CHANGE_OUT_OPACITY,
 };
 view.addEffect({ id: highlightStyle.glowEffectId, selectiveBloom: { strength: CHANGE_BLOOM_STRENGTH, radius: CHANGE_BLOOM_RADIUS, threshold: 0 } });
 

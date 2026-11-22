@@ -35,7 +35,7 @@ export const OUTSIDE_OPACITY = 0.35;
 /**
  * 上位30の入れ替わりの見せ方（src/changes.ts、2026-11-22）。どれも仮置き（yyama が見て決める）。
  * 入った柱：柱の色はそのままで、暖かい黄色の光をまとわせる（Navara の SelectiveBloom）
- * 外れた柱：その年は赤紫の不透明で描く（CHANGE_OUT_PILLAR_COLOR）
+ * 外れた柱：その年は赤紫の半透明で描く（CHANGE_OUT_PILLAR_COLOR・CHANGE_OUT_OPACITY）
  */
 export const CHANGE_GLOW_COLOR = "#ffa000";
 /**
@@ -50,12 +50,16 @@ export const CHANGE_GLOW_INTENSITY = 0.25;
 export const CHANGE_BLOOM_STRENGTH = 1.5;
 export const CHANGE_BLOOM_RADIUS = 0.7;
 /**
- * 外れた柱の色（不透明で描く）。2026-11-22 yyamaの指示で、紺の輪郭（SelectiveOutline）から変えた。輪郭の太さは画面上で固定なので、
+ * 外れた柱の色。2026-11-22 yyamaの指示で、紺の輪郭（SelectiveOutline）から変えた。輪郭の太さは画面上で固定なので、
  * 引くと細い柱が輪郭に覆われて潰れたため。灰色は分かりにくかった。
  * 赤紫は、柱の青（PILLAR_COLOR）とも入った柱のオレンジとも、色覚の違いがあっても見分けやすい（dataviz の検証スクリプトで確かめた。
  * 背景は海の色に近い #cfe6e3。いちばん近い組み合わせは青と ΔE 15.5（1型色覚）。赤 #c62828 はオレンジと近く、紫 #7b3fb5 は青と近かった）
  */
 export const CHANGE_OUT_PILLAR_COLOR = "#c2307a";
+/**
+ * 外れた柱の不透明度。2026-11-23 に不透明（1）から半透明にした（yyamaの指示）。圏外の柱（OUTSIDE_OPACITY 0.35）より少し濃くして、色が分かるようにした。仮置き
+ */
+export const CHANGE_OUT_OPACITY = 0.55;
 
 /** 年を送ったときのアニメーションの長さ（ミリ秒）。ON のとき使う */
 export const ANIMATION_MS = 1500;
