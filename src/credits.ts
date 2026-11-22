@@ -1,6 +1,6 @@
 // クレジット：画面の左下に常に出す1行と、Navara の ⓘ ボタンの中の一覧（2026-11-22 yyamaの指示「隅にも常に出す」）。
 // - 背景地図（Re:Earth Papers・OpenStreetMap）のクレジットは、TileJsonPlugin が TileJSON の attribution を ⓘ に自動で入れる
-// - ⓘ に足すのは、国土数値情報と人口の統計。API：view.attribution?.add([...])（@navaramap/three の AttributionPlugin、
+// - ⓘ に足すのは、柱の位置（OpenStreetMap・国土地理院）と人口の統計。API：view.attribution?.add([...])（@navaramap/three の AttributionPlugin、
 //   docs/navara-api-check.md）
 // - 文言は constants.ts の CREDIT_LINE と CREDIT_ITEMS
 

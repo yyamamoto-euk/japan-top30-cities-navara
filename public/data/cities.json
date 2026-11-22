@@ -136,8 +136,8 @@
     {
       "id": "yokohama",
       "pref": "神奈川県",
-      "lon": 139.637954,
-      "lat": 35.444035,
+      "lon": 139.634335,
+      "lat": 35.450649,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -210,8 +210,8 @@
     {
       "id": "osaka",
       "pref": "大阪府",
-      "lon": 135.502046,
-      "lat": 34.693891,
+      "lon": 135.502175,
+      "lat": 34.693739,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -284,8 +284,8 @@
     {
       "id": "nagoya",
       "pref": "愛知県",
-      "lon": 136.906421,
-      "lat": 35.181433,
+      "lon": 136.906572,
+      "lat": 35.181437,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -358,8 +358,8 @@
     {
       "id": "sapporo",
       "pref": "北海道",
-      "lon": 141.354374,
-      "lat": 43.061972,
+      "lon": 141.354386,
+      "lat": 43.062031,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -433,8 +433,8 @@
     {
       "id": "fukuoka",
       "pref": "福岡県",
-      "lon": 130.401735,
-      "lat": 33.590313,
+      "lon": 130.401667,
+      "lat": 33.59,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -507,8 +507,8 @@
     {
       "id": "kawasaki",
       "pref": "神奈川県",
-      "lon": 139.703012,
-      "lat": 35.530806,
+      "lon": 139.703043,
+      "lat": 35.530771,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -569,8 +569,8 @@
     {
       "id": "kobe",
       "pref": "兵庫県",
-      "lon": 135.195728,
-      "lat": 34.689495,
+      "lon": 135.195316,
+      "lat": 34.689886,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -643,8 +643,8 @@
     {
       "id": "kyoto",
       "pref": "京都府",
-      "lon": 135.768181,
-      "lat": 35.011574,
+      "lon": 135.768059,
+      "lat": 35.01212,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -717,8 +717,8 @@
     {
       "id": "saitama",
       "pref": "埼玉県",
-      "lon": 139.645502,
-      "lat": 35.861515,
+      "lon": 139.645641,
+      "lat": 35.861607,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -773,8 +773,8 @@
     {
       "id": "hiroshima",
       "pref": "広島県",
-      "lon": 132.455337,
-      "lat": 34.385253,
+      "lon": 132.45524,
+      "lat": 34.385295,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -847,8 +847,8 @@
     {
       "id": "sendai",
       "pref": "宮城県",
-      "lon": 140.869617,
-      "lat": 38.268008,
+      "lon": 140.869464,
+      "lat": 38.268208,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -922,8 +922,8 @@
     {
       "id": "chiba",
       "pref": "千葉県",
-      "lon": 140.10638,
-      "lat": 35.607331,
+      "lon": 140.106068,
+      "lat": 35.607037,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -996,8 +996,8 @@
     {
       "id": "kitakyushu",
       "pref": "福岡県",
-      "lon": 130.875183,
-      "lat": 33.883408,
+      "lon": 130.875214,
+      "lat": 33.883415,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1034,8 +1034,8 @@
     {
       "id": "sakai",
       "pref": "大阪府",
-      "lon": 135.48302,
-      "lat": 34.573354,
+      "lon": 135.483056,
+      "lat": 34.573333,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1108,8 +1108,8 @@
     {
       "id": "hamamatsu",
       "pref": "静岡県",
-      "lon": 137.726117,
-      "lat": 34.710865,
+      "lon": 137.726307,
+      "lat": 34.710809,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1182,8 +1182,8 @@
     {
       "id": "niigata",
       "pref": "新潟県",
-      "lon": 139.036402,
-      "lat": 37.916128,
+      "lon": 139.036378,
+      "lat": 37.915438,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1256,8 +1256,8 @@
     {
       "id": "kumamoto",
       "pref": "熊本県",
-      "lon": 130.707897,
-      "lat": 32.803078,
+      "lon": 130.708048,
+      "lat": 32.803347,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1331,8 +1331,8 @@
     {
       "id": "sagamihara",
       "pref": "神奈川県",
-      "lon": 139.373268,
-      "lat": 35.571376,
+      "lon": 139.373336,
+      "lat": 35.571389,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1370,8 +1370,8 @@
     {
       "id": "okayama",
       "pref": "岡山県",
-      "lon": 133.919566,
-      "lat": 34.655107,
+      "lon": 133.919758,
+      "lat": 34.655185,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1445,8 +1445,8 @@
     {
       "id": "shizuoka",
       "pref": "静岡県",
-      "lon": 138.382388,
-      "lat": 34.975473,
+      "lon": 138.382636,
+      "lat": 34.975504,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1519,8 +1519,8 @@
     {
       "id": "funabashi",
       "pref": "千葉県",
-      "lon": 139.982621,
-      "lat": 35.694711,
+      "lon": 139.982504,
+      "lat": 35.694722,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1575,8 +1575,8 @@
     {
       "id": "kawaguchi",
       "pref": "埼玉県",
-      "lon": 139.724171,
-      "lat": 35.807741,
+      "lon": 139.723392,
+      "lat": 35.80672,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1632,8 +1632,8 @@
     {
       "id": "kagoshima",
       "pref": "鹿児島県",
-      "lon": 130.557339,
-      "lat": 31.596789,
+      "lon": 130.557025,
+      "lat": 31.596861,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1707,8 +1707,8 @@
     {
       "id": "hachioji",
       "pref": "東京都",
-      "lon": 139.316075,
-      "lat": 35.66657,
+      "lon": 139.315836,
+      "lat": 35.666667,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1770,8 +1770,8 @@
     {
       "id": "himeji",
       "pref": "兵庫県",
-      "lon": 134.685458,
-      "lat": 34.815496,
+      "lon": 134.686149,
+      "lat": 34.815236,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1845,8 +1845,8 @@
     {
       "id": "utsunomiya",
       "pref": "栃木県",
-      "lon": 139.882807,
-      "lat": 36.555115,
+      "lon": 139.882608,
+      "lat": 36.555186,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1908,8 +1908,8 @@
     {
       "id": "matsuyama",
       "pref": "愛媛県",
-      "lon": 132.765556,
-      "lat": 33.839157,
+      "lon": 132.765312,
+      "lat": 33.839273,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -1983,8 +1983,8 @@
     {
       "id": "matsudo",
       "pref": "千葉県",
-      "lon": 139.903226,
-      "lat": 35.787652,
+      "lon": 139.903274,
+      "lat": 35.787662,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2028,8 +2028,8 @@
     {
       "id": "ichikawa",
       "pref": "千葉県",
-      "lon": 139.931013,
-      "lat": 35.721914,
+      "lon": 139.931067,
+      "lat": 35.721857,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2073,8 +2073,8 @@
     {
       "id": "higashiosaka",
       "pref": "大阪府",
-      "lon": 135.600898,
-      "lat": 34.679324,
+      "lon": 135.600642,
+      "lat": 34.679398,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2112,8 +2112,8 @@
     {
       "id": "nishinomiya",
       "pref": "兵庫県",
-      "lon": 135.34183,
-      "lat": 34.737691,
+      "lon": 135.341528,
+      "lat": 34.737773,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2187,8 +2187,8 @@
     {
       "id": "oita",
       "pref": "大分県",
-      "lon": 131.609377,
-      "lat": 33.239526,
+      "lon": 131.608812,
+      "lat": 33.239698,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2244,8 +2244,8 @@
     {
       "id": "kurashiki",
       "pref": "岡山県",
-      "lon": 133.772281,
-      "lat": 34.584677,
+      "lon": 133.771972,
+      "lat": 34.584923,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2289,8 +2289,8 @@
     {
       "id": "amagasaki",
       "pref": "兵庫県",
-      "lon": 135.406394,
-      "lat": 34.733554,
+      "lon": 135.406503,
+      "lat": 34.733662,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2358,8 +2358,8 @@
     {
       "id": "kanazawa",
       "pref": "石川県",
-      "lon": 136.656633,
-      "lat": 36.561051,
+      "lon": 136.656355,
+      "lat": 36.559814,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2433,8 +2433,8 @@
     {
       "id": "fujisawa",
       "pref": "神奈川県",
-      "lon": 139.491116,
-      "lat": 35.33894,
+      "lon": 139.491156,
+      "lat": 35.338849,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2489,8 +2489,8 @@
     {
       "id": "fukuyama",
       "pref": "広島県",
-      "lon": 133.36234,
-      "lat": 34.485927,
+      "lon": 133.362415,
+      "lat": 34.485896,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2539,8 +2539,8 @@
     {
       "id": "kashiwa",
       "pref": "千葉県",
-      "lon": 139.976199,
-      "lat": 35.868295,
+      "lon": 139.975865,
+      "lat": 35.867672,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2577,8 +2577,8 @@
     {
       "id": "machida",
       "pref": "東京都",
-      "lon": 139.438527,
-      "lat": 35.546559,
+      "lon": 139.438671,
+      "lat": 35.546611,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2616,8 +2616,8 @@
     {
       "id": "takamatsu",
       "pref": "香川県",
-      "lon": 134.046574,
-      "lat": 34.342791,
+      "lon": 134.046548,
+      "lat": 34.342805,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2691,8 +2691,8 @@
     {
       "id": "toyama",
       "pref": "富山県",
-      "lon": 137.213449,
-      "lat": 36.695982,
+      "lon": 137.213718,
+      "lat": 36.695902,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2766,8 +2766,8 @@
     {
       "id": "nagasaki",
       "pref": "長崎県",
-      "lon": 129.877906,
-      "lat": 32.750311,
+      "lon": 129.879904,
+      "lat": 32.749497,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2841,8 +2841,8 @@
     {
       "id": "yokosuka",
       "pref": "神奈川県",
-      "lon": 139.672284,
-      "lat": 35.281276,
+      "lon": 139.672231,
+      "lat": 35.281467,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2916,8 +2916,8 @@
     {
       "id": "wakayama",
       "pref": "和歌山県",
-      "lon": 135.170808,
-      "lat": 34.230514,
+      "lon": 135.170833,
+      "lat": 34.230556,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -2991,8 +2991,8 @@
     {
       "id": "maebashi",
       "pref": "群馬県",
-      "lon": 139.063493,
-      "lat": 36.389413,
+      "lon": 139.063455,
+      "lat": 36.38946,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -3054,8 +3054,8 @@
     {
       "id": "naha",
       "pref": "沖縄県",
-      "lon": 127.679218,
-      "lat": 26.212295,
+      "lon": 127.679217,
+      "lat": 26.212337,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -3111,8 +3111,8 @@
     {
       "id": "kochi",
       "pref": "高知県",
-      "lon": 133.531166,
-      "lat": 33.558788,
+      "lon": 133.531067,
+      "lat": 33.558641,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -3186,8 +3186,8 @@
     {
       "id": "akita",
       "pref": "秋田県",
-      "lon": 140.102512,
-      "lat": 39.719929,
+      "lon": 140.1035,
+      "lat": 39.719916,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -3261,8 +3261,8 @@
     {
       "id": "morioka",
       "pref": "岩手県",
-      "lon": 141.154183,
-      "lat": 39.701795,
+      "lon": 141.154509,
+      "lat": 39.702215,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -3336,8 +3336,8 @@
     {
       "id": "fukui",
       "pref": "福井県",
-      "lon": 136.219452,
-      "lat": 36.06412,
+      "lon": 136.219593,
+      "lat": 36.064077,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -3399,8 +3399,8 @@
     {
       "id": "tokushima",
       "pref": "徳島県",
-      "lon": 134.554713,
-      "lat": 34.070234,
+      "lon": 134.554698,
+      "lat": 34.07009,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -3474,8 +3474,8 @@
     {
       "id": "shimonoseki",
       "pref": "山口県",
-      "lon": 130.941459,
-      "lat": 33.957828,
+      "lon": 130.940957,
+      "lat": 33.957286,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -3549,8 +3549,8 @@
     {
       "id": "hakodate",
       "pref": "北海道",
-      "lon": 140.729108,
-      "lat": 41.768712,
+      "lon": 140.728917,
+      "lat": 41.768659,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -3624,8 +3624,8 @@
     {
       "id": "sasebo",
       "pref": "長崎県",
-      "lon": 129.71509,
-      "lat": 33.179904,
+      "lon": 129.715118,
+      "lat": 33.179902,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -3693,8 +3693,8 @@
     {
       "id": "matsue",
       "pref": "島根県",
-      "lon": 133.048527,
-      "lat": 35.468039,
+      "lon": 133.048517,
+      "lat": 35.467815,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -3756,8 +3756,8 @@
     {
       "id": "kure",
       "pref": "広島県",
-      "lon": 132.565805,
-      "lat": 34.249254,
+      "lon": 132.565228,
+      "lat": 34.2488,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -3825,8 +3825,8 @@
     {
       "id": "tottori",
       "pref": "鳥取県",
-      "lon": 134.235091,
-      "lat": 35.501133,
+      "lon": 134.221616,
+      "lat": 35.494382,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -3888,8 +3888,8 @@
     {
       "id": "otaru",
       "pref": "北海道",
-      "lon": 140.994605,
-      "lat": 43.190753,
+      "lon": 140.9944,
+      "lat": 43.190529,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -3957,8 +3957,8 @@
     {
       "id": "yonezawa",
       "pref": "山形県",
-      "lon": 140.116683,
-      "lat": 37.922242,
+      "lon": 140.11613,
+      "lat": 37.92187,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4110,8 +4110,8 @@
     {
       "id": "hirosaki",
       "pref": "青森県",
-      "lon": 140.464008,
-      "lat": 40.602965,
+      "lon": 140.463834,
+      "lat": 40.602981,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4173,8 +4173,8 @@
     {
       "id": "yamagata",
       "pref": "山形県",
-      "lon": 140.339605,
-      "lat": 38.255436,
+      "lon": 140.339717,
+      "lat": 38.25537,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4236,8 +4236,8 @@
     {
       "id": "saga",
       "pref": "佐賀県",
-      "lon": 130.300835,
-      "lat": 33.263543,
+      "lon": 130.300881,
+      "lat": 33.263512,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4299,8 +4299,8 @@
     {
       "id": "joetsu",
       "pref": "新潟県",
-      "lon": 138.236039,
-      "lat": 37.147873,
+      "lon": 138.236184,
+      "lat": 37.147872,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4362,8 +4362,8 @@
     {
       "id": "gifu",
       "pref": "岐阜県",
-      "lon": 136.760657,
-      "lat": 35.423301,
+      "lon": 136.759832,
+      "lat": 35.426262,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4437,8 +4437,8 @@
     {
       "id": "otsu",
       "pref": "滋賀県",
-      "lon": 135.854666,
-      "lat": 35.018357,
+      "lon": 135.854597,
+      "lat": 35.017959,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4500,8 +4500,8 @@
     {
       "id": "nara",
       "pref": "奈良県",
-      "lon": 135.804995,
-      "lat": 34.685117,
+      "lon": 135.804722,
+      "lat": 34.685,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4563,8 +4563,8 @@
     {
       "id": "ise",
       "pref": "三重県",
-      "lon": 136.709286,
-      "lat": 34.487506,
+      "lon": 136.709336,
+      "lat": 34.48749,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4626,8 +4626,8 @@
     {
       "id": "sakata",
       "pref": "山形県",
-      "lon": 139.836513,
-      "lat": 38.914386,
+      "lon": 139.836563,
+      "lat": 38.914678,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4689,8 +4689,8 @@
     {
       "id": "kurume",
       "pref": "福岡県",
-      "lon": 130.508371,
-      "lat": 33.319286,
+      "lon": 130.508356,
+      "lat": 33.319248,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4752,8 +4752,8 @@
     {
       "id": "tsuruoka",
       "pref": "山形県",
-      "lon": 139.826725,
-      "lat": 38.727183,
+      "lon": 139.82676,
+      "lat": 38.727208,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4815,8 +4815,8 @@
     {
       "id": "mito",
       "pref": "茨城県",
-      "lon": 140.471222,
-      "lat": 36.365861,
+      "lon": 140.471705,
+      "lat": 36.365799,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4878,8 +4878,8 @@
     {
       "id": "aomori",
       "pref": "青森県",
-      "lon": 140.74732,
-      "lat": 40.822358,
+      "lon": 140.747251,
+      "lat": 40.82265,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4941,8 +4941,8 @@
     {
       "id": "choshi",
       "pref": "千葉県",
-      "lon": 140.826791,
-      "lat": 35.734667,
+      "lon": 140.826745,
+      "lat": 35.734582,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -4992,8 +4992,8 @@
     {
       "id": "toyohashi",
       "pref": "愛知県",
-      "lon": 137.391469,
-      "lat": 34.769199,
+      "lon": 137.391389,
+      "lat": 34.769167,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -5061,8 +5061,8 @@
     {
       "id": "asahikawa",
       "pref": "北海道",
-      "lon": 142.364798,
-      "lat": 43.770799,
+      "lon": 142.364968,
+      "lat": 43.770857,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -5181,8 +5181,8 @@
     {
       "id": "shibuya-machi",
       "pref": "東京都",
-      "lon": 139.697948,
-      "lat": 35.663982,
+      "lon": 139.697747,
+      "lat": 35.66374,
       "merged_into": "tokyo",
       "merged_year": 1932,
       "name": {
@@ -5301,8 +5301,8 @@
     {
       "id": "toyonaka",
       "pref": "大阪府",
-      "lon": 135.469889,
-      "lat": 34.781239,
+      "lon": 135.470263,
+      "lat": 34.781284,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -5346,8 +5346,8 @@
     {
       "id": "takatsuki",
       "pref": "大阪府",
-      "lon": 135.617216,
-      "lat": 34.8461,
+      "lon": 135.616766,
+      "lat": 34.846028,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -5391,8 +5391,8 @@
     {
       "id": "iwaki",
       "pref": "福島県",
-      "lon": 140.887687,
-      "lat": 37.050456,
+      "lon": 140.886576,
+      "lat": 37.050268,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -5430,8 +5430,8 @@
     {
       "id": "omiya",
       "pref": "埼玉県",
-      "lon": 139.628721,
-      "lat": 35.906481,
+      "lon": 139.63054,
+      "lat": 35.901854,
       "merged_into": "saitama",
       "merged_year": 2001,
       "name": {
@@ -5475,8 +5475,8 @@
     {
       "id": "kofu",
       "pref": "山梨県",
-      "lon": 138.568339,
-      "lat": 35.662033,
+      "lon": 138.56831,
+      "lat": 35.662093,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -5550,8 +5550,8 @@
     {
       "id": "omuta",
       "pref": "福岡県",
-      "lon": 130.446058,
-      "lat": 33.030248,
+      "lon": 130.446111,
+      "lat": 33.030278,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -5619,8 +5619,8 @@
     {
       "id": "kokura",
       "pref": "福岡県",
-      "lon": 130.875183,
-      "lat": 33.883408,
+      "lon": 130.875214,
+      "lat": 33.883415,
       "merged_into": "kitakyushu",
       "merged_year": 1963,
       "name": {
@@ -5676,8 +5676,8 @@
     {
       "id": "fuse",
       "pref": "大阪府",
-      "lon": 135.600898,
-      "lat": 34.679324,
+      "lon": 135.600642,
+      "lat": 34.679398,
       "merged_into": "higashiosaka",
       "merged_year": 1967,
       "name": {
@@ -5715,8 +5715,8 @@
     {
       "id": "takaoka",
       "pref": "富山県",
-      "lon": 137.025717,
-      "lat": 36.754099,
+      "lon": 137.025708,
+      "lat": 36.754075,
       "merged_into": null,
       "merged_year": null,
       "name": {
@@ -5790,8 +5790,8 @@
     {
       "id": "tsu",
       "pref": "三重県",
-      "lon": 136.505443,
-      "lat": 34.718563,
+      "lon": 136.505679,
+      "lat": 34.718613,
       "merged_into": null,
       "merged_year": null,
       "name": {

@@ -77,18 +77,18 @@ export const CREDIT_LINE: (string | { text: string; url: string })[][] = [
     { text: "OpenStreetMap", url: "https://www.openstreetmap.org/copyright" },
     " contributors",
   ],
-  // 国土数値情報の使用許諾条件（非商用）の書き方に合わせる：「国土数値情報（○○データ）（国土交通省）（ページの URL）をもとに作成」
-  [{ text: "国土数値情報（市町村役場等及び公的集会施設データ）", url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P34.html" }, "（国土交通省）をもとに作成"],
+  // 柱の位置：OpenStreetMap の市役所の点（ODbL）と、OSM に無い市は国土地理院の地名検索（2026-11-22 に国土数値情報 P34 から入れ替えた）
+  ["柱の位置：© ", { text: "OpenStreetMap", url: "https://www.openstreetmap.org/copyright" }, " contributors（ODbL）、", { text: "国土地理院", url: "https://www.gsi.go.jp/" }],
   ["人口：日本帝国統計年鑑・日本統計年鑑・国勢調査ほか（各年の出典）"],
 ];
 
 /** Navara の ⓘ ボタンの中に足すクレジット（背景地図のクレジットは TileJsonPlugin が自動で入れる） */
 export const CREDIT_ITEMS: AttributionItem[] = [
   {
-    attribution: "国土数値情報（国土交通省）",
-    attributionUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P34.html",
+    attribution: "柱の位置",
     children: [
-      { attribution: "国土数値情報（市町村役場等及び公的集会施設データ）（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P34.html）をもとに作成（柱の位置。2014年版）" },
+      { attribution: "OpenStreetMap の市役所の点：<a href=\"https://www.openstreetmap.org/copyright\">© OpenStreetMap contributors</a>（Open Database License 1.0）" },
+      { attribution: "OpenStreetMap に無い市：<a href=\"https://www.gsi.go.jp/\">国土地理院</a>の地名検索" },
     ],
   },
   {

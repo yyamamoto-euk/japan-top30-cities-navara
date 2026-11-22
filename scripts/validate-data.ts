@@ -11,7 +11,7 @@
 //   - 和集合の柱で、収集済みの年に値が無い
 //   - 同じ優先度の行が複数あり、人口が違う（人口が同じなら情報にとどめる）
 //   - source_id が sources.csv に無い
-//   - 採用行が1つも無い柱、座標・自治体コードが空欄の柱
+//   - 採用行が1つも無い柱、座標が空欄の柱
 
 import {
   STATUS_PRIORITY,
@@ -140,8 +140,7 @@ for (const [year, ids] of unionGaps)
 const noAdopted = entities.filter((e) => !adopted.has(e.entity_id)).map((e) => e.entity_id);
 if (noAdopted.length > 0) infos.push(`採用行が1つも無い柱: ${noAdopted.join("、")}`);
 const noCoord = entities.filter((e) => e.lon === null || e.lat === null).length;
-const noCode = entities.filter((e) => e.current_code === "").length;
-infos.push(`座標が空欄の柱 ${noCoord} / ${entities.length}、自治体コードが空欄の柱 ${noCode} / ${entities.length}`);
+infos.push(`座標が空欄の柱 ${noCoord} / ${entities.length}`);
 infos.push(`和集合 ${union.size} 本（どこかの年で採用行が ${TOP_N} 位以内）`);
 
 // --- 出力 ---

@@ -71,6 +71,7 @@ pnpm dev
 | `pnpm data:validate` | データの抜けや矛盾を調べる |
 | `pnpm data:spot-check` | 年ごとに5都市を選び、画面の値と元の行（出典・ページ）を並べる（`--seed 数字` で同じ選び方） |
 | `pnpm data:national` | 総人口の表を作る |
+| `pnpm data:fetch-osm` → `data:check-osm` → `data:fill-coords` | 柱の座標（市役所の点）を OpenStreetMap などから取り直す（[docs/coordinates.md](docs/coordinates.md)） |
 | `pnpm data:1886`、`data:1940-1950`、`data:2000` | 各年の原本から observations.csv の行を作り直す |
 
 ## フォルダ
@@ -88,7 +89,7 @@ docs/         座標の決め方、Navara の API の確認メモ
 ## クレジット
 
 - 地図：[Re:Earth Papers](https://papers.reearth.land/attribution) / © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors
-- 柱の位置：国土数値情報（市町村役場等及び公的集会施設データ）（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P34.html）をもとに作成
+- 柱の位置：© [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors（市役所の点、ODbL 1.0）、国土地理院の地名検索（OpenStreetMap に無い市）
 - 人口：日本帝国統計年鑑・日本統計年鑑（内閣統計局・総理庁統計局・総理府統計局・総務省統計局）、国勢調査（総務省統計局、e-Stat）、札幌市統計書、呉市統計書
 - 統計年鑑の画像とテキスト：一橋大学経済研究所「日本統計年鑑・帝国統計年鑑」データベース
 
@@ -102,7 +103,8 @@ docs/         座標の決め方、Navara の API の確認メモ
 |---|---|
 | e-Stat（国勢調査） | 政府標準利用規約（第2.0版）。CC BY 4.0 と互換で、出典を書けば複製・加工・商用利用ができる |
 | 総務省統計局のウェブサイト（日本統計年鑑） | 公共データ利用規約（第1.0版）。CC BY 4.0 と互換 |
-| 国土数値情報（P34） | 非商用。出典の表示が要る。元のデータの複製物は再配布できない |
+| OpenStreetMap の市役所の点（柱の座標） | Open Database License（ODbL）1.0。`data/entities.csv` の座標と、それを含む `public/data/cities.json`、`data/raw/osm/` は OpenStreetMap のデータを元にしているので ODbL 1.0。出典は「© OpenStreetMap contributors」と https://www.openstreetmap.org/copyright |
+| 国土地理院の地名検索（柱の座標のうち27本、`data/raw/gsi/`） | 国土地理院コンテンツ利用規約（公共データ利用規約 第1.0版。出典を書けば商用も可）。地名検索 API そのものの利用条件のページは未確認 |
 | 地図（Re:Earth Papers） | OpenStreetMap 由来のタイルは ODbL 1.0。「© OpenStreetMap contributors」の表示が要る |
 | 一橋大学経済研究所のデータベース | 利用条件の明記なし。公表するときはデータベース名と原本の書名を書くよう求めている |
 | 札幌市・呉市のウェブサイト | 私的使用と引用を除き、複製・転載には事前の相談が要る |

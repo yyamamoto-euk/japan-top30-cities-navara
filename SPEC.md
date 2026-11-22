@@ -13,7 +13,8 @@
 - 公開リポジトリは japan-top30-cities-navara（作業用の private リポジトリとは別。履歴を引き継がない）。置き場所は、ゆくゆく eukarya-biz に移す
 - GitHub Pages で公開できる形にした（vite.config.ts の base "./"、.github/workflows/deploy-pages.yml）。Pages の有効化と、main への push での自動公開は、eukarya-biz に移してから
 - README と見る人向けの文書（conditions.md、data/check/README.md）には、作者の立場（所属など）を書かない
-- 柱の座標と自治体コードに使っている国土数値情報 P34 は非商用なので、商用でも使えるデータに入れ替える方向で候補を調べている（docs/coordinates.md の「P34 を入れ替える場合の候補」）。どれにするかは yyama が決める
+- 柱の座標は、OpenStreetMap の市役所の点（国土数値情報 P02 から取り込まれた点は使わない）と、OSM に無い市は国土地理院の地名検索の点（2026-11-22）。それまで使っていた国土数値情報 P34 は非商用なので入れ替えた。柱の座標と、それを含む public/data/cities.json は ODbL 1.0（docs/coordinates.md）
+- entities.csv の current_code（自治体コード）の列は外した（アプリとビルドで使っていなかったため。2026-11-22）
 - 利用条件のため再配布できない原本はリポジトリに入れない（data/raw/README.md）
 
 ## 決めたこと
@@ -73,7 +74,7 @@
 | status | 一次照合済／二次のみ／要照合／矛盾あり |
 | note | 調査方法の違い、境界、疑義 |
 
-後で足す列：entity_id、current_code、lon、lat
+柱の列（entities.csv）：entity_id、pref_now、names、merged_into、merged_year、lon、lat、coord_basis、note
 
 座標の決め方（提案）：当時の役場か城の位置。決めたら全年共通にする。
 

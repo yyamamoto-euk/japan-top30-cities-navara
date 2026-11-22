@@ -46,7 +46,6 @@ export type Entity = {
   names: string[];
   merged_into: string | null;
   merged_year: number | null;
-  current_code: string;
   lon: number | null;
   lat: number | null;
   coord_basis: string;
@@ -88,7 +87,6 @@ export function loadEntities(): Entity[] {
     names: (r.names ?? "").split("|").map((s) => s.trim()).filter(Boolean),
     merged_into: (r.merged_into ?? "").trim() || null,
     merged_year: toInt(r.merged_year ?? ""),
-    current_code: (r.current_code ?? "").trim(),
     lon: toFloat(r.lon ?? ""),
     lat: toFloat(r.lat ?? ""),
     coord_basis: (r.coord_basis ?? "").trim(),

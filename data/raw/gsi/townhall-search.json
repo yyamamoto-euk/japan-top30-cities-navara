@@ -1,0 +1,1399 @@
+{
+  "fetched_at": "2026-11-22T11:55:52.590Z",
+  "endpoint": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=",
+  "note": "国土地理院の地名検索（地理院地図の検索窓と同じ API）の応答をそのまま保存",
+  "results": [
+    {
+      "query": "名古屋市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              136.90657,
+              35.181438
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "愛知県名古屋市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              136.90657204,
+              35.18143742
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "23106",
+            "title": "名古屋市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              136.86590089,
+              35.24566977
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "23234",
+            "title": "北名古屋市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              136.9066675,
+              35.181742
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "23106",
+            "title": "名古屋市役所内郵便局",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "福岡市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              130.401672,
+              33.59
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "福岡県福岡市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              130.4016667,
+              33.59
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "40133",
+            "title": "福岡市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              130.4016667,
+              33.59
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "40133",
+            "title": "福岡市役所内郵便局",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "千葉市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E5%8D%83%E8%91%89%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              140.106064,
+              35.607037
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "千葉県千葉市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              140.10606833,
+              35.60703729
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "12101",
+            "title": "千葉市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              140.1088602,
+              35.60814034
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "12101",
+            "title": "千葉市役所前郵便局",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "堺市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E5%A0%BA%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              135.483063,
+              34.573334
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "大阪府堺市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              135.4830556,
+              34.57333333
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "27141",
+            "title": "堺市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "浜松市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              137.726303,
+              34.710808
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "静岡県浜松市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              137.7263066,
+              34.71080924
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "22138",
+            "title": "浜松市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "相模原市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E7%9B%B8%E6%A8%A1%E5%8E%9F%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              139.373337,
+              35.571388
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "神奈川県相模原市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              139.37333555,
+              35.57138892
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "14152",
+            "title": "相模原市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "岡山市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E5%B2%A1%E5%B1%B1%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              133.919754,
+              34.655186
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "岡山県岡山市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              133.9197583,
+              34.65518484
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "33101",
+            "title": "岡山市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "船橋市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E8%88%B9%E6%A9%8B%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              139.982498,
+              35.694721
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "千葉県船橋市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              139.982504,
+              35.69472179
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "12204",
+            "title": "船橋市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "鹿児島市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E9%B9%BF%E5%85%90%E5%B3%B6%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              130.557022,
+              31.596861
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "鹿児島県鹿児島市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              130.55702451,
+              31.59686099
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "46201",
+            "title": "鹿児島市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "八王子市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E5%85%AB%E7%8E%8B%E5%AD%90%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              139.315842,
+              35.666668
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "東京都八王子市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              139.31583598,
+              35.66666668
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "13201",
+            "title": "八王子市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              139.31579627,
+              35.66518473
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "13201",
+            "title": "八王子市役所前郵便局",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "市川市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E5%B8%82%E5%B7%9D%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              139.931061,
+              35.721855
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "千葉県市川市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              139.9310668,
+              35.72185694
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "12203",
+            "title": "市川市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "富山市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E5%AF%8C%E5%B1%B1%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              137.213715,
+              36.695904
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "富山県富山市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              137.2137175,
+              36.69590153
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "16201",
+            "title": "富山市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              137.2133973,
+              36.69552686
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "16201",
+            "title": "富山市役所内郵便局",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "横須賀市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E6%A8%AA%E9%A0%88%E8%B3%80%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              139.672226,
+              35.281467
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "神奈川県横須賀市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              139.6722311,
+              35.28146655
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "14201",
+            "title": "横須賀市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "和歌山市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E5%92%8C%E6%AD%8C%E5%B1%B1%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              135.170837,
+              34.230556
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "和歌山県和歌山市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              135.1708333,
+              34.23055556
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "30201",
+            "title": "和歌山市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "前橋市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E5%89%8D%E6%A9%8B%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              139.063461,
+              36.389462
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "群馬県前橋市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              139.06345534,
+              36.38946018
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "10201",
+            "title": "前橋市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "福井市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E7%A6%8F%E4%BA%95%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              136.219589,
+              36.064075
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "福井県福井市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              136.21959314,
+              36.06407695
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "18201",
+            "title": "福井市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "徳島市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E5%BE%B3%E5%B3%B6%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              134.554703,
+              34.070091
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "徳島県徳島市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              134.5546984,
+              34.07008967
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "36201",
+            "title": "徳島市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "下関市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E4%B8%8B%E9%96%A2%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              130.940964,
+              33.957287
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "山口県下関市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              130.94095719,
+              33.95728612
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "35201",
+            "title": "下関市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "松江市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E6%9D%BE%E6%B1%9F%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              133.048523,
+              35.467815
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "島根県松江市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              133.04851682,
+              35.46781538
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "32201",
+            "title": "松江市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "佐賀市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E4%BD%90%E8%B3%80%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              130.300888,
+              33.263512
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "佐賀県佐賀市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              130.3008811,
+              33.26351168
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "41201",
+            "title": "佐賀市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "奈良市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E5%A5%88%E8%89%AF%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              135.804718,
+              34.685001
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "奈良県奈良市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              135.8047222,
+              34.685
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "29201",
+            "title": "奈良市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              135.8054121,
+              34.68500324
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "29201",
+            "title": "奈良市役所内郵便局",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "伊勢市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E4%BC%8A%E5%8B%A2%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              136.709335,
+              34.487492
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "三重県伊勢市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              136.7093355,
+              34.48749028
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "24203",
+            "title": "伊勢市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "久留米市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E4%B9%85%E7%95%99%E7%B1%B3%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              130.508362,
+              33.319248
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "福岡県久留米市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              139.52988461,
+              35.75801319
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "13222",
+            "title": "東久留米市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              130.508356,
+              33.31924803
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "40203",
+            "title": "久留米市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "豊橋市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E8%B1%8A%E6%A9%8B%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              137.391388,
+              34.769169
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "愛知県豊橋市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              137.3913889,
+              34.76916667
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "23201",
+            "title": "豊橋市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              137.39145695,
+              34.76665617
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "23201",
+            "title": "豊橋市役所前郵便局",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "大牟田市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E5%A4%A7%E7%89%9F%E7%94%B0%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              130.446106,
+              33.030277
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "福岡県大牟田市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              130.4461111,
+              33.03027778
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "40202",
+            "title": "大牟田市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "高岡市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E9%AB%98%E5%B2%A1%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              137.025711,
+              36.754074
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "富山県高岡市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              137.02570797,
+              36.75407469
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "16202",
+            "title": "高岡市役所",
+            "dataSource": "3"
+          }
+        }
+      ]
+    },
+    {
+      "query": "津市役所",
+      "url": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E6%B4%A5%E5%B8%82%E5%BD%B9%E6%89%80",
+      "status": 200,
+      "response": [
+        {
+          "geometry": {
+            "coordinates": [
+              136.505676,
+              34.718613
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "三重県津市"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              135.9599923,
+              35.01318003
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "25206",
+            "title": "草津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              135.9595567,
+              35.01453593
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "25206",
+            "title": "草津市役所前郵便局",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              135.85468933,
+              35.01801704
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "25201",
+            "title": "大津市役所内郵便局",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              131.1883333,
+              33.59833333
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "44203",
+            "title": "中津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              129.96768019,
+              33.44980122
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "41202",
+            "title": "唐津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              130.4911111,
+              33.76694444
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "40224",
+            "title": "福津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              132.21775357,
+              35.01162149
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "32207",
+            "title": "江津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              135.5622222,
+              34.77722222
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "27224",
+            "title": "摂津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              135.4102778,
+              34.50444444
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "27206",
+            "title": "泉大津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              135.1955556,
+              35.53555556
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "26205",
+            "title": "宮津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              135.8547222,
+              35.01777778
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "25201",
+            "title": "大津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              136.5056791,
+              34.71861277
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "24201",
+            "title": "津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              138.32281189,
+              34.86717047
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "22212",
+            "title": "焼津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              138.8636111,
+              35.09555556
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "22203",
+            "title": "沼津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              136.63712975,
+              35.22050867
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "21221",
+            "title": "海津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              137.4090809,
+              36.82739553
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "16204",
+            "title": "魚津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              139.85711931,
+              35.30416695
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "12226",
+            "title": "富津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              139.90250116,
+              35.33055592
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "12225",
+            "title": "君津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              139.9248897,
+              35.38124888
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "12206",
+            "title": "木更津市役所",
+            "dataSource": "3"
+          }
+        },
+        {
+          "geometry": {
+            "coordinates": [
+              135.850911075278,
+              35.0185861247222
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "25201",
+            "title": "大津市役所前駅",
+            "dataSource": "1"
+          }
+        }
+      ]
+    }
+  ]
+}
