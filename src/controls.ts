@@ -61,7 +61,7 @@ export class Controls {
     this.title.append(this.yearText, this.total);
     this.source = document.createElement("div");
     this.source.className = "controls__source";
-    // 上位30の入れ替わりの説明（src/changes.ts）。見本の四角は index.html の CSS で柱の光と輪郭に似せる
+    // 上位30の入れ替わりの説明（src/changes.ts）。見本の四角は index.html の CSS で柱の色と光に似せる
     this.changes = document.createElement("div");
     this.changes.className = "controls__changes";
     current.append(this.title, this.changes, this.source);

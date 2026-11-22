@@ -88,7 +88,7 @@ export function lerpStates(
 
 type Applied = PillarState & { visible: boolean; ground: number };
 
-/** 入れ替わりの見せ方（src/main.ts で Navara の効果を足したときの id と、光の色・強さ） */
+/** 入れ替わりの見せ方（src/main.ts で Navara の効果を足したときの id と、光の色・強さ、外れた柱の色） */
 export type HighlightStyle = {
   /** 入った柱に使う SelectiveBloom の効果の id */
   glowEffectId: string;
@@ -96,8 +96,8 @@ export type HighlightStyle = {
   glowIntensity: number;
   /** 入った柱の色。null なら柱の色のまま */
   inColor: string | null;
-  /** 外れた柱に使う SelectiveOutline の効果の id */
-  outlineEffectId: string;
+  /** 外れた柱の色。その年は不透明で描く（圏外の柱は普段は半透明） */
+  outColor: string;
 };
 
 export class Pillars {
@@ -130,8 +130,8 @@ export class Pillars {
   }
 
   /**
-   * 入れ替わりの見せ方を付け外しする（src/changes.ts）。入った柱は光らせ、外れた柱には輪郭を付ける。
-   * 前回と変わった柱だけを更新する。空の Map を渡すと全部外す
+   * 入れ替わりの見せ方を付け外しする（src/changes.ts）。入った柱はオレンジにして光らせ、外れた柱は赤紫の不透明にする。
+   * 前回と変わった柱だけを更新する。空の Map を渡すと全部外す（外れた柱は、apply で決めた透明度に戻す）
    */
   setHighlights(changes: Map<string, Change>, style: HighlightStyle): void {
     const glow = new Color().setStyle(style.glowColor);
@@ -141,10 +141,17 @@ export class Pillars {
       if (this.highlighted.get(id) === next) continue;
       const handle = this.handles.get(id);
       if (!handle) continue;
-      const color = next === "in" && style.inColor ? new Color().setStyle(style.inColor) : this.baseColor;
-      if (next === "in") handle.update({ box: { color, effectIds: [style.glowEffectId], emissiveColor: glow, emissiveIntensity: style.glowIntensity } });
-      else if (next === "out") handle.update({ box: { color, effectIds: [style.outlineEffectId], emissiveIntensity: 0 } });
-      else handle.update({ box: { color, effectIds: [], emissiveIntensity: 0 } });
+      // 外れた柱は不透明にする。外すときは、apply で決めた透明度（圏外なら半透明）に戻す
+      const opacity = next === "out" ? 1 : (this.applied.get(id)?.opacity ?? 1);
+      const fade = { opacity, transparent: opacity < 0.999 };
+      if (next === "in") {
+        const color = style.inColor ? new Color().setStyle(style.inColor) : this.baseColor;
+        handle.update({ box: { color, effectIds: [style.glowEffectId], emissiveColor: glow, emissiveIntensity: style.glowIntensity, ...fade } });
+      } else if (next === "out") {
+        handle.update({ box: { color: new Color().setStyle(style.outColor), effectIds: [], emissiveIntensity: 0, ...fade } });
+      } else {
+        handle.update({ box: { color: this.baseColor, effectIds: [], emissiveIntensity: 0, ...fade } });
+      }
       if (next) this.highlighted.set(id, next);
       else this.highlighted.delete(id);
     }
@@ -174,10 +181,13 @@ export class Pillars {
         update.scale = { x: this.width, y: s.height, z: this.width };
         update.position = { x: 0, y: s.height / 2, z: 0 };
       }
-      // 透明度は、ある程度変わったときだけ更新する（マテリアルの更新は毎フレーム呼ぶと重い）
+      // 透明度は、ある程度変わったときだけ更新する（マテリアルの更新は毎フレーム呼ぶと重い）。
+      // 外れた柱として不透明にしている間は触らない（値だけ覚えておき、setHighlights で外すときに戻す）
       let opacity = prev?.opacity ?? -1;
       const diff = Math.abs(opacity - s.opacity);
-      if (!prev || diff > 0.05 || (final && diff > 0)) {
+      if (this.highlighted.get(id) === "out") {
+        opacity = s.opacity;
+      } else if (!prev || diff > 0.05 || (final && diff > 0)) {
         update.box = { opacity: s.opacity, transparent: s.opacity < 0.999 };
         opacity = s.opacity;
       }

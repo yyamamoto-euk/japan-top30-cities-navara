@@ -213,7 +213,7 @@ https://navara.world/docs/ は最新リリース（0.3.1）に、Nightly 版の�
 - 効果を足す：`view.addEffect({ id, selectiveBloom: { strength, radius, threshold } })`、`view.addEffect({ id, selectiveOutline: { color, thickness } })`。`SelectiveBloomConfig`・`SelectiveOutlineConfig`（`three-default-descs/dist/index.d.ts`）。効果の key は `selectiveBloom`・`selectiveOutline`
 - 柱を選ぶ：箱（`BoxMeshDesc`）の `box.effectIds` に、上で付けた効果の `id` を入れた柱だけに効果がかかる。ライブラリの中で、効果の `id` ごとにマスクの番号が振られる（`SelectiveEffectRegistry.registerSlot(this.id)`、最大11個）
 - 光：`box.emissiveColor`（`Color`）と `box.emissiveIntensity`。SelectiveBloom は発光（emissive）の出力をもとににじませる。発光の色は柱の色に足し合わされるので、青い柱に黄色の光を強く足すと白っぽくなり、弱いと明るい地図の上で見えにくかった。そのため、入った柱は色（`box.color`）そのものをオレンジに変え、光は軽く添えた
-- 輪郭：SelectiveOutline は、半透明（不透明度 0.35）の柱にも付いた
+- 輪郭：SelectiveOutline は、半透明（不透明度 0.35）の柱にも付いた。ただし太さ（thickness）は画面上の px なので、引くと細い柱が輪郭に覆われて潰れた。2026-11-22 に、外れた柱は輪郭をやめて赤紫の不透明で描くようにした（`box.color`・`box.opacity`・`box.transparent` の部分の更新）
 - 付け外し：`handle.update({ box: { effectIds, emissiveColor, emissiveIntensity, color } })`（部分の更新）
 
 ## 3D地形（2026-11-22、0.3.1）

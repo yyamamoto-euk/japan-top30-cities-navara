@@ -17,7 +17,7 @@
 //     画像のそばに書くこと（OpenStreetMap の ODbL と国土地理院のコンテンツ利用規約が出典の表示を求めている）
 //     README には書かない（スクリーンショット専用のため）
 
-import ThreeView, { Color, type CameraPosition } from "@navaramap/three";
+import ThreeView, { type CameraPosition } from "@navaramap/three";
 import { DefaultPlugin, type DefaultDescriptions } from "@navaramap/three-default-plugin";
 import { OverlayPlugin, TileJsonPlugin } from "@navaramap/three-plugins";
 
@@ -32,8 +32,7 @@ import {
   CHANGE_GLOW_COLOR,
   CHANGE_GLOW_INTENSITY,
   CHANGE_IN_PILLAR_COLOR,
-  CHANGE_OUTLINE_COLOR,
-  CHANGE_OUTLINE_THICKNESS,
+  CHANGE_OUT_PILLAR_COLOR,
   CITIES_URL,
   DUMMY_URL,
   HEIGHT_PER_PERSON,
@@ -121,20 +120,16 @@ view.addLight({ ambient: { intensity: AMBIENT_INTENSITY } });
 const basemap = await tilejson.addSource({ type: "raster-tile", url: BASEMAP_TILEJSON });
 view.addLayer({ type: "raster", source: basemap });
 
-// --- 上位30の入れ替わりの見せ方（src/changes.ts）：入った柱を光らせる効果と、外れた柱に輪郭を付ける効果 ---
-// Navara の SelectiveBloom・SelectiveOutline。柱ごとに box.effectIds でこの id を指定した柱だけにかかる
+// --- 上位30の入れ替わりの見せ方（src/changes.ts）：入った柱はオレンジにして光らせ、外れた柱は赤紫の不透明にする ---
+// 光は Navara の SelectiveBloom。柱ごとに box.effectIds でこの id を指定した柱だけにかかる
 const highlightStyle: HighlightStyle = {
   glowEffectId: "change-glow",
   glowColor: CHANGE_GLOW_COLOR,
   glowIntensity: CHANGE_GLOW_INTENSITY,
   inColor: CHANGE_IN_PILLAR_COLOR,
-  outlineEffectId: "change-outline",
+  outColor: CHANGE_OUT_PILLAR_COLOR,
 };
 view.addEffect({ id: highlightStyle.glowEffectId, selectiveBloom: { strength: CHANGE_BLOOM_STRENGTH, radius: CHANGE_BLOOM_RADIUS, threshold: 0 } });
-view.addEffect({
-  id: highlightStyle.outlineEffectId,
-  selectiveOutline: { color: new Color().setStyle(CHANGE_OUTLINE_COLOR), thickness: CHANGE_OUTLINE_THICKNESS },
-});
 
 // --- クレジット（左下の1行と ⓘ の中、src/credits.ts） ---
 addCredits(view, container);
@@ -258,7 +253,7 @@ function go(i: number): void {
   index = i;
   showControls(i);
   labels.set([]); // 動いている間はラベルを消す
-  pillars.setHighlights(new Map(), highlightStyle); // 入れ替わりの光と輪郭も、動いている間は消す
+  pillars.setHighlights(new Map(), highlightStyle); // 入れ替わりの色と光も、動いている間は消す
 
   const duration = animationOn ? ANIMATION_MS : 0;
   const camera = FRAMES[i].camera;
