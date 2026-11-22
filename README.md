@@ -89,7 +89,7 @@ docs/         座標の決め方、Navara の API の確認メモ
 ## クレジット
 
 - 地図：[Re:Earth Papers](https://papers.reearth.land/attribution) / © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors
-- 地形：[Re:Earth Terrain](https://terrain.reearth.land/) · [Mapterhorn](https://mapterhorn.com/)（CC BY 4.0）。高さは10倍に強調して描いています
+- 地形：[Re:Earth Terrain](https://terrain.reearth.land/) · [Mapterhorn](https://mapterhorn.com/)（CC BY 4.0）
 - 柱の位置：© [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors（市役所の点、ODbL 1.0）、電子国土基本図（地名情報）（国土地理院）をもとに作成（OpenStreetMap に無い市。地理院地図の地名検索で取得）
 - 人口：日本帝国統計年鑑・日本統計年鑑（内閣統計局・総理庁統計局・総理府統計局・総務省統計局）、国勢調査（総務省統計局、e-Stat）、札幌市統計書、呉市統計書
 - 統計年鑑の画像とテキスト：一橋大学経済研究所「日本統計年鑑・帝国統計年鑑」データベース

@@ -1,5 +1,5 @@
 // 画面の組み立て。9つの年（frames.ts）ごとに、人口上位30の都市を柱で見せる。
-// - 3D地形（Re:Earth Terrain。高さは10倍に強調）に背景地図（Re:Earth Papers）を貼り、その上に人口に比例した高さの柱（pillars.ts）。年を送ると柱が伸び縮みする（アニメーションは ON・OFF できる）
+// - 3D地形（Re:Earth Terrain。高さは実物どおり）に背景地図（Re:Earth Papers）を貼り、その上に人口に比例した高さの柱（pillars.ts）。年を送ると柱が伸び縮みする（アニメーションは ON・OFF できる）
 // - 上位30の柱には、人口と当時の名前、（今の名前）のラベル（labels.ts）
 // - 画面の左に年表（timeline.ts）：年・和暦・出来事の一言・日本の総人口。クリックでその年へ
 // - 画面の下に ◀ ▶、今の年と総人口、出典の一行（controls.ts）。左下とⓘにクレジット（credits.ts）
@@ -101,7 +101,7 @@ if (import.meta.env.DEV) Object.assign(window, { view });
 view.setCamera(startCamera);
 
 // --- 3D地形（Re:Earth Terrain）。背景地図はこの上に貼る（層は足した順に描くので、地形を先に足す） ---
-// 高さは TERRAIN_EXAGGERATION 倍に強調する。柱とラベルの根元は、強調したあとの地面の高さに合わせる（src/ground.ts）
+// 高さの強調は TERRAIN_EXAGGERATION 倍（今は1倍＝実物どおり）。柱とラベルの根元は、描かれている地面の高さに合わせる（src/ground.ts）
 const terrain = view.addSource({
   type: "quantized-mesh",
   url: TERRAIN_URL,

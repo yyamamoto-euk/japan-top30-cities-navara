@@ -223,7 +223,7 @@ src/main.ts の地形と光、src/ground.ts の柱の根元。型定義（d.ts�
 - 地形：`view.addSource({ type: "quantized-mesh", url, maxZoom, requestVertexNormals, requestWaterMask })` と `view.addLayer({ type: "terrain", source, terrain: { ... } })`（スキル `recipes.md`）。背景地図の層より先に足す（層は足した順に描く）
   - `maxZoom` は Re:Earth Terrain の `layer.json` の `maxzoom`（14）に合わせた
 - 高さの強調：`TerrainMaterial` の `exaggeration`（既定 1）と `exaggerationRelativeHeight`（既定 0）。描く高さは `(h - relativeHeight) * exaggeration + relativeHeight`（`three/dist/index.d.ts:11833` 付近）
-- 地面の高さ：`view.observeTerrainHeightAt({ lat, lng }, cb)`（度。`dist/index.d.ts:13337`）と `view.sampleTerrainHeight({ lat, lng })`。返る高さは強調したあとの、画面に描かれている地面の高さ（楕円体から）。開発サーバーで、松本の辺りで約6,370m（標高約590m＋ジオイド高 約40m の10倍）、東京で約716m だった。カメラが寄って細かい地形が読み込まれると、また呼ばれる
+- 地面の高さ：`view.observeTerrainHeightAt({ lat, lng }, cb)`（度。`dist/index.d.ts:13337`）と `view.sampleTerrainHeight({ lat, lng })`。返る高さは強調したあとの、画面に描かれている地面の高さ（楕円体から）。開発サーバーで10倍に強調していたとき、松本の辺りで約6,370m（標高約590m＋ジオイド高 約40m の10倍）、東京で約716m だった。カメラが寄って細かい地形が読み込まれると、また呼ばれる
 - 光：法線のある地形は、光が無いと黒くなる（スキル SKILL.md の Lighting）。`view.addLight({ sun: { castShadow, intensity } })` と `view.addLight({ ambient: { intensity } })`（`three-default-descs` の `SunLightConfig`・`AmbientLightConfig`）。太陽の向きは `view.atmosphere.date`（`Date`）から決まるので、日時を固定した。柱は `lit: false` なので光の影響を受けない
 - クレジット：地形のクレジットは `view.attribution` に自動では入らなかった（TileJsonPlugin の背景地図とは違う）。constants.ts の CREDIT_ITEMS で足した
 - 海の波の表現（`requestWaterMask: true`）を付けると画面が真っ黒になった。地形のシェーダーが組み立てられないため。`requestWaterMask: false` にした

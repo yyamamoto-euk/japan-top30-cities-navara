@@ -110,7 +110,7 @@ export class Pillars {
     ids: Iterable<string>,
     private width: number,
     colorStyle: string,
-    /** 柱の根元の地面の高さ（m）。3D地形を強調して描いているので、その上に立てる（src/ground.ts） */
+    /** 柱の根元の地面の高さ（m）。3D地形の上に立てる（src/ground.ts） */
     private groundAt: (id: string) => number = () => 0,
   ) {
     const color = new Color().setStyle(colorStyle);
