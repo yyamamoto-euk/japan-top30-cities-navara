@@ -35,6 +35,7 @@ export class Controls {
   private yearText: HTMLSpanElement;
   private total: HTMLSpanElement;
   private source: HTMLDivElement;
+  private changes: HTMLDivElement;
   private anim: HTMLButtonElement;
   private dummyBadge: HTMLDivElement;
   private animationOn: boolean;
@@ -60,7 +61,10 @@ export class Controls {
     this.title.append(this.yearText, this.total);
     this.source = document.createElement("div");
     this.source.className = "controls__source";
-    current.append(this.title, this.source);
+    // 上位30の入れ替わりの説明（src/changes.ts）。見本の四角は index.html の CSS で柱の光と輪郭に似せる
+    this.changes = document.createElement("div");
+    this.changes.className = "controls__changes";
+    current.append(this.title, this.changes, this.source);
 
     this.next = document.createElement("button");
     this.next.type = "button";
@@ -90,13 +94,35 @@ export class Controls {
   }
 
   /** 今のコマに合わせて表示を変える */
-  show(frames: Frame[], index: number, usesDummy: boolean, total: string | null = null): void {
+  show(
+    frames: Frame[],
+    index: number,
+    usesDummy: boolean,
+    total: string | null = null,
+    changes: { in: number; out: number; prevYear: number } | null = null,
+  ): void {
     const f = frames[index];
     const before = frames[index - 1];
     const after = frames[index + 1];
     this.yearText.textContent = `${f.year}年`;
     this.total.textContent = total ? `総人口 ${total}` : "";
     this.total.hidden = !total;
+    this.changes.replaceChildren();
+    this.changes.hidden = !changes;
+    if (changes) {
+      const item = (cls: string, text: string) => {
+        const span = document.createElement("span");
+        span.className = "controls__change";
+        const swatch = document.createElement("span");
+        swatch.className = `controls__swatch ${cls}`;
+        span.append(swatch, text);
+        return span;
+      };
+      this.changes.append(
+        item("controls__swatch--in", `${changes.prevYear}年から上位30に入った（${changes.in}本）`),
+        item("controls__swatch--out", `外れた（${changes.out}本）`),
+      );
+    }
     this.source.textContent = f.source;
     this.source.hidden = f.source === "";
     this.prev.textContent = before ? `◀ ${before.year}年` : "◀";

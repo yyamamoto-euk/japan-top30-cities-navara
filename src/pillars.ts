@@ -5,6 +5,7 @@ import { Color, type MeshHandle } from "@navaramap/three";
 import type { DefaultDescriptions } from "@navaramap/three-default-plugin";
 import type { BoxMeshDesc } from "@navaramap/three-default-descs";
 
+import type { Change } from "./changes.ts";
 import type { City, YearValue } from "./cities.ts";
 import type { PlacedPosition } from "./layout.ts";
 
@@ -86,9 +87,23 @@ export function lerpStates(
 
 type Applied = PillarState & { visible: boolean };
 
+/** 入れ替わりの見せ方（src/main.ts で Navara の効果を足したときの id と、光の色・強さ） */
+export type HighlightStyle = {
+  /** 入った柱に使う SelectiveBloom の効果の id */
+  glowEffectId: string;
+  glowColor: string;
+  glowIntensity: number;
+  /** 入った柱の色。null なら柱の色のまま */
+  inColor: string | null;
+  /** 外れた柱に使う SelectiveOutline の効果の id */
+  outlineEffectId: string;
+};
+
 export class Pillars {
   private handles = new Map<string, MeshHandle<BoxMeshDesc>>();
   private applied = new Map<string, Applied>();
+  private highlighted = new Map<string, Change>();
+  private baseColor: Color;
 
   constructor(
     view: ThreeView<DefaultDescriptions>,
@@ -97,6 +112,7 @@ export class Pillars {
     colorStyle: string,
   ) {
     const color = new Color().setStyle(colorStyle);
+    this.baseColor = color;
     for (const id of ids) {
       const handle = view.addMesh<BoxMeshDesc>({
         // 1×1×1 の箱を scale で伸ばす（高さの更新を scale だけで済ませるため）
@@ -107,6 +123,27 @@ export class Pillars {
         visible: false,
       });
       this.handles.set(id, handle);
+    }
+  }
+
+  /**
+   * 入れ替わりの見せ方を付け外しする（src/changes.ts）。入った柱は光らせ、外れた柱には輪郭を付ける。
+   * 前回と変わった柱だけを更新する。空の Map を渡すと全部外す
+   */
+  setHighlights(changes: Map<string, Change>, style: HighlightStyle): void {
+    const glow = new Color().setStyle(style.glowColor);
+    const ids = new Set([...this.highlighted.keys(), ...changes.keys()]);
+    for (const id of ids) {
+      const next = changes.get(id);
+      if (this.highlighted.get(id) === next) continue;
+      const handle = this.handles.get(id);
+      if (!handle) continue;
+      const color = next === "in" && style.inColor ? new Color().setStyle(style.inColor) : this.baseColor;
+      if (next === "in") handle.update({ box: { color, effectIds: [style.glowEffectId], emissiveColor: glow, emissiveIntensity: style.glowIntensity } });
+      else if (next === "out") handle.update({ box: { color, effectIds: [style.outlineEffectId], emissiveIntensity: 0 } });
+      else handle.update({ box: { color, effectIds: [], emissiveIntensity: 0 } });
+      if (next) this.highlighted.set(id, next);
+      else this.highlighted.delete(id);
     }
   }
 

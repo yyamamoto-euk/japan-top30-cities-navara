@@ -17,7 +17,7 @@
 //     画像のそばに書くこと（OpenStreetMap の ODbL と国土地理院のコンテンツ利用規約が出典の表示を求めている）
 //     README には書かない（スクリーンショット専用のため）
 
-import ThreeView, { type CameraPosition } from "@navaramap/three";
+import ThreeView, { Color, type CameraPosition } from "@navaramap/three";
 import { DefaultPlugin, type DefaultDescriptions } from "@navaramap/three-default-plugin";
 import { OverlayPlugin, TileJsonPlugin } from "@navaramap/three-plugins";
 
@@ -27,6 +27,13 @@ import { loadCities, loadDummy, valuesForYear } from "./cities.ts";
 import {
   ANIMATION_MS,
   BASEMAP_TILEJSON,
+  CHANGE_BLOOM_RADIUS,
+  CHANGE_BLOOM_STRENGTH,
+  CHANGE_GLOW_COLOR,
+  CHANGE_GLOW_INTENSITY,
+  CHANGE_IN_PILLAR_COLOR,
+  CHANGE_OUTLINE_COLOR,
+  CHANGE_OUTLINE_THICKNESS,
   CITIES_URL,
   DUMMY_URL,
   HEIGHT_PER_PERSON,
@@ -42,12 +49,13 @@ import {
   PILLAR_WIDTH,
   TOP_N,
 } from "./constants.ts";
+import { topChanges } from "./changes.ts";
 import { Controls, loadAnimationSetting } from "./controls.ts";
 import { addCredits } from "./credits.ts";
 import { formatNationalPopulation, nowNameForLabel } from "./format.ts";
 import { formatPopulation, PillarLabels, type LabelItem } from "./labels.ts";
 import { layoutPillars } from "./layout.ts";
-import { lerpStates, Pillars, targetStates, type PillarState } from "./pillars.ts";
+import { lerpStates, Pillars, targetStates, type HighlightStyle, type PillarState } from "./pillars.ts";
 import { stackTowns } from "./stack.ts";
 import { Timeline } from "./timeline.ts";
 
@@ -89,6 +97,21 @@ view.setCamera(startCamera);
 // --- 背景地図 ---
 const basemap = await tilejson.addSource({ type: "raster-tile", url: BASEMAP_TILEJSON });
 view.addLayer({ type: "raster", source: basemap });
+
+// --- 上位30の入れ替わりの見せ方（src/changes.ts）：入った柱を光らせる効果と、外れた柱に輪郭を付ける効果 ---
+// Navara の SelectiveBloom・SelectiveOutline。柱ごとに box.effectIds でこの id を指定した柱だけにかかる
+const highlightStyle: HighlightStyle = {
+  glowEffectId: "change-glow",
+  glowColor: CHANGE_GLOW_COLOR,
+  glowIntensity: CHANGE_GLOW_INTENSITY,
+  inColor: CHANGE_IN_PILLAR_COLOR,
+  outlineEffectId: "change-outline",
+};
+view.addEffect({ id: highlightStyle.glowEffectId, selectiveBloom: { strength: CHANGE_BLOOM_STRENGTH, radius: CHANGE_BLOOM_RADIUS, threshold: 0 } });
+view.addEffect({
+  id: highlightStyle.outlineEffectId,
+  selectiveOutline: { color: new Color().setStyle(CHANGE_OUTLINE_COLOR), thickness: CHANGE_OUTLINE_THICKNESS },
+});
 
 // --- クレジット（左下の1行と ⓘ の中、src/credits.ts） ---
 addCredits(view, container);
@@ -176,9 +199,16 @@ function labelItemsFor(i: number, states: Map<string, PillarState>): LabelItem[]
   return items;
 }
 
+/** i 番目のコマの、1つ前の年からの入れ替わり（1886年は無し） */
+function changesFor(i: number) {
+  return topChanges(data.cities, i > 0 ? frameValues(i - 1) : null, frameValues(i), FRAMES[i].year, TOP_N);
+}
+
 function showControls(i: number): void {
   const usesDummy = [...frameValues(i).values()].some((v) => v.dummy);
-  controls.show(FRAMES, i, usesDummy, totalFor(FRAMES[i].year));
+  const changes = changesFor(i);
+  const count = (k: "in" | "out") => [...changes.values()].filter((c) => c === k).length;
+  controls.show(FRAMES, i, usesDummy, totalFor(FRAMES[i].year), i > 0 ? { in: count("in"), out: count("out"), prevYear: FRAMES[i - 1].year } : null);
   timeline.show(i);
 }
 
@@ -186,6 +216,7 @@ function showControls(i: number): void {
 let index = startIndex;
 let current = statesFor(index);
 pillars.apply(current);
+pillars.setHighlights(changesFor(index), highlightStyle);
 labels.set(labelItemsFor(index, current));
 showControls(index);
 
@@ -198,6 +229,7 @@ function go(i: number): void {
   index = i;
   showControls(i);
   labels.set([]); // 動いている間はラベルを消す
+  pillars.setHighlights(new Map(), highlightStyle); // 入れ替わりの光と輪郭も、動いている間は消す
 
   const duration = animationOn ? ANIMATION_MS : 0;
   const camera = FRAMES[i].camera;
@@ -211,6 +243,7 @@ function go(i: number): void {
     (t) => pillars.apply(t >= 1 ? to : lerpStates(from, to, t), t >= 1),
     () => {
       current = to;
+      pillars.setHighlights(changesFor(i), highlightStyle);
       labels.set(labelItemsFor(i, to));
     },
   );

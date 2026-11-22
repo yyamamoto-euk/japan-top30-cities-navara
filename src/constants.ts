@@ -26,6 +26,27 @@ export const PILLAR_COLOR = "#2f6fd6";
 /** 圏外（TOP_N 位より下）の柱の不透明度。0 = 見えない、1 = 不透明。仮置き */
 export const OUTSIDE_OPACITY = 0.35;
 
+/**
+ * 上位30の入れ替わりの見せ方（src/changes.ts、2026-11-22）。どれも仮置き（yyama が見て決める）。
+ * 入った柱：柱の色はそのままで、暖かい黄色の光をまとわせる（Navara の SelectiveBloom）
+ * 外れた柱：薄い柱に濃い紺の輪郭を付ける（Navara の SelectiveOutline）。背景の地図が明るいので白は見えにくい
+ */
+export const CHANGE_GLOW_COLOR = "#ffa000";
+/**
+ * 入った柱の色。null なら柱の色（青）のまま光だけを足す。
+ * 光は柱の色に足し合わされるので、青のまま強く光らせると白っぽくなり、弱いと明るい地図の上で見えにくい。
+ * そのため、入った柱は色そのものを変え、光は軽く添える（2026-11-22 の試作）
+ */
+export const CHANGE_IN_PILLAR_COLOR: string | null = "#f08a00";
+/** 柱が出す光の強さ（emissiveIntensity） */
+export const CHANGE_GLOW_INTENSITY = 0.25;
+/** 光のにじみ（SelectiveBloom の strength・radius） */
+export const CHANGE_BLOOM_STRENGTH = 1.5;
+export const CHANGE_BLOOM_RADIUS = 0.7;
+export const CHANGE_OUTLINE_COLOR = "#1b2a44";
+/** 輪郭の太さ（SelectiveOutline の thickness） */
+export const CHANGE_OUTLINE_THICKNESS = 2;
+
 /** 年を送ったときのアニメーションの長さ（ミリ秒）。ON のとき使う */
 export const ANIMATION_MS = 1500;
 

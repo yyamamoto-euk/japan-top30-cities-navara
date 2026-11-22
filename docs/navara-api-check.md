@@ -205,3 +205,13 @@ https://navara.world/docs/ は最新リリース（0.3.1）に、Nightly 版の�
   - `AttributionSource`：`attribution`（名前）・`attributionUrl`・`children`（`AttributionChild[]`、`attribution` に部分的な `<a>` を書ける）など（`three/dist/index.d.ts:517`・`704`）
 - 背景地図のクレジット：`TileJsonPlugin.addSource()` が TileJSON の `attribution` を `view.attribution` に自動で入れる（`three-plugins/dist/index.d.ts:709-721`）。開発サーバーで「Re:Earth Papers · © OpenStreetMap contributors」が入っていることを確かめた
 - カードは閉じた状態が初期表示（`show()`・`hide()` で開閉）。プロジェクターでも出典が分かるよう、左下に常に出す1行は HTML で別に作った（2026-11-22 yyamaの指示）
+
+## 入れ替わりを光らせる（2026-11-22、0.3.1）
+
+上位30に入った柱・外れた柱の見せ方（src/changes.ts、src/pillars.ts の setHighlights、src/main.ts）。型定義（d.ts）と、ライブラリの中身・開発サーバーでの動作で確かめた。
+
+- 効果を足す：`view.addEffect({ id, selectiveBloom: { strength, radius, threshold } })`、`view.addEffect({ id, selectiveOutline: { color, thickness } })`。`SelectiveBloomConfig`・`SelectiveOutlineConfig`（`three-default-descs/dist/index.d.ts`）。効果の key は `selectiveBloom`・`selectiveOutline`
+- 柱を選ぶ：箱（`BoxMeshDesc`）の `box.effectIds` に、上で付けた効果の `id` を入れた柱だけに効果がかかる。ライブラリの中で、効果の `id` ごとにマスクの番号が振られる（`SelectiveEffectRegistry.registerSlot(this.id)`、最大11個）
+- 光：`box.emissiveColor`（`Color`）と `box.emissiveIntensity`。SelectiveBloom は発光（emissive）の出力をもとににじませる。発光の色は柱の色に足し合わされるので、青い柱に黄色の光を強く足すと白っぽくなり、弱いと明るい地図の上で見えにくかった。そのため、入った柱は色（`box.color`）そのものをオレンジに変え、光は軽く添えた
+- 輪郭：SelectiveOutline は、半透明（不透明度 0.35）の柱にも付いた
+- 付け外し：`handle.update({ box: { effectIds, emissiveColor, emissiveIntensity, color } })`（部分の更新）
