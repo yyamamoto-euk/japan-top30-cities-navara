@@ -98,8 +98,9 @@ export const CREDIT_LINE: (string | { text: string; url: string })[][] = [
     { text: "OpenStreetMap", url: "https://www.openstreetmap.org/copyright" },
     " contributors",
   ],
-  // 柱の位置：OpenStreetMap の市役所の点（ODbL）と、OSM に無い市は国土地理院の地名検索（2026-11-22 に国土数値情報 P34 から入れ替えた）
-  ["柱の位置：© ", { text: "OpenStreetMap", url: "https://www.openstreetmap.org/copyright" }, " contributors（ODbL）、", { text: "国土地理院", url: "https://www.gsi.go.jp/" }],
+  // 柱の位置：OpenStreetMap の市役所の点（ODbL）と、OSM に無い市は電子国土基本図（地名情報）（国土地理院。地理院地図の地名検索で取得）。
+  // 国土地理院コンテンツ利用規約に従い、加工したこと（をもとに作成）を書く
+  ["柱の位置：© ", { text: "OpenStreetMap", url: "https://www.openstreetmap.org/copyright" }, " contributors（ODbL）、", { text: "電子国土基本図（地名情報）（国土地理院）", url: "https://www.gsi.go.jp/kibanjoho/kibanjoho40025.html" }, "をもとに作成"],
   ["人口：日本帝国統計年鑑・日本統計年鑑・国勢調査ほか（各年の出典）"],
 ];
 
@@ -109,7 +110,7 @@ export const CREDIT_ITEMS: AttributionItem[] = [
     attribution: "柱の位置",
     children: [
       { attribution: "OpenStreetMap の市役所の点：<a href=\"https://www.openstreetmap.org/copyright\">© OpenStreetMap contributors</a>（Open Database License 1.0）" },
-      { attribution: "OpenStreetMap に無い市：<a href=\"https://www.gsi.go.jp/\">国土地理院</a>の地名検索" },
+      { attribution: "OpenStreetMap に無い市：<a href=\"https://www.gsi.go.jp/kibanjoho/kibanjoho40025.html\">電子国土基本図（地名情報）（国土地理院）</a>をもとに作成（地理院地図の地名検索で取得）" },
     ],
   },
   {

@@ -29,4 +29,4 @@ e-Stat（政府標準利用規約）と総務省統計局のウェブサイト�
 - `1940-1950/y750203000.xlsx`：第75回 日本統計年鑑 表2-3 都道府県別人口
 - `1940-1950/c1947_t3_cities100k.pdf`・`c1950_t13_cities100k.pdf`：昭和22年臨時国勢調査、昭和25年国勢調査の表
 - `osm/townhall-japan.json`：OpenStreetMap の日本の役所（amenity=townhall）。Overpass API の応答をそのまま保存（`pnpm data:fetch-osm`）。**Open Database License（ODbL）1.0**、© OpenStreetMap contributors（https://www.openstreetmap.org/copyright）
-- `gsi/townhall-search.json`：国土地理院の地名検索（地理院地図の検索窓と同じ API）で「○○市役所」を引いた応答27件。値は応答のまま（読みやすいよう改行だけ入れた）。国土地理院コンテンツ利用規約（地名検索 API そのものの利用条件のページは未確認）
+- `gsi/townhall-search.json`：地理院地図の地名検索で「○○市役所」を引いた応答27件。値は応答のまま（読みやすいよう改行だけ入れた）。使う点は電子国土基本図（地名情報）の公共施設とみられる。国土地理院コンテンツ利用規約。地名検索 API の利用規約のページは無い（gsimaps の Issue #29 の回答）

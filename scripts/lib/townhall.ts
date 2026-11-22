@@ -3,7 +3,7 @@
 // - OpenStreetMap：data/raw/osm/townhall-japan.json（pnpm data:fetch-osm。amenity=townhall、ODbL 1.0）
 //   国土数値情報 P02（公共施設）から取り込まれた点は使わない：source に KSJ2、source_ref に KsjTmplt-P02、
 //   note に National-Land Numerical Information / 国土数値情報 を含む点
-// - 国土地理院の地名検索：data/raw/gsi/townhall-search.json（地理院地図の検索窓と同じ API の応答。OSM で見つからない市の分）
+// - 地理院地図の地名検索：data/raw/gsi/townhall-search.json（応答。OSM で見つからない市の分）。電子国土基本図（地名情報）の公共施設とみられる
 // - 対象：今の市役所（など）の位置に立てる柱。手で決めた柱（MANUAL）は対象外
 // - 探す名前：今の市の名前＋「役所」（横浜市 → 横浜市役所）。大宮・小倉・布施は TARGET の施設
 //   同じ名前の点が複数あるときは、今の座標にいちばん近い点

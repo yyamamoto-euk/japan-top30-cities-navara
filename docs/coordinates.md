@@ -7,11 +7,22 @@
 - **OpenStreetMap の市役所の点（58本）**：`amenity=townhall` で、名前が「今の市の名前＋役所」（横浜市は「横浜市市庁舎」、秋田市は「秋田市庁舎」、金沢市は「金沢市役所 第二本庁舎」）の点。建物は中心点。原本は `data/raw/osm/townhall-japan.json`（`pnpm data:fetch-osm`、sources.csv の OSM_TOWNHALL）
   - 国土数値情報 P02（公共施設、2006年）から OpenStreetMap に取り込まれた点（タグ source に KSJ2、source_ref に KsjTmplt-P02、note に National-Land Numerical Information を含む点）は使わない
   - 利用条件：Open Database License（ODbL）1.0。柱の座標（entities.csv の lon・lat）と、それを含む public/data/cities.json は ODbL で、出典「© OpenStreetMap contributors」（https://www.openstreetmap.org/copyright）が要る
-- **国土地理院の地名検索（27本）**：OpenStreetMap に P02 由来でない点が無い市（名古屋市・福岡市・千葉市など）は、地理院地図の検索窓と同じ地名検索で「○○市役所」と名前が完全に一致する点。原本は `data/raw/gsi/townhall-search.json`（sources.csv の GSI_TOWNHALL_SEARCH）
-  - 利用条件：国土地理院コンテンツ利用規約（公共データ利用規約 第1.0版。出典を書けば商用も可）。地名検索 API そのものの利用条件のページは未確認
+- **電子国土基本図（地名情報）（27本）**：OpenStreetMap に P02 由来でない点が無い市（名古屋市・福岡市・千葉市など）は、地理院地図の地名検索で「○○市役所」と名前が完全に一致する点。原本は `data/raw/gsi/townhall-search.json`（sources.csv の GSI_TOWNHALL_SEARCH）
+  - 出典の書き方：「電子国土基本図（地名情報）（国土地理院）をもとに作成」。取り方として「地理院地図の地名検索で取得」を添える（entities.csv の coord_basis、README、画面のⓘ）
+  - 利用条件：国土地理院コンテンツ利用規約（公共データ利用規約 第1.0版。出典を書けば商用も可）。くわしくは下の「地名検索で取った27本について」
 - 大宮は今のさいたま市大宮区役所、小倉は今の北九州市役所、布施は今の東大阪市役所の点（旧市役所の位置は未確認）
 - 1886年にしか出てこない柱は、今の市の役所を使った（高田 → 上越市役所、宇治山田 → 伊勢市役所 など）
 - 埋め方：`pnpm data:fetch-osm` → `pnpm data:build` → `pnpm data:check-osm`（照合表 `data/check/coords-osm.md`）→ `pnpm data:fill-coords`。探し方は `scripts/lib/townhall.ts`。手で決めた柱（下の節）は触らない
+
+### 地名検索で取った27本について（2026-11-22 調べたこと）
+
+- 地名検索 API（`msearch.gsi.go.jp/address-search/AddressSearch`）そのものの利用規約のページは無い。地理院地図の公式リポジトリの Issue（https://github.com/gsi-cyberjapan/gsimaps/issues/29 ）で、国土地理院が「主に地理院地図からの利用を想定、長期的な提供は保証しない、仕様は予告なく変わる」「住所の検索には東京大学 CSIS のシンプルジオコーディングを使っている」と答えている
+- 27本の市役所の点は、応答の dataSource が "3"（地理院地図のソース js/gsimaps.js では「居住地名以外」）。国土地理院は電子国土基本図（地名情報）を地名検索のデータに使っていて、地名情報には公共施設が含まれる（https://www.gsi.go.jp/kibanjoho/kibanjoho40025.html ）。そのため27本は電子国土基本図（地名情報）の公共施設とみられる
+- 国土地理院コンテンツ利用規約（https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html ）：加工して使うときは、出典とは別に加工したことを書き、国土地理院が作ったように見せない。そのため「をもとに作成」と書く
+- 住所で引いた点は CSIS のサービスの結果なので、国土地理院の規約ではなく CSIS 側の条件になる。その条件のページは見つかっていない。そのため、住所で引いた点は使わない（門司・西巣鴨町・滝野川町・平塚町。下の「仮の座標」の節）
+- **未確認**：27本が地名情報の公共施設であること（応答に資料名が無い）
+- **未確認**：測量法の承認。国土地理院の Q&A（https://www.gsi.go.jp/LAW/2930-qa.html ）では、複製しない場合は承認不要とされている。27点の座標を取り出すことが複製にあたらないかは、原文からは判断できない
+
 - 2026-11-22 までは、国土数値情報 市町村役場等及び公的集会施設データ（P34、2014年）の点を使っていた。使用許諾条件が非商用なので入れ替えた。前の座標からのずれは、大きいもので鳥取市 1,432m、横浜市 805m、大宮 540m（どれも P34 の2014年より後に庁舎が移ったとみられる）。ほかは 340m 以内
 
 ## 描く位置のずれ（2026-11-22）

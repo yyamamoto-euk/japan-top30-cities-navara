@@ -4,7 +4,8 @@
 // - 1つ目：OpenStreetMap の市役所の点（data/raw/osm/townhall-japan.json、ODbL 1.0）。
 //   国土数値情報 P02 から取り込まれた点は使わない。探し方と判定は scripts/lib/townhall.ts
 //   使うのは「一致」と、yyama が照合表（data/check/coords-osm.md）で OK した「要確認」（ACCEPTED）
-// - 2つ目：OSM に無い市は、国土地理院の地名検索の点（data/raw/gsi/townhall-search.json）。名前が完全一致するもの
+// - 2つ目：OSM に無い市は、地理院地図の地名検索で取った点（data/raw/gsi/townhall-search.json）。名前が完全一致するもの。
+//   電子国土基本図（地名情報）の公共施設とみられる。出典は「電子国土基本図（地名情報）（国土地理院）をもとに作成」
 // - どちらも無い柱は変えずに一覧に出す。手で決めた柱（townhall.ts の MANUAL）は触らない
 // - coord_basis に、どこから取ったか（OSM は種類と ID まで）を書く
 // - 2026-11-22 まで使っていた国土数値情報 P34（非商用）からは取らない
@@ -40,11 +41,11 @@ for (const m of matches) {
   } else {
     const hit = gsi.find(m.target, m.cur);
     if (!hit) {
-      left.push(`${m.id}（${m.name}）：${m.judge}。${m.why}。国土地理院の地名検索にも無い`);
+      left.push(`${m.id}（${m.name}）：${m.judge}。${m.why}。地理院地図の地名検索にも無い`);
       continue;
     }
     ({ lon, lat } = hit);
-    basis = `国土地理院の地名検索（地理院地図の検索）の${hit.title}の位置`;
+    basis = `電子国土基本図（地名情報）（国土地理院）をもとに作成。地理院地図の地名検索で取得（${hit.title}）`;
   }
   basis += SUFFIX[m.id] ?? "";
   const moved = distM(m.cur, [lon, lat]);
@@ -56,7 +57,7 @@ for (const m of matches) {
 
 writeCsv(PATHS.entities, header, rows);
 const osmCount = done.filter((d) => d.how.startsWith("OpenStreetMap")).length;
-console.log(`入れた柱 ${done.length}（OpenStreetMap ${osmCount}、国土地理院の地名検索 ${done.length - osmCount}）、残した柱 ${left.length}`);
+console.log(`入れた柱 ${done.length}（OpenStreetMap ${osmCount}、電子国土基本図（地名情報）（地理院地図の地名検索） ${done.length - osmCount}）、残した柱 ${left.length}`);
 for (const s of left) console.log(`  残した：${s}`);
 console.log("前の座標からのずれ（大きい順に10本）：");
 for (const d of [...done].sort((a, b) => b.moved - a.moved).slice(0, 10)) console.log(`  ${d.id}　${Math.round(d.moved)}m　${d.how}`);
