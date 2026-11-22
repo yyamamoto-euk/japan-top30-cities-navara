@@ -1,0 +1,42 @@
+{
+  "name": "jinko-bunpu",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 8080",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "data:build": "tsx scripts/build-data.ts",
+    "data:validate": "tsx scripts/validate-data.ts",
+    "data:fill-coords": "tsx scripts/fill-entity-coords.ts",
+    "data:dummy": "tsx scripts/build-dummy.ts",
+    "data:check-2025": "tsx scripts/check-estat-2025.ts",
+    "data:prefectures": "tsx scripts/build-prefectures-pop.ts",
+    "data:prefectures-geo": "node --max-old-space-size=8192 --import tsx scripts/build-prefectures.ts",
+    "data:2000": "tsx scripts/build-2000.ts",
+    "data:1940-1950": "tsx scripts/build-1940-1950-cities.ts",
+    "data:check-1886": "tsx scripts/check-1886.ts",
+    "data:1886": "tsx scripts/build-1886.ts",
+    "data:spot-check": "tsx scripts/spot-check.ts",
+    "data:national": "tsx scripts/build-national-pop.ts"
+  },
+  "dependencies": {
+    "@navaramap/three": "0.3.1",
+    "@navaramap/three-default-descs": "0.3.1",
+    "@navaramap/three-default-plugin": "0.3.1",
+    "@navaramap/three-plugins": "0.3.1",
+    "postprocessing": "6.38.3",
+    "three": "0.184.0",
+    "three-stdlib": "2.36.1"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "@types/three": "0.184.0",
+    "exceljs": "4.4.0",
+    "mapshaper": "0.7.101",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vite": "8.0.8"
+  }
+}

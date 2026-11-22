@@ -1,0 +1,43 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.env
+
+# 国土数値情報 N03（約600MB、GitHub の1ファイル100MB制限を超えるので git に入れない。取得元は data/sources.csv の N03_KSJ）
+data/raw/N03/
+
+# 原本から作る作業用の中間ファイル（.xls を TSV にしたものなど）。scripts/ から作り直せる
+data/work/
+
+# 利用条件のため公開リポジトリに入れない原本（手元には置いて、スクリプトから使う）。一覧と取得先は data/raw/README.md
+# - 国土数値情報 P34：非商用で、複製物の再配布ができない
+data/raw/P34/
+# - 札幌市・呉市の統計書：私的使用と引用以外の転載には事前の相談が要る
+data/raw/sapporo/
+data/raw/1940-1950/kure_109550.xls
+# - 一橋大学経済研究所のデータベースの画像・PDF・Excel：利用条件の記載がないので入れない
+data/raw/1886/
+data/raw/1908/
+data/raw/1925/
+data/raw/1940-1950/yb1949_*
+data/raw/1940-1950/yb1951_*

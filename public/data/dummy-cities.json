@@ -1,0 +1,5 @@
+{
+  "note": "テスト用の仮データ。実データではない。scripts/build-dummy.ts が cities.json から作る",
+  "years": [],
+  "cities": []
+}

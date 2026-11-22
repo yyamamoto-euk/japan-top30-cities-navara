@@ -1,0 +1,7 @@
+allowBuilds:
+  # tsx が使う esbuild。インストール時のスクリプトを走らせなくても動くことを確認済み
+  esbuild: false
+  # mapshaper が引き込むネイティブ部品（GeoPackage 用の better-sqlite3、msgpackr の高速化）。
+  # GeoJSON・Shapefile の読み書きには使わないので走らせない（T4、2026-11-22）
+  better-sqlite3: false
+  msgpackr-extract: false

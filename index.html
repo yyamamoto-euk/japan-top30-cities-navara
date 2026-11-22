@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>人口上位30都市 100年比較</title>
+  <script type="module" src="./src/main.ts"></script>
+  <style>
+    /* 人口ラベル（src/labels.ts）。文字の大きさは constants.ts の LABEL_FONT_SIZE */
+    .pillar-labels {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .pillar-label {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .pillar-label > span {
+      display: block;
+      padding: 1px 5px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.85);
+      color: #1b2a44;
+      font: 600 var(--label-font-size, 14px) / 1.2 system-ui, "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    /* ラベルの中身（src/labels.ts の renderLabel）：1行目「人口 当時の名前」、2行目「（今の名前）」 */
+    .pillar-label > span {
+      text-align: center;
+    }
+    .pillar-label__name {
+      margin-left: 0.3em;
+      font-size: calc(1em * var(--label-name-scale, 0.8));
+      font-weight: 500;
+    }
+    .pillar-label__now {
+      display: block;
+      font-size: calc(1em * var(--label-now-scale, 0.7));
+      font-weight: 400;
+      color: #4b5563;
+    }
+    /* 柱の頭：文字の下端を頭の少し上に置く */
+    .pillar-labels--top .pillar-label > span {
+      transform: translate(-50%, calc(-100% - 4px));
+    }
+    /* 根元：文字の上端を根元の少し下に置く */
+    .pillar-labels--bottom .pillar-label > span {
+      transform: translate(-50%, 4px);
+    }
+
+    /* 画面下の中央の操作ボタン（src/controls.ts） */
+    .controls {
+      position: absolute;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+      font-family: system-ui, "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+      color: #1b2a44;
+      max-width: calc(100vw - 32px);
+      box-sizing: border-box;
+    }
+    .controls button {
+      font: inherit;
+      font-weight: 600;
+      border: 1px solid #c5cedb;
+      border-radius: 8px;
+      background: #fff;
+      color: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .controls button:hover:not(:disabled) {
+      background: #eef3fb;
+    }
+    .controls button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+    .controls__step {
+      font-size: 18px;
+      padding: 8px 16px;
+    }
+    .controls__current {
+      min-width: 160px;
+      text-align: center;
+    }
+    .controls__title {
+      font-size: 22px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .controls__total {
+      margin-left: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .controls__source {
+      font-size: 11px;
+      margin-top: 2px;
+      color: #4b5563;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .controls__anim {
+      font-size: 13px;
+      padding: 6px 10px;
+    }
+    .controls__anim[aria-pressed="false"] {
+      color: #6b7686;
+    }
+
+    /* 画面の左の年表（src/timeline.ts）。年の位置（top）は JS で決める */
+    .timeline {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      bottom: 40px;
+      width: 250px;
+      padding: 16px 12px 16px 14px;
+      box-sizing: border-box;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+      font-family: system-ui, "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+      color: #1b2a44;
+    }
+    .timeline {
+      display: flex;
+      flex-direction: column;
+    }
+    .timeline__caption {
+      margin: -4px 0 10px;
+      font-size: 11px;
+      color: #6b7686;
+      text-align: right;
+    }
+    .timeline__list {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+    }
+    /* 縦の線 */
+    .timeline__list::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 8px;
+      bottom: 30px;
+      width: 2px;
+      background: #c5cedb;
+    }
+    .timeline__item {
+      position: absolute;
+      left: 0;
+      right: 0;
+      display: block;
+      padding: 0 0 0 22px;
+      border: 0;
+      background: none;
+      color: #4b5563;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+    /* 線の上の丸 */
+    .timeline__item::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #9aa7b8;
+      box-sizing: border-box;
+    }
+    .timeline__item:hover .timeline__year {
+      text-decoration: underline;
+    }
+    .timeline__head {
+      display: flex;
+      align-items: baseline;
+      white-space: nowrap;
+    }
+    .timeline__total {
+      margin-left: auto;
+      padding-left: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .timeline__year {
+      font-size: 17px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .timeline__era {
+      margin-left: 6px;
+      font-size: 12px;
+    }
+    .timeline__event {
+      display: block;
+      font-size: 12px;
+      line-height: 1.3;
+    }
+    .timeline__item--active {
+      color: #1b2a44;
+    }
+    .timeline__item--active .timeline__year {
+      font-size: 20px;
+    }
+    /* 今の年の丸：柱と同じ青 */
+    .timeline__item--active::before {
+      left: 0;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border: 0;
+      background: #2f6fd6;
+    }
+
+    /* 左下に常に出すクレジット（src/credits.ts） */
+    .credit-line {
+      position: absolute;
+      left: 8px;
+      bottom: 4px;
+      max-width: calc(100vw - 64px);
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.8);
+      color: #374151;
+      font: 11px / 1.4 system-ui, "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    }
+    .credit-line a {
+      color: inherit;
+    }
+
+    /* 仮データを使っている年に出す印 */
+    .dummy-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #d64545;
+      color: #fff;
+      font: 700 14px system-ui, "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    }
+  </style>
+</head>
+
+<body style="margin: 0; overflow: hidden">
+  <!-- touch-action: none：タッチ画面でのピンチでページが拡大されないようにする（地図の操作は Navara が受け取る） -->
+  <div id="main" style="position: relative; width: 100vw; height: 100vh; touch-action: none"></div>
+</body>
+
+</html>
