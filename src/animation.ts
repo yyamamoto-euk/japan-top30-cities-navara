@@ -1,4 +1,4 @@
-// 章送りのアニメーション。requestAnimationFrame で t = 0 → 1 を進める。
+// 年送りのアニメーション。requestAnimationFrame で t = 0 → 1 を進める。
 // 途中で finish() を呼ぶと、すぐ最後の状態にして終わる。
 
 /** 動き出しと止まり際をゆっくりにする */

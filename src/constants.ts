@@ -26,7 +26,7 @@ export const PILLAR_COLOR = "#2f6fd6";
 /** 圏外（TOP_N 位より下）の柱の不透明度。0 = 見えない、1 = 不透明。仮置き */
 export const OUTSIDE_OPACITY = 0.35;
 
-/** 章を送ったときのアニメーションの長さ（ミリ秒）。ON のとき使う */
+/** 年を送ったときのアニメーションの長さ（ミリ秒）。ON のとき使う */
 export const ANIMATION_MS = 1500;
 
 /**
