@@ -19,7 +19,7 @@
 
 ![1886年の関西に近づいた画面。大阪・京都・神戸・堺・和歌山の柱と人口のラベル。上位30の外の都市は薄い柱で出る](docs/screenshot-1886-kansai.webp)
 
-数える単位は**当時の市町村**です。東京は東京市（戦後は特別区部）を1点、政令市も1点として数えます。1925年だけは、1932年に東京市に入る町（渋谷町・西巣鴨町・滝野川町・平塚町）を東京の柱に積んで1本で見せています。
+数える単位は**当時の市町村**です（東京と政令市は1点）。数え方、年ごとの資料と日付の違い、1925年の東京の扱いなどは [conditions.md](conditions.md) にまとめています。
 
 ## 動かし方
 
@@ -48,22 +48,14 @@ pnpm dev
 | 2025 | 令和7年国勢調査 人口等基本集計（e-Stat） |
 | 総人口 | 第75回 日本統計年鑑 表2-1（1886〜2000年）、令和7年国勢調査 表1-1（2025年） |
 
-札幌と呉の一部の年は、各市の統計書の値です。資料の一覧と取得日は [`data/sources.csv`](data/sources.csv)、くわしい状況は [SPEC.md](SPEC.md) の「出典と状況」にあります。
+札幌と呉の一部の年は、各市の統計書の値です。資料の一覧と取得日は [`data/sources.csv`](data/sources.csv) にあります。年ごとの日付と数え方の違いは [conditions.md](conditions.md) を見てください。
 
 ### 値の扱い
 
 - 数値の正は [`data/observations.csv`](data/observations.csv)（年・順位・当時の名前・人口・出典・status・note）。柱の定義は [`data/entities.csv`](data/entities.csv)、総人口は [`data/national_pop.csv`](data/national_pop.csv)
 - 画面が読む `public/data/cities.json` は生成物で、`pnpm data:build` で作る。手で直さない
-- status は「一次照合済」「二次のみ」「要照合」「矛盾あり」の4つ。同じ年・同じ柱に複数の行があるときは、この順に採用する（「矛盾あり」は使わない）
-- 画像や PDF から読んだ値は、表の合計が総計と一致することを確かめ、照合表（[`data/check/`](data/check/)）で目で確かめてから「一次照合済」にしている
-- 数値を推測で埋めない。無い値は空欄にして、note に理由を書く
+- status（一次照合済・二次のみ・要照合・矛盾あり）と値の確かめ方は [conditions.md](conditions.md#値の確かめ方)、照合表の一覧は [`data/check/README.md`](data/check/README.md)
 - 原本は `data/raw/` に置き、書き換えない。利用条件のためリポジトリに入れていない原本もある（一覧と取得先は [`data/raw/README.md`](data/raw/README.md)）。画面の値は observations.csv に入っているので、原本が無くても `pnpm data:build` と `pnpm dev` は動く
-
-### 注意
-
-- 1886年・1908年の都市の値は年末の現住人口で、1920年からの国勢調査とは数え方が違う
-- 1945年は国勢調査ではなく、11月1日の人口調査（沖縄県は対象外）
-- 1940年と1945年は、1947年に10万人以上だった52市の表しか無いため、それより小さかった都市には値が無い
 
 ### よく使うスクリプト
 
@@ -111,7 +103,12 @@ docs/         座標の決め方、Navara の API の確認メモ
 
 ## 関連文書
 
+- [conditions.md](conditions.md)：数え方と条件（画面の数字を読むときに）
+- [docs/coordinates.md](docs/coordinates.md)：柱の座標の決め方
+- [data/check/README.md](data/check/README.md)：照合表の一覧
+
+開発の記録（仕様を決めた経緯や作業の順番。見る人が読む必要はありません）
+
 - [SPEC.md](SPEC.md)：仕様と決めたこと
 - [TASKS.md](TASKS.md)：作業の順番と記録
 - [CLAUDE.md](CLAUDE.md)：Claude Code で作業するときのルール
-- [docs/coordinates.md](docs/coordinates.md)：柱の座標の決め方
