@@ -3,7 +3,7 @@
 
 import type { Frame } from "./frames.ts";
 
-const ANIMATION_KEY = "jinko-bunpu:animation";
+const ANIMATION_KEY = "japan-top30-cities-navara:animation";
 
 /** アニメーションの ON/OFF を、このブラウザに覚えさせる（読めなければ ON） */
 export function loadAnimationSetting(): boolean {

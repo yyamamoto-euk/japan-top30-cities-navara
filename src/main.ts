@@ -209,4 +209,4 @@ function go(i: number): void {
   );
 }
 
-console.info(`[jinko-bunpu] 柱 ${placed.size} 本、コマ ${FRAMES.length}、最初は ${FRAMES[index].year} 年`);
+console.info(`[japan-top30-cities-navara] 柱 ${placed.size} 本、コマ ${FRAMES.length}、最初は ${FRAMES[index].year} 年`);
