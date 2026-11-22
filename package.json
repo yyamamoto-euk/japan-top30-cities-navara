@@ -23,6 +23,7 @@
     "data:fetch-osm": "tsx scripts/fetch-osm-townhall.ts",
     "data:check-osm": "tsx scripts/check-coords-osm.ts",
     "data:layout-shift": "tsx scripts/measure-layout.ts",
+    "data:check-frames": "tsx scripts/check-frames.ts",
     "data:fetch-osm-manual": "tsx scripts/fetch-osm-manual.ts"
   },
   "dependencies": {

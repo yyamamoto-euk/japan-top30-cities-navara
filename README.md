@@ -72,6 +72,7 @@ pnpm dev
 | `pnpm data:validate` | データの抜けや矛盾を調べる |
 | `pnpm data:spot-check` | 年ごとに5都市を選び、画面の値と元の行（出典・ページ）を並べる（`--seed 数字` で同じ選び方） |
 | `pnpm data:national` | 総人口の表を作る |
+| `pnpm data:check-frames` | 年ごとの上位30（本数、1・2位、29〜31位）と入れ替わり（入った柱・外れた柱）を、画面と同じ計算で出す |
 | `pnpm data:fetch-osm` → `data:check-osm` → `data:fill-coords` | 柱の座標（市役所の点）を OpenStreetMap などから取り直す（[docs/coordinates.md](docs/coordinates.md)） |
 | `pnpm data:1886`、`data:1940-1950`、`data:2000` | 各年の原本から observations.csv の行を作り直す |
 
