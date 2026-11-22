@@ -4,6 +4,7 @@
 // - 画面の左に年表（timeline.ts）：年・和暦・出来事の一言・日本の総人口。クリックでその年へ
 // - 画面の下に ◀ ▶、今の年と総人口、出典の一行（controls.ts）。左下とⓘにクレジット（credits.ts）
 // - 画面の右に、開閉式の一覧（rankList.ts）：今の年の上位30と外れた柱を表で出す
+// - 開くとスタート画面（intro.ts）。「はじめる」で遠くから日本へ寄り、柱が0から伸びる。右上の「？」で開き直せる
 // - 1925年は、1932年に東京市に入る町を東京の柱に積む（stack.ts）
 // - タッチパッドのピンチでページ全体が拡大されないようにする（地図のカメラだけが動く）
 //
@@ -12,6 +13,7 @@
 //   ?camera=naha … frames.ts の DEBUG_CAMERAS のカメラで開く
 //   例：http://localhost:8080/?year=1886&camera=naha （那覇・首里の重なりを見る）
 //   例：http://localhost:8080/?year=1925&camera=tokyo （1925年の東京まわりの町の柱を見る）
+//   ?intro=0     … スタート画面を出さずに開く（デモ用）
 //   ?ui=0        … スクリーンショット用。年表・下のパネル・左下のクレジット・ⓘ を隠す（柱とラベルは出す）
 //   例：http://localhost:8080/?year=2025&ui=0 （Navara のショーケース用に、1000×1000 程度の正方形で撮る）
 //   ※ ?ui=0 で撮った画像を載せるときは、地図と柱の位置のクレジット（Re:Earth Papers / © OpenStreetMap contributors、国土地理院）を
@@ -38,6 +40,8 @@ import {
   CITIES_URL,
   DUMMY_URL,
   HEIGHT_PER_PERSON,
+  INTRO_FAR_DISTANCE,
+  INTRO_MS,
   LABEL_FONT_SIZE,
   LABEL_NAME_SCALE,
   LABEL_NOW_DISPLAY,
@@ -62,6 +66,7 @@ import { topChanges } from "./changes.ts";
 import { Controls, loadAnimationSetting } from "./controls.ts";
 import { addCredits } from "./credits.ts";
 import { formatNationalPopulation, nowNameForLabel } from "./format.ts";
+import { Intro, introHidden } from "./intro.ts";
 import { formatPopulation, PillarLabels, type LabelItem } from "./labels.ts";
 import { RankList, type OutRow, type RankChange, type RankRow } from "./rankList.ts";
 import { layoutPillars } from "./layout.ts";
@@ -77,6 +82,11 @@ const startCamera: CameraPosition = DEBUG_CAMERAS[params.get("camera") ?? ""] ??
 
 // --- 初期化（プラグインは init の前に全部足す） ---
 const container = document.getElementById("main")!;
+// スタート画面（src/intro.ts）。地図の読み込み中の黒い画面も隠すので、地図より先に出す。
+// 毎回出す。「次から表示しない」にチェックした人、?intro=0、?ui=0 のときは出さない
+const showIntro = params.get("ui") !== "0" && params.get("intro") !== "0" && !introHidden();
+const intro = new Intro(container);
+if (showIntro) intro.open(() => startIntro());
 const view = new ThreeView<DefaultDescriptions>({ container });
 view.addPlugin(new DefaultPlugin());
 const tilejson = new TileJsonPlugin();
@@ -102,7 +112,8 @@ if (import.meta.env.DEV) Object.assign(window, { view });
 // マウスでの移動・拡大縮小・傾きは効かせたままにする（2026-11-22 yyamaの指示）。
 // 操作・体験設計はあとで見直す（SPEC.md の未決）。止めるときは次の1行を戻す：
 // view.camera.options = { enableSpin: false, enableZoom: false, enableTilt: false };
-view.setCamera(startCamera);
+// スタート画面を出すときは、遠くから始める（「はじめる」で startCamera へ寄る）
+view.setCamera(showIntro ? { ...startCamera, distance: INTRO_FAR_DISTANCE } : startCamera);
 
 // --- 光：柱の面ごとに明るさを変える（constants.ts の PILLAR_LIT）。太陽の向きは日時から決まるので固定する ---
 // 2026-11-23 に3D地形はやめた（開いてから地図が出るまでが遅くなったため。yyamaの指示）。背景地図は光の影響を受けない
@@ -312,10 +323,36 @@ function goHome(): void {
 // --- 最初のコマ ---
 let index = startIndex;
 let current = statesFor(index);
-pillars.apply(current);
-pillars.setHighlights(changesFor(index), highlightStyle);
-labels.set(labelItemsFor(index, current));
+/** 柱の高さを0にした状態（スタート画面のあと、ここから伸ばす） */
+const flat = (states: Map<string, PillarState>) => new Map([...states].map(([id, s]) => [id, { ...s, height: 0 }]));
+if (showIntro) {
+  pillars.apply(flat(current)); // スタート画面の後ろでは柱を立てない
+} else {
+  pillars.apply(current);
+  pillars.setHighlights(changesFor(index), highlightStyle);
+  labels.set(labelItemsFor(index, current));
+}
 showControls(index);
+
+/**
+ * スタート画面の「はじめる」のあと：遠くから開いたときのカメラへ寄り、柱を0から伸ばす（案A）。
+ * アニメーションが OFF なら、すぐにいつもの画面にする
+ */
+function startIntro(): void {
+  const duration = animationOn ? INTRO_MS : 0;
+  if (duration > 0) void view.flyTo(startCamera as Parameters<typeof view.flyTo>[0], { duration });
+  else view.setCamera(startCamera);
+  const from = flat(current);
+  const to = current;
+  tween.start(
+    duration,
+    (t) => pillars.apply(t >= 1 ? to : lerpStates(from, to, t), t >= 1),
+    () => {
+      pillars.setHighlights(changesFor(index), highlightStyle);
+      labels.set(labelItemsFor(index, current));
+    },
+  );
+}
 
 /** i 番目のコマへ送る。動いている途中なら、先に最後の状態にしてから送る */
 function go(i: number): void {
@@ -348,4 +385,5 @@ function go(i: number): void {
   );
 }
 
+intro.setReady();
 console.info(`[japan-top30-cities-navara] 柱 ${placed.size} 本、コマ ${FRAMES.length}、最初は ${FRAMES[index].year} 年`);

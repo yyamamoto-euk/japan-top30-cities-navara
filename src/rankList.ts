@@ -6,6 +6,8 @@
 // - 名前はボタン。押す（Enter）と、その柱に寄る（main.ts の selectPillar）。「全国に戻る」で開いたときのカメラに戻る
 //   画面が狭くて一覧が全面に重なっているときは、選んだら一覧を閉じて、寄った先を見せる
 
+import { CONDITIONS_URL } from "./constants.ts";
+
 /** 前の年からの変化。null は比べる年が無い（1886年） */
 export type RankChange = { kind: "up" | "down" | "same"; by: number } | { kind: "new" } | null;
 
@@ -33,7 +35,7 @@ export type RankListContent = {
 };
 
 /** 順位の注意のリンク先（conditions.md の「気をつけてほしい違い」） */
-const NOTE_URL = "https://github.com/yyamamoto-euk/japan-top30-cities-navara/blob/main/conditions.md#%E6%B0%97%E3%82%92%E3%81%A4%E3%81%91%E3%81%A6%E3%81%BB%E3%81%97%E3%81%84%E9%81%95%E3%81%84";
+const NOTE_URL = `${CONDITIONS_URL}#%E6%B0%97%E3%82%92%E3%81%A4%E3%81%91%E3%81%A6%E3%81%BB%E3%81%97%E3%81%84%E9%81%95%E3%81%84`;
 
 const el = <K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string) => {
   const e = document.createElement(tag);

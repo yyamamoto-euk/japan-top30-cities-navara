@@ -288,6 +288,8 @@
     }
 
     /* ?ui=0（スクリーンショット用）：年表・下のパネル・左下のクレジット・ⓘ を隠す。柱とラベルは出す（src/main.ts） */
+    .ui-hidden .intro,
+    .ui-hidden .intro-help,
     .ui-hidden .rank-toggle,
     .ui-hidden .rank-panel,
     .ui-hidden .timeline,
@@ -514,6 +516,133 @@
         width: auto;
         border-radius: 0;
         padding-top: 52px;
+      }
+    }
+
+    /* スタート画面（src/intro.ts）。地図をうすく暗くした上に重ねる。教室のプロジェクターでも読めるよう本文は 17px */
+    .intro {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 23, 42, 0.45);
+      font-family: system-ui, "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+      color: #1b2a44;
+    }
+    .intro[hidden] {
+      display: none;
+    }
+    .intro__card {
+      max-width: 680px;
+      max-height: 100%;
+      overflow-y: auto;
+      padding: 32px 36px 24px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+    .intro__title {
+      margin: 0 0 12px;
+      font-size: 28px;
+      line-height: 1.3;
+    }
+    .intro__title:focus {
+      outline: none;
+    }
+    .intro__lead {
+      margin: 0 0 16px;
+    }
+    .intro__how {
+      margin: 0 0 16px;
+      padding-left: 1.2em;
+    }
+    .intro__how li {
+      margin: 6px 0;
+    }
+    .intro__note {
+      margin: 0 0 20px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: #f1f4f9;
+      font-size: 15px;
+    }
+    .intro__actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+    }
+    .intro__start {
+      padding: 12px 32px;
+      border: none;
+      border-radius: 10px;
+      background: #2f6fd6;
+      color: #fff;
+      font: 700 18px system-ui, "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+      cursor: pointer;
+    }
+    .intro__start:disabled {
+      background: #9aa8bd;
+      cursor: wait;
+    }
+    .intro__hide {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #4a5568;
+    }
+    .intro__credit {
+      margin: 20px 0 0;
+      font-size: 11px;
+      line-height: 1.5;
+      color: #6b7686;
+    }
+    .intro__credit a,
+    .intro__note a {
+      color: inherit;
+    }
+    .intro__start:focus-visible,
+    .intro a:focus-visible,
+    .intro input:focus-visible,
+    .intro-help:focus-visible {
+      outline: 3px solid #1b2a44;
+      outline-offset: 2px;
+    }
+    /* 右上の「？」：スタート画面を開き直す（「一覧」の左） */
+    .intro-help {
+      position: absolute;
+      top: 16px;
+      right: 96px;
+      z-index: 6;
+      width: 38px;
+      height: 38px;
+      border: 1px solid #c9d3e3;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+      font: 700 17px system-ui, "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+      color: #1b2a44;
+      cursor: pointer;
+    }
+    @media (max-width: 719px) {
+      .intro {
+        padding: 0;
+      }
+      .intro__card {
+        max-width: none;
+        height: 100%;
+        border-radius: 0;
+        padding: 20px;
+        font-size: 15px;
+      }
+      .intro__title {
+        font-size: 22px;
       }
     }
 

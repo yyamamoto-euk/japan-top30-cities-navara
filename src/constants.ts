@@ -72,6 +72,17 @@ export const SELECT_PITCH = -40;
 export const SELECT_DISTANCE_PER_HEIGHT = 1.6;
 export const SELECT_MIN_DISTANCE = 150_000;
 
+/**
+ * 「数え方と条件」（conditions.md）の置き場所。一覧の一言とスタート画面からリンクする。
+ * 公開用リポジトリの GitHub 上のファイル。リポジトリを移したら直す
+ */
+export const CONDITIONS_URL = "https://github.com/yyamamoto-euk/japan-top30-cities-navara/blob/main/conditions.md";
+
+/** スタート画面の「はじめる」のあと、遠くから日本へ寄って柱が伸びる長さ（ミリ秒）。アニメーションが ON のとき */
+export const INTRO_MS = 2500;
+/** スタート画面の後ろに見せる、遠くのカメラ（開いたときのカメラから、この距離まで引く。m） */
+export const INTRO_FAR_DISTANCE = 12_000_000;
+
 /** 年を送ったときのアニメーションの長さ（ミリ秒）。ON のとき使う */
 export const ANIMATION_MS = 1500;
 
