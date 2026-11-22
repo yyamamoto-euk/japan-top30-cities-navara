@@ -19,6 +19,8 @@ export type LabelItem = {
   nameNow: string | null;
   /** 重なったときの優先度。大きいほうを残す（人口） */
   priority: number;
+  /** 一覧で選んだ柱（紺の枠で目立たせ、重なっても隠さない） */
+  selected?: boolean;
 };
 
 export { formatPopulation } from "./format.ts";
@@ -99,6 +101,7 @@ export class PillarLabels {
         this.entries.set(item.id, entry);
       }
       entry.item = item;
+      entry.el.classList.toggle("pillar-label--selected", !!item.selected);
       renderLabel(entry.el.firstElementChild as HTMLElement, item);
       this.measure(entry);
     }

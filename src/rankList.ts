@@ -3,6 +3,8 @@
 // - 画面の右。「一覧」ボタンで開閉し、最初は閉じている。× と Esc でも閉じる。画面が狭いとき（1200px 未満）は地図の上に全面で重ねる（index.html の CSS）
 // - 順位と人口は画面と同じ値（src/stack.ts で積んで順位を付け直したあと）。行は main.ts の rankRowsFor が作る
 // - 表は <table> と <caption>。前の年からの変化は、記号のほかに読み上げ用の文も付ける（色だけ・記号だけに頼らない）
+// - 名前はボタン。押す（Enter）と、その柱に寄る（main.ts の selectPillar）。「全国に戻る」で開いたときのカメラに戻る
+//   画面が狭くて一覧が全面に重なっているときは、選んだら一覧を閉じて、寄った先を見せる
 
 /** 前の年からの変化。null は比べる年が無い（1886年） */
 export type RankChange = { kind: "up" | "down" | "same"; by: number } | { kind: "new" } | null;
@@ -43,13 +45,27 @@ const el = <K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, t
 /** 読み上げソフトだけが読む文 */
 const srOnly = (text: string) => el("span", "sr-only", text);
 
+export type RankListHandlers = {
+  /** 行を選んだ（その柱に寄る） */
+  onSelect: (id: string) => void;
+  /** 「全国に戻る」 */
+  onHome: () => void;
+};
+
+/** 一覧を地図の上に全面で重ねる幅（index.html の @media と合わせる） */
+const NARROW = "(max-width: 1199px)";
+
 export class RankList {
+  private selected: string | null = null;
   private toggle: HTMLButtonElement;
   private panel: HTMLElement;
   private title: HTMLElement;
   private body: HTMLElement;
 
-  constructor(parent: HTMLElement) {
+  constructor(
+    parent: HTMLElement,
+    private handlers: RankListHandlers,
+  ) {
     this.toggle = el("button", "rank-toggle", "一覧");
     this.toggle.type = "button";
     this.toggle.setAttribute("aria-expanded", "false");
@@ -69,8 +85,16 @@ export class RankList {
     close.setAttribute("aria-label", "一覧を閉じる");
     close.addEventListener("click", () => this.setOpen(false));
     head.append(this.title, close);
+    const home = el("button", "rank-panel__home", "全国に戻る");
+    home.type = "button";
+    home.addEventListener("click", () => {
+      this.handlers.onHome();
+      if (window.matchMedia(NARROW).matches) this.setOpen(false);
+    });
+    const tools = el("div", "rank-panel__tools");
+    tools.append(home, el("span", "rank-panel__hint", "名前を押すと、その柱に寄ります"));
     this.body = el("div", "rank-panel__body");
-    this.panel.append(head, this.body);
+    this.panel.append(head, tools, this.body);
     this.panel.addEventListener("keydown", (e) => {
       if (e.key === "Escape") this.setOpen(false);
     });
@@ -90,12 +114,33 @@ export class RankList {
   show(c: RankListContent): void {
     this.title.textContent = `${c.year}年の人口上位${c.rows.length}`;
     this.body.replaceChildren(this.topTable(c), ...this.outSection(c), this.footnote(c));
+    this.setSelected(this.selected);
   }
 
-  private nameCell(name: string, nameNow: string | null): HTMLTableCellElement {
+  /** 選んだ行を目立たせる（aria-current）。null で外す */
+  setSelected(id: string | null): void {
+    this.selected = id;
+    for (const tr of this.body.querySelectorAll<HTMLTableRowElement>("tbody tr")) {
+      const on = id !== null && tr.dataset.id === id;
+      tr.classList.toggle("rank-table__row--selected", on);
+      const btn = tr.querySelector(".rank-table__pick");
+      if (on) btn?.setAttribute("aria-current", "true");
+      else btn?.removeAttribute("aria-current");
+    }
+  }
+
+  private nameCell(id: string, name: string, nameNow: string | null): HTMLTableCellElement {
     const td = el("td", "rank-table__name");
-    td.append(el("span", "rank-table__then", name));
-    if (nameNow) td.append(el("span", "rank-table__now", `（${nameNow}）`));
+    const btn = el("button", "rank-table__pick");
+    btn.type = "button";
+    btn.append(el("span", "rank-table__then", name));
+    if (nameNow) btn.append(el("span", "rank-table__now", `（${nameNow}）`));
+    btn.append(srOnly("。この柱に寄る"));
+    btn.addEventListener("click", () => {
+      this.handlers.onSelect(id);
+      if (window.matchMedia(NARROW).matches) this.setOpen(false);
+    });
+    td.append(btn);
     return td;
   }
 
@@ -132,9 +177,10 @@ export class RankList {
     const tbody = el("tbody");
     for (const r of c.rows) {
       const tr = el("tr");
+      tr.dataset.id = r.id;
       const rank = el("th", "rank-table__rank", String(r.rank));
       rank.scope = "row";
-      tr.append(rank, this.nameCell(r.name, r.nameNow), el("td", "rank-table__pop", r.pop.toLocaleString("ja-JP")), this.changeCell(r.change));
+      tr.append(rank, this.nameCell(r.id, r.name, r.nameNow), el("td", "rank-table__pop", r.pop.toLocaleString("ja-JP")), this.changeCell(r.change));
       tbody.append(tr);
     }
     table.append(tbody);
@@ -157,12 +203,13 @@ export class RankList {
     const tbody = el("tbody");
     for (const r of c.outRows) {
       const tr = el("tr");
+      tr.dataset.id = r.id;
       const rank = el("th", "rank-table__rank");
       rank.scope = "row";
       const mark = el("span", "rank-mark rank-mark--out");
       mark.setAttribute("aria-hidden", "true");
       rank.append(mark, document.createTextNode(r.rank != null ? String(r.rank) : "—"));
-      tr.append(rank, this.nameCell(r.name, r.nameNow), el("td", "rank-table__pop", r.pop.toLocaleString("ja-JP")));
+      tr.append(rank, this.nameCell(r.id, r.name, r.nameNow), el("td", "rank-table__pop", r.pop.toLocaleString("ja-JP")));
       tbody.append(tr);
     }
     table.append(tbody);

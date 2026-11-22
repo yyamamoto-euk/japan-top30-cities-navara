@@ -61,6 +61,17 @@ export const CHANGE_OUT_PILLAR_COLOR = "#c2307a";
  */
 export const CHANGE_OUT_OPACITY = 0.55;
 
+/**
+ * 一覧で選んだ柱の見せ方（2026-11-23）。入った（オレンジ）・外れた（赤紫）とは別に、紺の輪郭（Navara の SelectiveOutline）を付け、ラベルに紺の枠を付ける。
+ * 輪郭の太さは画面の px で決まり、引いた画面では細い柱を潰した（外れた柱で使っていたとき）。そのため柱に寄ったときだけ付け、「全国に戻る」で外す
+ */
+export const SELECT_OUTLINE_COLOR = "#1b2a44";
+export const SELECT_OUTLINE_THICKNESS = 2;
+/** 選んだ柱に寄るカメラ：北が上のまま、少し寝かせて見る。距離は柱の高さ × SELECT_DISTANCE_PER_HEIGHT（最低 SELECT_MIN_DISTANCE） */
+export const SELECT_PITCH = -40;
+export const SELECT_DISTANCE_PER_HEIGHT = 1.6;
+export const SELECT_MIN_DISTANCE = 150_000;
+
 /** 年を送ったときのアニメーションの長さ（ミリ秒）。ON のとき使う */
 export const ANIMATION_MS = 1500;
 

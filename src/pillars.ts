@@ -100,12 +100,16 @@ export type HighlightStyle = {
   outColor: string;
   /** 外れた柱の不透明度（圏外の柱の普段の不透明度とは別に決める） */
   outOpacity: number;
+  /** 一覧で選んだ柱に付ける SelectiveOutline の効果の id */
+  selectEffectId: string;
 };
 
 export class Pillars {
   private handles = new Map<string, MeshHandle<BoxMeshDesc>>();
   private applied = new Map<string, Applied>();
   private highlighted = new Map<string, Change>();
+  /** 一覧で選んだ柱（輪郭を付ける） */
+  private selected: string | null = null;
   private baseColor: Color;
 
   constructor(
@@ -146,14 +150,33 @@ export class Pillars {
       const fade = { opacity, transparent: opacity < 0.999 };
       if (next === "in") {
         const color = style.inColor ? new Color().setStyle(style.inColor) : this.baseColor;
-        handle.update({ box: { color, effectIds: [style.glowEffectId], emissiveColor: glow, emissiveIntensity: style.glowIntensity, ...fade } });
+        handle.update({ box: { color, effectIds: this.effectIds(id, [style.glowEffectId], style), emissiveColor: glow, emissiveIntensity: style.glowIntensity, ...fade } });
       } else if (next === "out") {
-        handle.update({ box: { color: new Color().setStyle(style.outColor), effectIds: [], emissiveIntensity: 0, ...fade } });
+        handle.update({ box: { color: new Color().setStyle(style.outColor), effectIds: this.effectIds(id, [], style), emissiveIntensity: 0, ...fade } });
       } else {
-        handle.update({ box: { color: this.baseColor, effectIds: [], emissiveIntensity: 0, ...fade } });
+        handle.update({ box: { color: this.baseColor, effectIds: this.effectIds(id, [], style), emissiveIntensity: 0, ...fade } });
       }
       if (next) this.highlighted.set(id, next);
       else this.highlighted.delete(id);
+    }
+  }
+
+  /** 柱に付ける効果の id。選んだ柱には輪郭を足す */
+  private effectIds(id: string, base: string[], style: HighlightStyle): string[] {
+    return this.selected === id ? [...base, style.selectEffectId] : base;
+  }
+
+  /**
+   * 一覧で選んだ柱に輪郭（SelectiveOutline）を付ける。null で外す。
+   * 入った柱の光（SelectiveBloom）とは別の効果なので、両方付く
+   */
+  setSelected(id: string | null, style: HighlightStyle): void {
+    const before = this.selected;
+    this.selected = id;
+    for (const target of [before, id]) {
+      if (!target) continue;
+      const base = this.highlighted.get(target) === "in" ? [style.glowEffectId] : [];
+      this.handles.get(target)?.update({ box: { effectIds: this.effectIds(target, base, style) } });
     }
   }
 

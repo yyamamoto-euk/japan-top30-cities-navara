@@ -18,7 +18,7 @@
 //     画像のそばに書くこと（OpenStreetMap の ODbL と国土地理院のコンテンツ利用規約が出典の表示を求めている）
 //     README には書かない（スクリーンショット専用のため）
 
-import ThreeView, { type CameraPosition } from "@navaramap/three";
+import ThreeView, { Color, type CameraPosition } from "@navaramap/three";
 import { DefaultPlugin, type DefaultDescriptions } from "@navaramap/three-default-plugin";
 import { OverlayPlugin, TileJsonPlugin } from "@navaramap/three-plugins";
 
@@ -48,6 +48,11 @@ import {
   PILLAR_COLOR,
   PILLAR_GAP,
   PILLAR_WIDTH,
+  SELECT_DISTANCE_PER_HEIGHT,
+  SELECT_MIN_DISTANCE,
+  SELECT_OUTLINE_COLOR,
+  SELECT_OUTLINE_THICKNESS,
+  SELECT_PITCH,
   TOP_N,
   AMBIENT_INTENSITY,
   SUN_DATE,
@@ -118,8 +123,11 @@ const highlightStyle: HighlightStyle = {
   inColor: CHANGE_IN_PILLAR_COLOR,
   outColor: CHANGE_OUT_PILLAR_COLOR,
   outOpacity: CHANGE_OUT_OPACITY,
+  selectEffectId: "select-outline",
 };
 view.addEffect({ id: highlightStyle.glowEffectId, selectiveBloom: { strength: CHANGE_BLOOM_STRENGTH, radius: CHANGE_BLOOM_RADIUS, threshold: 0 } });
+// 一覧で選んだ柱の紺の輪郭（Navara の SelectiveOutline）。柱に寄ったときだけ付ける（constants.ts の SELECT_OUTLINE_*）
+view.addEffect({ id: highlightStyle.selectEffectId, selectiveOutline: { color: new Color().setStyle(SELECT_OUTLINE_COLOR), thickness: SELECT_OUTLINE_THICKNESS } });
 
 // --- クレジット（左下の1行と ⓘ の中、src/credits.ts） ---
 addCredits(view, container);
@@ -184,7 +192,7 @@ function totalFor(year: number): string | null {
 }
 const timeline = new Timeline(container, FRAMES, totalFor, (i) => go(i));
 // 画面の右の一覧：今の年の上位30を表で出す（src/rankList.ts）。最初は閉じている
-const rankList = new RankList(container);
+const rankList = new RankList(container, { onSelect: (id) => selectPillar(id), onHome: () => goHome() });
 
 function frameValues(i: number) {
   return stackedFor(i).values;
@@ -195,12 +203,13 @@ function statesFor(i: number): Map<string, PillarState> {
   return targetStates(data.cities, placed, values, FRAMES[i].year, style, stacked);
 }
 
-/** TOP_N 位以内で、柱が立っているものだけにラベルを付ける */
+/** TOP_N 位以内で、柱が立っているものだけにラベルを付ける。一覧で選んだ柱は、上位30の外でも付ける */
 function labelItemsFor(i: number, states: Map<string, PillarState>): LabelItem[] {
   const items: LabelItem[] = [];
   for (const [id, v] of frameValues(i)) {
     const s = states.get(id);
-    if (!s || s.height <= 0 || v.rank == null || v.rank > TOP_N) continue;
+    const isSelected = id === selectedId;
+    if (!s || s.height <= 0 || ((v.rank == null || v.rank > TOP_N) && !isSelected)) continue;
     const city = cityById.get(id);
     const nameThen = city?.name[String(FRAMES[i].year)] ?? "";
     items.push({
@@ -211,7 +220,8 @@ function labelItemsFor(i: number, states: Map<string, PillarState>): LabelItem[]
       text: formatPopulation(v.pop),
       name: nameThen,
       nameNow: nowNameForLabel(nameThen, city?.name_now ?? null, LABEL_NOW_DISPLAY),
-      priority: v.pop, // 重なったら人口の小さい方を隠す
+      priority: isSelected ? Infinity : v.pop, // 重なったら人口の小さい方を隠す。選んだ柱は隠さない
+      selected: isSelected,
     });
   }
   return items;
@@ -268,6 +278,37 @@ function showControls(i: number): void {
   rankList.show({ year: FRAMES[i].year, prevYear: i > 0 ? FRAMES[i - 1].year : null, source: FRAMES[i].source, ...rankRowsFor(i) });
 }
 
+// --- 一覧で選んだ柱（src/rankList.ts） ---
+// 行を選ぶと、その柱に寄って紺の輪郭とラベルの枠で目立たせる。年を送っても選んだまま、カメラも留まる（2026-11-23 yyamaが案Aを選んだ）。
+// 送った先の年に柱が立っていなければ（合併で無くなった、値が無い）選んだ状態を外す。「全国に戻る」で開いたときのカメラに戻る
+let selectedId: string | null = null;
+
+/** カメラを動かす。アニメーションが ON なら flyTo、OFF なら setCamera */
+function moveCamera(camera: CameraPosition): void {
+  if (animationOn) void view.flyTo(camera as Parameters<typeof view.flyTo>[0], { duration: ANIMATION_MS });
+  else view.setCamera(camera);
+}
+
+function setSelection(id: string | null): void {
+  selectedId = id;
+  pillars.setSelected(id, highlightStyle);
+  rankList.setSelected(id);
+  if (!tween.isRunning) labels.set(labelItemsFor(index, current));
+}
+
+function selectPillar(id: string): void {
+  const s = current.get(id);
+  if (!s || s.height <= 0) return;
+  setSelection(id);
+  // 柱の高さが画面に収まる距離で、柱の中ほどを見る
+  moveCamera({ lng: s.lon, lat: s.lat, height: s.height * 0.4, distance: Math.max(SELECT_MIN_DISTANCE, s.height * SELECT_DISTANCE_PER_HEIGHT), heading: 0, pitch: SELECT_PITCH, roll: 0 });
+}
+
+function goHome(): void {
+  setSelection(null);
+  moveCamera(JAPAN_CAMERA);
+}
+
 // --- 最初のコマ ---
 let index = startIndex;
 let current = statesFor(index);
@@ -299,6 +340,8 @@ function go(i: number): void {
     (t) => pillars.apply(t >= 1 ? to : lerpStates(from, to, t), t >= 1),
     () => {
       current = to;
+      // 選んだ柱がこの年に立っていなければ、選んだ状態を外す（カメラはそのまま）
+      if (selectedId && !((to.get(selectedId)?.height ?? 0) > 0)) setSelection(null);
       pillars.setHighlights(changesFor(i), highlightStyle);
       labels.set(labelItemsFor(i, to));
     },

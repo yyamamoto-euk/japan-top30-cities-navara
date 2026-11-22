@@ -232,3 +232,12 @@ src/main.ts の地形と光、src/ground.ts の柱の根元。型定義（d.ts�
 - 海の波の表現（`requestWaterMask: true`）を付けると画面が真っ黒になった。地形のシェーダーが組み立てられないため。`requestWaterMask: false` にした
 - `requestWaterMask: false` でも、コンソールに地形のシェーダーの組み立ての失敗（MeshLambertMaterial、`transformDirectionByInverseViewMatrix` が無い）が出る。この関数は three.js 0.185 以降の `common.glsl.js` にあり、このリポジトリの three.js 0.184 には無い（`@navaramap/three` 0.3.1 の peerDependencies は `three >= 0.183.0`）。地形と陰影は描かれている
 - 地形を入れると、開いてから地図が出るまでが長くなった（開発サーバーで、地形なし約7秒 → あり約10〜16秒。それまでは黒い画面）
+
+## 一覧で選んだ柱に寄る（2026-11-23、0.3.1）
+
+src/main.ts の selectPillar・goHome、src/pillars.ts の setSelected。どれもこのファイルの上の節で確かめた API。
+
+- カメラ：`view.flyTo(camera, { duration })`（アニメーション ON）と `view.setCamera(camera)`（OFF）。`CameraPosition` の lng/lat は見る先の点、height はその点の高さ、distance はそこからカメラまでの距離（3. の節）
+- 選んだ柱の目印：SelectiveOutline（入れ替わりを光らせる節）。効果の id を1つ足し（`select-outline`）、選んだ柱の `box.effectIds` に入れる。入った柱の SelectiveBloom の id と一緒に入れられ、両方付いた
+  - 太さは画面の px なので、引いた画面では細い柱を覆って潰れる（外れた柱に使っていたときに分かった）。そのため柱に寄ったときだけ付け、「全国に戻る」で外す。ただし寄ったあとにマウスで引いたときは付いたまま
+- ラベル：OverlayPlugin のラベル（6. の節）に CSS のクラスを足して紺の枠を付けた。画面の px で決まるので、引いても潰れない
