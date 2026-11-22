@@ -11,14 +11,14 @@ import type { AttributionItem } from "@navaramap/three";
  */
 export const HEIGHT_PER_PERSON = 0.0565;
 
-/** 柱の幅（メートル）。全柱で共通。仮置き */
-export const PILLAR_WIDTH = 20_000;
+/** 柱の幅（メートル）。全柱で共通。仮置き。2026-11-22 に 20km から半分にした（yyamaの指示） */
+export const PILLAR_WIDTH = 10_000;
 
 /**
  * 近い柱どうしのすき間（メートル）。仮置き。
  * 中心どうしが PILLAR_WIDTH + PILLAR_GAP より近い柱は、描く位置を自動でずらす（src/layout.ts）
  */
-export const PILLAR_GAP = 3_000;
+export const PILLAR_GAP = 1_500; // 2026-11-22 に柱の幅と一緒に半分にした（3km → 1.5km）
 
 /** 柱の色。仮置き */
 export const PILLAR_COLOR = "#2f6fd6";
