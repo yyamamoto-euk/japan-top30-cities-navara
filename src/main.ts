@@ -11,6 +11,11 @@
 //   ?camera=naha … frames.ts の DEBUG_CAMERAS のカメラで開く
 //   例：http://localhost:8080/?year=1886&camera=naha （那覇・首里の重なりを見る）
 //   例：http://localhost:8080/?year=1925&camera=tokyo （1925年の東京まわりの町の柱を見る）
+//   ?ui=0        … スクリーンショット用。年表・下のパネル・左下のクレジット・ⓘ を隠す（柱とラベルは出す）
+//   例：http://localhost:8080/?year=2025&ui=0 （Navara のショーケース用に、1000×1000 程度の正方形で撮る）
+//   ※ ?ui=0 で撮った画像を載せるときは、地図のクレジット（Re:Earth Papers / © OpenStreetMap contributors）と
+//     国土数値情報の出典を、画像のそばに書くこと（OpenStreetMap の ODbL と国土数値情報の使用許諾条件が出典の表示を求めている）
+//     README には書かない（スクリーンショット専用のため）
 
 import ThreeView, { type CameraPosition } from "@navaramap/three";
 import { DefaultPlugin, type DefaultDescriptions } from "@navaramap/three-default-plugin";
@@ -47,6 +52,8 @@ import { stackTowns } from "./stack.ts";
 import { Timeline } from "./timeline.ts";
 
 const params = new URLSearchParams(location.search);
+// ?ui=0：UI を隠す（スクリーンショット用）。index.html の .ui-hidden の CSS で消す
+if (params.get("ui") === "0") document.body.classList.add("ui-hidden");
 const startIndex = Math.max(0, FRAMES.findIndex((f) => String(f.year) === params.get("year")));
 const startCamera: CameraPosition = DEBUG_CAMERAS[params.get("camera") ?? ""] ?? JAPAN_CAMERA;
 

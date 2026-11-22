@@ -250,6 +250,16 @@
       color: inherit;
     }
 
+    /* ?ui=0（スクリーンショット用）：年表・下のパネル・左下のクレジット・ⓘ を隠す。柱とラベルは出す（src/main.ts） */
+    .ui-hidden .timeline,
+    .ui-hidden .controls,
+    .ui-hidden .credit-line,
+    .ui-hidden .dummy-badge,
+    .ui-hidden .navara-attr-dock,
+    .ui-hidden .navara-attr-logoframe {
+      display: none !important;
+    }
+
     /* 仮データを使っている年に出す印 */
     .dummy-badge {
       position: absolute;
