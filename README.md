@@ -1,8 +1,8 @@
 # 日本の人口上位30都市 100年比較
 
-明治から令和まで、日本の人口の多い30都市の顔ぶれがどう入れ替わったかを、3D地図の上の柱で見せるアプリです。地図の描画には [Navara](https://navara.world/docs/) を使っています。
+明治から令和まで、日本の人口の多い30都市の顔ぶれがどう入れ替わったかを、3D地形（高さは実物どおり）の地図の上に立てた柱で見せるアプリです。地図の描画には [Navara](https://navara.world/docs/) を使っています。
 
-*A 3D map that shows Japan's 30 most populous cities as pillars, for nine years from 1886 to 2025 (roughly every 25 years). Cities are counted as the municipalities of each year, and the numbers come from primary statistics such as the Statistical Yearbook of the Empire of Japan, the Japan Statistical Yearbook and the national census. Built with the Navara map engine. Docs are in Japanese.*
+*A 3D map that shows Japan's 30 most populous cities as pillars on 3D terrain (true-scale heights), for nine years from 1886 to 2025 (roughly every 25 years). Cities are counted as the municipalities of each year, and the numbers come from primary statistics such as the Statistical Yearbook of the Empire of Japan, the Japan Statistical Yearbook and the national census. Built with the Navara map engine. Docs are in Japanese.*
 
 ![1886年の画面。左に年表、地図に上位30都市の柱と人口のラベル、下に年の送りボタン](docs/screenshot-1886.webp)
 
@@ -13,6 +13,8 @@
 - **ラベル**：人口と当時の名前。2行目の（）は今の名前（例：「3.1万 赤間関（下関市）」）
 - **画面の左の年表**：年・和暦・その年の出来事の一言と、日本の総人口。年をクリックするとその年へ移る
 - **画面の下**：◀ ▶ で年を送る。今の年・総人口・出典の一行、アニメーションの ON・OFF
+- **入れ替わり**：1つ前の年から新たに上位30に入った柱はオレンジで光り、外れた柱には紺の輪郭が付く。画面の下にそれぞれの本数が出る
+- **地形**：Re:Earth Terrain の3D地形。高さは実物どおりなので、日本全体を見ている間は起伏はほぼ見えず、マウスで近づくと山並みが見える
 - **左下とⓘ**：地図とデータのクレジット
 
 マウスで地図を動かして、近づいて見ることもできます。
@@ -38,6 +40,8 @@ pnpm dev
 
 - GitHub Pages はリポジトリ名のサブパス（`/リポジトリ名/`）で配信されるので、`vite.config.ts` で `base: "./"` にし、データも相対パス（`data/cities.json`）で読んでいます。サブパスに置いた `dist` を手元の静的サーバーで開き、読み込みの 404 が無いことを確かめました
 - Navara 0.3.1 の大気・雲などのアセットは、ビルドで `dist/assets` に入ります。前の版（0.1.1・0.2.1）で要った、アセットをコピーするプラグインは入れていません。このアプリは大気の表示を使っていません
+- 3D地形を入れたので、開いてから地図が出るまで10〜16秒ほどかかります（その間は黒い画面です）
+- ブラウザのコンソールに、地形のシェーダーの組み立ての失敗（`transformDirectionByInverseViewMatrix` が無い）が出ます。この関数は three.js 0.185 以降にあり、このリポジトリの three.js は 0.184 のためです。地形と陰影は描かれます（[docs/navara-api-check.md](docs/navara-api-check.md)）
 - 公開は `.github/workflows/deploy-pages.yml`（GitHub Actions）で行います。今は Actions の画面から手で動かすときだけで、Pages の有効化もまだしていません
 
 ## データ
@@ -77,7 +81,8 @@ pnpm dev
 ## フォルダ
 
 ```
-src/          画面（main.ts、柱 pillars.ts、ラベル labels.ts、年表 timeline.ts、年の定義 frames.ts など）
+src/          画面（main.ts、柱 pillars.ts、柱の根元を地面に合わせる ground.ts、ラベル labels.ts、
+              入れ替わり changes.ts、年表 timeline.ts、年の定義 frames.ts など）
 scripts/      データを作る・調べるスクリプト（TypeScript、tsx で実行）
 data/         observations.csv・entities.csv・sources.csv などのデータ
 data/raw/     原本（統計表の PDF・Excel。一部は利用条件のため入れていない）
