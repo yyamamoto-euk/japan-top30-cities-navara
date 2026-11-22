@@ -1,8 +1,8 @@
 # 日本の人口上位30都市 100年比較
 
-明治から令和まで、日本の人口の多い30都市の顔ぶれがどう入れ替わったかを、3D地形（高さは実物どおり）の地図の上に立てた柱で見せるアプリです。地図の描画には [Navara](https://navara.world/docs/) を使っています。
+明治から令和まで、日本の人口の多い30都市の顔ぶれがどう入れ替わったかを、3D地図の上の柱で見せるアプリです。地図の描画には [Navara](https://navara.world/docs/) を使っています。
 
-*A 3D map that shows Japan's 30 most populous cities as pillars on 3D terrain (true-scale heights), for nine years from 1886 to 2025 (roughly every 25 years). Cities are counted as the municipalities of each year, and the numbers come from primary statistics such as the Statistical Yearbook of the Empire of Japan, the Japan Statistical Yearbook and the national census. Built with the Navara map engine. Docs are in Japanese.*
+*A 3D map that shows Japan's 30 most populous cities as pillars, for nine years from 1886 to 2025 (roughly every 25 years). Cities are counted as the municipalities of each year, and the numbers come from primary statistics such as the Statistical Yearbook of the Empire of Japan, the Japan Statistical Yearbook and the national census. Built with the Navara map engine. Docs are in Japanese.*
 
 ![1886年の画面。左に年表、地図に上位30都市の柱と人口のラベル、下に年の送りボタン](docs/screenshot-1886.webp)
 
@@ -14,7 +14,6 @@
 - **画面の左の年表**：年・和暦・その年の出来事の一言と、日本の総人口。年をクリックするとその年へ移る
 - **画面の下**：◀ ▶ で年を送る。今の年・総人口・出典の一行、アニメーションの ON・OFF
 - **入れ替わり**：1つ前の年から新たに上位30に入った柱はオレンジで光り、外れた柱は赤紫になる。画面の下にそれぞれの本数が出る
-- **地形**：Re:Earth Terrain の3D地形。高さは実物どおりなので、日本全体を見ている間は起伏はほぼ見えず、マウスで近づくと山並みが見える
 - **左下とⓘ**：地図とデータのクレジット
 
 マウスで地図を動かして、近づいて見ることもできます。
@@ -40,8 +39,6 @@ pnpm dev
 
 - GitHub Pages はリポジトリ名のサブパス（`/リポジトリ名/`）で配信されるので、`vite.config.ts` で `base: "./"` にし、データも相対パス（`data/cities.json`）で読んでいます。サブパスに置いた `dist` を手元の静的サーバーで開き、読み込みの 404 が無いことを確かめました
 - Navara 0.3.1 の大気・雲などのアセットは、ビルドで `dist/assets` に入ります。前の版（0.1.1・0.2.1）で要った、アセットをコピーするプラグインは入れていません。このアプリは大気の表示を使っていません
-- 3D地形を入れたので、開いてから地図が出るまで10〜16秒ほどかかります（その間は黒い画面です）
-- ブラウザのコンソールに、地形のシェーダーの組み立ての失敗（`transformDirectionByInverseViewMatrix` が無い）が出ます。この関数は three.js 0.185 以降にあり、このリポジトリの three.js は 0.184 のためです。地形と陰影は描かれます（[docs/navara-api-check.md](docs/navara-api-check.md)）
 - 公開は `.github/workflows/deploy-pages.yml`（GitHub Actions）で行います。今は Actions の画面から手で動かすときだけで、Pages の有効化もまだしていません
 
 ## データ
@@ -81,8 +78,8 @@ pnpm dev
 ## フォルダ
 
 ```
-src/          画面（main.ts、柱 pillars.ts、柱の根元を地面に合わせる ground.ts、ラベル labels.ts、
-              入れ替わり changes.ts、年表 timeline.ts、年の定義 frames.ts など）
+src/          画面（main.ts、柱 pillars.ts、ラベル labels.ts、入れ替わり changes.ts、年表 timeline.ts、
+              年の定義 frames.ts など）
 scripts/      データを作る・調べるスクリプト（TypeScript、tsx で実行）
 data/         observations.csv・entities.csv・sources.csv などのデータ
 data/raw/     原本（統計表の PDF・Excel。一部は利用条件のため入れていない）
@@ -94,7 +91,6 @@ docs/         座標の決め方、Navara の API の確認メモ
 ## クレジット
 
 - 地図：[Re:Earth Papers](https://papers.reearth.land/attribution) / © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors
-- 地形：[Re:Earth Terrain](https://terrain.reearth.land/) · [Mapterhorn](https://mapterhorn.com/)（CC BY 4.0）
 - 柱の位置：© [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors（市役所の点、ODbL 1.0）、電子国土基本図（地名情報）（国土地理院）をもとに作成（OpenStreetMap に無い市。地理院地図の地名検索で取得）
 - 人口：日本帝国統計年鑑・日本統計年鑑（内閣統計局・総理庁統計局・総理府統計局・総務省統計局）、国勢調査（総務省統計局、e-Stat）、札幌市統計書、呉市統計書
 - 統計年鑑の画像とテキスト：一橋大学経済研究所「日本統計年鑑・帝国統計年鑑」データベース
@@ -112,7 +108,6 @@ docs/         座標の決め方、Navara の API の確認メモ
 | OpenStreetMap の市役所の点（柱の座標） | Open Database License（ODbL）1.0。`data/entities.csv` の座標と、それを含む `public/data/cities.json`、`data/raw/osm/` は OpenStreetMap のデータを元にしているので ODbL 1.0。出典は「© OpenStreetMap contributors」と https://www.openstreetmap.org/copyright |
 | 電子国土基本図（地名情報）（国土地理院）（柱の座標のうち27本、`data/raw/gsi/`。地理院地図の地名検索で取得） | 国土地理院コンテンツ利用規約（公共データ利用規約 第1.0版。出典を書けば商用も可。加工したときは、出典とは別に加工したことを書き、国土地理院が作ったように見せない）。出典は「電子国土基本図（地名情報）（国土地理院）をもとに作成」。地名検索 API の利用規約のページは無い（[gsimaps の Issue #29](https://github.com/gsi-cyberjapan/gsimaps/issues/29) の回答） |
 | 地図（Re:Earth Papers） | OpenStreetMap 由来のタイルは ODbL 1.0。「© OpenStreetMap contributors」の表示が要る |
-| 地形（Re:Earth Terrain） | 標高データ Mapterhorn は CC BY 4.0。最低限の出典は「Re:Earth Terrain · Mapterhorn (CC BY 4.0)」（[Re:Earth Terrain](https://terrain.reearth.land/) の Attribution）。海の表現（water mask）は使っていないので、Protomaps・OpenStreetMap の表示は要らない |
 | 一橋大学経済研究所のデータベース | 利用条件の明記なし。公表するときはデータベース名と原本の書名を書くよう求めている |
 | 札幌市・呉市のウェブサイト | 私的使用と引用を除き、複製・転載には事前の相談が要る |
 

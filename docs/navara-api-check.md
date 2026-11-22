@@ -218,6 +218,8 @@ https://navara.world/docs/ は最新リリース（0.3.1）に、Nightly 版の�
 
 ## 3D地形（2026-11-22、0.3.1）
 
+**2026-11-23 に地形はやめた**（開いてから地図が出るまでが遅くなったため。yyamaの指示）。src/ground.ts は消した。光（太陽の光と全体を明るくする光）は、柱の面の明るさのために残した。以下は入れていたときの記録。
+
 src/main.ts の地形と光、src/ground.ts の柱の根元。型定義（d.ts）、スキルの recipes.md、ライブラリの中身と開発サーバーでの動作で確かめた。
 
 - 地形：`view.addSource({ type: "quantized-mesh", url, maxZoom, requestVertexNormals, requestWaterMask })` と `view.addLayer({ type: "terrain", source, terrain: { ... } })`（スキル `recipes.md`）。背景地図の層より先に足す（層は足した順に描く）

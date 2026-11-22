@@ -71,28 +71,13 @@ export const ANIMATION_MS = 1500;
 export const BASEMAP_TILEJSON = "https://papers.reearth.land/styles/protomaps-light/tilejson.json";
 
 /**
- * 3D地形（Re:Earth Terrain の quantized-mesh）。2026-11-22 yyamaの指示でON。
- * 利用条件と出典の書き方は https://terrain.reearth.land/
- */
-export const TERRAIN_URL = "https://terrain.reearth.land/cesium-mesh/ellipsoid/{z}/{x}/{y}.terrain";
-
-/**
- * 地形の高さの強調（倍）。1 は実物どおり。
- * 2026-11-22 にいったん10倍にしたが、yyamaの指示で実物どおりに戻した（日本全体を見るカメラでは起伏はほぼ見えず、寄ると見える）。
- * 1 でないときは、画面のクレジット（CREDIT_LINE・CREDIT_ITEMS）に「高さは○倍に強調」と出る
- */
-export const TERRAIN_EXAGGERATION = 1;
-
-/** クレジットに足す、高さを強調していることの断り。実物どおり（1倍）なら無し */
-const TERRAIN_EXAGGERATION_NOTE = TERRAIN_EXAGGERATION === 1 ? null : `高さは${TERRAIN_EXAGGERATION}倍に強調`;
-
-/**
- * 地形の陰影を付ける太陽の日時。Navara は太陽の向きを日時から決めるので、開く時刻で日本が夜にならないよう固定する。
- * 2025年10月1日 午前10時（日本時間）。南東から光が当たる。仮置き
+ * 柱に当てる太陽の日時（PILLAR_LIT）。Navara は太陽の向きを日時から決めるので、開く時刻で光の向きが変わらないよう固定する。
+ * 2025年10月1日 午前10時（日本時間）。南東から光が当たる。仮置き。
+ * 2026-11-22 に3D地形の陰影のために入れた。2026-11-23 に地形はやめたが、柱の面の明るさのために残した
  */
 export const SUN_DATE = new Date("2025-10-01T01:00:00Z");
 
-/** 太陽の光と、全体を明るくする光の強さ。背景地図の色が暗くなりすぎないように合わせる。仮置き */
+/** 太陽の光と、全体を明るくする光の強さ。柱の暗い面が沈みすぎないように合わせる。仮置き */
 export const SUN_INTENSITY = 1;
 export const AMBIENT_INTENSITY = 1;
 
@@ -138,15 +123,6 @@ export const CREDIT_LINE: (string | { text: string; url: string })[][] = [
     { text: "OpenStreetMap", url: "https://www.openstreetmap.org/copyright" },
     " contributors",
   ],
-  // 地形：Re:Earth Terrain の示す最低限の出典（https://terrain.reearth.land/ の Attribution。海の波の表現 water mask を使わないので Protomaps・OSM は要らない）。
-  // 高さを強調するときは、そのことも書く（Mapterhorn は CC BY 4.0。描き方を変えたことが分かるように）
-  [
-    "地形：",
-    { text: "Re:Earth Terrain", url: "https://terrain.reearth.land/" },
-    " · ",
-    { text: "Mapterhorn", url: "https://mapterhorn.com/" },
-    TERRAIN_EXAGGERATION_NOTE ? `（CC BY 4.0）。${TERRAIN_EXAGGERATION_NOTE}` : "（CC BY 4.0）",
-  ],
   // 柱の位置：OpenStreetMap の市役所の点（ODbL）と、OSM に無い市は電子国土基本図（地名情報）（国土地理院。地理院地図の地名検索で取得）。
   // 国土地理院コンテンツ利用規約に従い、加工したこと（をもとに作成）を書く
   ["柱の位置：© ", { text: "OpenStreetMap", url: "https://www.openstreetmap.org/copyright" }, " contributors（ODbL）、", { text: "電子国土基本図（地名情報）（国土地理院）", url: "https://www.gsi.go.jp/kibanjoho/kibanjoho40025.html" }, "をもとに作成"],
@@ -154,15 +130,8 @@ export const CREDIT_LINE: (string | { text: string; url: string })[][] = [
   ["人口：統計年鑑・国勢調査ほか（各年の出典は画面下とⓘ）"],
 ];
 
-/** Navara の ⓘ ボタンの中に足すクレジット（背景地図のクレジットは TileJsonPlugin が自動で入れる。地形のクレジットは自動では入らないので、ここで足す） */
+/** Navara の ⓘ ボタンの中に足すクレジット（背景地図のクレジットは TileJsonPlugin が自動で入れる） */
 export const CREDIT_ITEMS: AttributionItem[] = [
-  {
-    attribution: "地形",
-    children: [
-      { attribution: "<a href=\"https://terrain.reearth.land/\">Re:Earth Terrain</a> · <a href=\"https://mapterhorn.com/\">Mapterhorn</a>（CC BY 4.0）" },
-      ...(TERRAIN_EXAGGERATION_NOTE ? [{ attribution: `${TERRAIN_EXAGGERATION_NOTE}して描いている` }] : []),
-    ],
-  },
   {
     attribution: "柱の位置",
     children: [
