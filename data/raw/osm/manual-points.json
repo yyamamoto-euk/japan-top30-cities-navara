@@ -1,0 +1,395 @@
+{
+  "fetched_at": "2026-11-22T12:35:10.956Z",
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "results": [
+    {
+      "id": "moji",
+      "query": "[out:json][timeout:60];nwr[\"name\"~\"門司区役所\"](around:1000,33.941662,130.959549);out center tags;",
+      "response": {
+        "version": 0.6,
+        "generator": "Overpass API 0.7.62.11 87bfad18",
+        "osm3s": {
+          "timestamp_osm_base": "2026-11-22T12:30:52Z",
+          "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+        },
+        "elements": [
+          {
+            "type": "node",
+            "id": 1423784404,
+            "lat": 33.941207,
+            "lon": 130.959698,
+            "tags": {
+              "amenity": "townhall",
+              "name": "門司区役所",
+              "source": "KSJ2",
+              "townhall:type": "city"
+            }
+          },
+          {
+            "type": "node",
+            "id": 5485904944,
+            "lat": 33.9411997,
+            "lon": 130.9590729,
+            "tags": {
+              "highway": "traffic_signals",
+              "mapillary": "466815422329051",
+              "name": "門司区役所前",
+              "name:en": "Moji Ward Office",
+              "name:ja": "門司区役所前"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "nishisugamo-machi",
+      "query": "[out:json][timeout:60];nwr[\"name\"~\"豊島公会堂|Hareza|ハレザ|西巣鴨町役場\"](around:1000,35.732368,139.715897);out center tags;",
+      "response": {
+        "version": 0.6,
+        "generator": "Overpass API 0.7.62.11 87bfad18",
+        "osm3s": {
+          "timestamp_osm_base": "2026-11-22T12:31:57Z",
+          "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+        },
+        "elements": [
+          {
+            "type": "node",
+            "id": 2204131794,
+            "lat": 35.7326416,
+            "lon": 139.7150917,
+            "tags": {
+              "bench": "no",
+              "bin": "no",
+              "bus": "yes",
+              "covered": "no",
+              "departures_board": "timetable",
+              "highway": "bus_stop",
+              "name": "Hareza池袋",
+              "old_name": "池袋保健所",
+              "operator": "東京都交通局",
+              "public_transport": "platform",
+              "shelter": "no",
+              "sign": "yes",
+              "tactile_paving": "yes"
+            }
+          },
+          {
+            "type": "node",
+            "id": 2204131799,
+            "lat": 35.73269,
+            "lon": 139.7155169,
+            "tags": {
+              "bench": "yes",
+              "bin": "no",
+              "bus": "yes",
+              "covered": "no",
+              "departures_board": "timetable",
+              "highway": "bus_stop",
+              "name": "Hareza池袋",
+              "old_name": "池袋保健所",
+              "operator": "東京都交通局",
+              "public_transport": "platform",
+              "shelter": "yes",
+              "sign": "yes",
+              "source": "survey",
+              "tactile_paving": "yes"
+            }
+          },
+          {
+            "type": "node",
+            "id": 7205167115,
+            "lat": 35.7322351,
+            "lon": 139.7157172,
+            "tags": {
+              "bus": "yes",
+              "departures_board": "timetable",
+              "highway": "bus_stop",
+              "name": "Hareza池袋",
+              "network": "IKEBUS",
+              "public_transport": "platform",
+              "shelter": "no"
+            }
+          },
+          {
+            "type": "node",
+            "id": 13042719720,
+            "lat": 35.7324242,
+            "lon": 139.7157705,
+            "tags": {
+              "addr:housenumber": "１丁目１８一１",
+              "amenity": "cafe",
+              "brand": "タリーズコーヒー",
+              "brand:en": "Tully's Coffee",
+              "brand:ja": "タリーズコーヒー",
+              "cuisine": "coffee_shop",
+              "indoor_seating": "yes",
+              "internet_access": "wlan",
+              "name": "タリーズコーヒー ハレザ池袋店",
+              "name:en": "Tully's Coffee",
+              "name:ja": "タリーズコーヒー ハレザ池袋店",
+              "opening_hours": "Mo-Su 08:00-21:00",
+              "outdoor_seating": "yes",
+              "phone": "03-5810-2110",
+              "takeaway": "yes",
+              "website": "https://shop.tullys.co.jp/detail/1003253",
+              "website:menu": "https://www.tullys.co.jp/menu/drink/"
+            }
+          },
+          {
+            "type": "node",
+            "id": 13042719732,
+            "lat": 35.732597,
+            "lon": 139.7153269,
+            "tags": {
+              "bench": "no",
+              "bin": "no",
+              "bus": "yes",
+              "covered": "no",
+              "highway": "bus_stop",
+              "name": "Hareza池袋",
+              "network": "国際興業バス",
+              "operator": "国際興業",
+              "public_transport": "platform",
+              "route_ref": "池07",
+              "shelter": "no",
+              "sign": "yes",
+              "tactile_paving": "yes"
+            }
+          },
+          {
+            "type": "node",
+            "id": 14157333098,
+            "lat": 35.7321434,
+            "lon": 139.7165868,
+            "tags": {
+              "bus": "yes",
+              "highway": "bus_stop",
+              "name": "Hareza池袋東",
+              "network": "国際興業バス",
+              "network:en": "Kokusai Kogyo Bus",
+              "network:ja": "国際興業バス",
+              "network:wikidata": "Q11422566",
+              "operator": "国際興業",
+              "public_transport": "platform"
+            }
+          },
+          {
+            "type": "way",
+            "id": 99293081,
+            "center": {
+              "lat": 35.7324132,
+              "lon": 139.7155044
+            },
+            "tags": {
+              "addr:block_number": "18",
+              "addr:city": "豊島区",
+              "addr:housename": "Hareza Tower",
+              "addr:housenumber": "1",
+              "addr:neighbourhood": "1",
+              "addr:postcode": "170-0013",
+              "addr:province": "東京都",
+              "addr:quarter": "東池袋",
+              "building": "commercial",
+              "building:levels": "33",
+              "height": "158.28",
+              "name": "HarezaTower",
+              "name:en": "Hareza Tower",
+              "website": "https://hareza-ikebukuro.com/"
+            }
+          },
+          {
+            "type": "way",
+            "id": 708913853,
+            "center": {
+              "lat": 35.7319105,
+              "lon": 139.7157141
+            },
+            "tags": {
+              "addr:block_number": "19",
+              "addr:city": "豊島区",
+              "addr:housenumber": "1",
+              "addr:neighbourhood": "東池袋一丁目",
+              "addr:postcode": "170-0013",
+              "addr:province": "東京都",
+              "building": "commercial",
+              "building:levels": "8",
+              "height": "41",
+              "name": "Hareza池袋ホール棟",
+              "name:en": "Hareza Ikebukuro Hall",
+              "source": "Bing"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "takinogawa-machi",
+      "query": "[out:json][timeout:60];node[\"place\"][\"name\"~\"^西[ケヶ]原\"](around:1000,35.741772,139.746033);out center tags;",
+      "response": {
+        "version": 0.6,
+        "generator": "Overpass API 0.7.62.11 87bfad18",
+        "osm3s": {
+          "timestamp_osm_base": "2026-11-22T12:32:59Z",
+          "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+        },
+        "elements": [
+          {
+            "type": "node",
+            "id": 8831288693,
+            "lat": 35.744546,
+            "lon": 139.740296,
+            "tags": {
+              "name": "西ケ原三丁目",
+              "name:en": "Nishigahara 3",
+              "name:fr": "Nishigahara 3",
+              "name:id": "Nishigahara 3",
+              "name:ja": "西ケ原三丁目",
+              "name:ja-Hira": "にしがはら3ちょうめ",
+              "name:ja-Latn": "Nishigahara 3-chōme",
+              "place": "neighbourhood"
+            }
+          },
+          {
+            "type": "node",
+            "id": 8831288694,
+            "lat": 35.747574,
+            "lon": 139.741413,
+            "tags": {
+              "name": "西ケ原二丁目",
+              "name:en": "Nishigahara 2",
+              "name:fr": "Nishigahara 2",
+              "name:id": "Nishigahara 2",
+              "name:ja-Hira": "にしがはら2ちょうめ",
+              "name:ja-Latn": "Nishigahara 2-chōme",
+              "place": "neighbourhood"
+            }
+          },
+          {
+            "type": "node",
+            "id": 8831288695,
+            "lat": 35.74177,
+            "lon": 139.746037,
+            "tags": {
+              "name": "西ケ原一丁目",
+              "name:en": "Nishigahara 1",
+              "name:fr": "Nishigahara 1",
+              "name:id": "Nishigahara 1",
+              "name:ja": "西ケ原一丁目",
+              "name:ja-Hira": "にしがはら1ちょうめ",
+              "name:ja-Latn": "Nishigahara 1-chōme",
+              "place": "neighbourhood"
+            }
+          },
+          {
+            "type": "node",
+            "id": 12290997701,
+            "lat": 35.7432985,
+            "lon": 139.7421535,
+            "tags": {
+              "name": "西ケ原",
+              "name:en": "Nishigahara",
+              "name:fr": "Nishigahara",
+              "name:id": "Nishigahara",
+              "name:ja-Hira": "にしがはら",
+              "name:ja-Latn": "Nishi-ga-hara",
+              "place": "quarter",
+              "postal_code": "114-0024",
+              "wikidata": "Q11627079"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "hiratsuka-machi",
+      "query": "[out:json][timeout:60];nwr[\"name\"~\"荏原文化センター\"](around:1000,35.61203,139.710678);out center tags;",
+      "response": {
+        "version": 0.6,
+        "generator": "Overpass API 0.7.62.11 87bfad18",
+        "osm3s": {
+          "timestamp_osm_base": "2026-11-22T12:34:01Z",
+          "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+        },
+        "elements": [
+          {
+            "type": "way",
+            "id": 113979221,
+            "center": {
+              "lat": 35.6116244,
+              "lon": 139.711156
+            },
+            "tags": {
+              "est_width": "3.0m〜5.5m",
+              "highway": "unclassified",
+              "maxspeed": "30",
+              "name": "荏原文化センター通り",
+              "name:en": "Ebara Cultural Center Street",
+              "name:es": "Calle cultural Ebara Center",
+              "name:ja_rm": "Ebara Bunka Centre Dōri",
+              "oneway": "yes",
+              "oneway:bicycle": "no",
+              "source": "YahooJapan/ALPSMAP",
+              "surface": "paved"
+            }
+          },
+          {
+            "type": "way",
+            "id": 114158800,
+            "center": {
+              "lat": 35.6109565,
+              "lon": 139.7146182
+            },
+            "tags": {
+              "highway": "unclassified",
+              "name": "荏原文化センター通り",
+              "name:en": "Ebara Cultural Center Street",
+              "name:es": "Calle cultural Ebara Center",
+              "name:ja_rm": "Ebara Bunka Centre Dōri",
+              "oneway": "yes",
+              "oneway:bicycle": "no",
+              "source": "Bing, 2007-04",
+              "surface": "paved"
+            }
+          },
+          {
+            "type": "way",
+            "id": 169899981,
+            "center": {
+              "lat": 35.612157,
+              "lon": 139.7106878
+            },
+            "tags": {
+              "addr:block_number": "9-15",
+              "addr:city": "品川区",
+              "addr:neighbourhood": "１",
+              "addr:province": "東京都",
+              "addr:quarter": "中延",
+              "building": "public",
+              "name": "荏原文化センター",
+              "phone": "+81 3-3785-1241",
+              "source": "Bing 2007"
+            }
+          },
+          {
+            "type": "way",
+            "id": 230619667,
+            "center": {
+              "lat": 35.6122527,
+              "lon": 139.7073734
+            },
+            "tags": {
+              "est_width": "3.0m〜5.5m",
+              "highway": "unclassified",
+              "name": "荏原文化センター通り",
+              "name:ja_rm": "Ebara Bunka Centre Dōri",
+              "oneway": "yes",
+              "oneway:bicycle": "no",
+              "source": "YahooJapan/ALPSMAP",
+              "surface": "paved"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

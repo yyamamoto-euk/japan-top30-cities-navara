@@ -5130,8 +5130,8 @@
     {
       "id": "moji",
       "pref": "福岡県",
-      "lon": 130.959549,
-      "lat": 33.941662,
+      "lon": 130.9596,
+      "lat": 33.9412,
       "merged_into": "kitakyushu",
       "merged_year": 1963,
       "name": {
@@ -5214,8 +5214,8 @@
     {
       "id": "nishisugamo-machi",
       "pref": "東京都",
-      "lon": 139.715897,
-      "lat": 35.732368,
+      "lon": 139.715714,
+      "lat": 35.73191,
       "merged_into": "tokyo",
       "merged_year": 1932,
       "name": {
@@ -5241,8 +5241,8 @@
     {
       "id": "takinogawa-machi",
       "pref": "東京都",
-      "lon": 139.746033,
-      "lat": 35.741772,
+      "lon": 139.742154,
+      "lat": 35.743299,
       "merged_into": "tokyo",
       "merged_year": 1932,
       "name": {
@@ -5274,8 +5274,8 @@
     {
       "id": "hiratsuka-machi",
       "pref": "東京都",
-      "lon": 139.710678,
-      "lat": 35.61203,
+      "lon": 139.710688,
+      "lat": 35.612157,
       "merged_into": "tokyo",
       "merged_year": 1932,
       "name": {

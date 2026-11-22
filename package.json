@@ -22,7 +22,8 @@
     "data:national": "tsx scripts/build-national-pop.ts",
     "data:fetch-osm": "tsx scripts/fetch-osm-townhall.ts",
     "data:check-osm": "tsx scripts/check-coords-osm.ts",
-    "data:layout-shift": "tsx scripts/measure-layout.ts"
+    "data:layout-shift": "tsx scripts/measure-layout.ts",
+    "data:fetch-osm-manual": "tsx scripts/fetch-osm-manual.ts"
   },
   "dependencies": {
     "@navaramap/three": "0.3.1",
