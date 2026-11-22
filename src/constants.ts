@@ -59,11 +59,11 @@ export const LABEL_NOW_DISPLAY: Record<string, string> = { 特別区部: "東京
  */
 export const LABEL_MAX_DISTANCE = 20_000_000;
 
-/** 柱のデータ（scripts/build-data.ts の出力） */
-export const CITIES_URL = "/data/cities.json";
+/** 柱のデータ（scripts/build-data.ts の出力）。GitHub Pages のサブパスでも読めるよう相対パスにする */
+export const CITIES_URL = "data/cities.json";
 
 /** テスト用の仮データ（scripts/build-dummy.ts の出力）。未収集の年を埋める */
-export const DUMMY_URL = "/data/dummy-cities.json";
+export const DUMMY_URL = "data/dummy-cities.json";
 
 /** 上位何位までを出すか */
 export const TOP_N = 30;

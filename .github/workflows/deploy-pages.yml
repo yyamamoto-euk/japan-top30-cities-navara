@@ -1,0 +1,66 @@
+# GitHub Pages への公開ワークフロー（sumidagawa-hanabi-navara の deploy-pages.yml と同じ構成）
+#
+# - Pages を使うには、リポジトリが Public である必要がある
+# - 認証情報（API キーなど）は使わない。このアプリは要らない
+# - eukarya-biz では「GitHub 製、または eukarya-biz 所有の Action」しか使えないので、actions/* だけを使う。
+#   pnpm は pnpm/action-setup ではなく、Node.js に付いている corepack で用意する
+# - configure-pages の enablement: true は、Pages がまだ有効でないリポジトリで、ワークフローから有効化を試みる設定
+#
+# 今は手で動かすときだけ（Actions の画面の「Run workflow」）。
+# eukarya-biz に移したら、on: に push（main）を足して、main への push で自動で公開する：
+#   push:
+#     branches: [main]
+name: Deploy to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Pages の有効化を先に済ませる。ここで失敗するならビルドしても無駄なので、install と build より前に置く
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      # corepack が Node に付いているのは Node 24 まで（Node 25 からは付いていない）なので 24 にする
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      # pnpm は corepack で用意する（サードパーティの Action を使わない）。
+      # pnpm-lock.yaml は lockfileVersion 9.0。手元で lockfile を作った pnpm と同じ版にする
+      - name: Set up pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@11.15.1 --activate
+          pnpm --version
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
