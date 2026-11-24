@@ -62,7 +62,9 @@ export class Intro {
     const title = el("h1", "intro__title", "日本の人口上位30都市 100年比較");
     title.id = "intro-title";
     title.tabIndex = -1; // 読み込み中は、開いたときにここへ移る
-    const lead = el("p", "intro__lead", "明治19年（1886年）から令和7年（2025年）まで、人口の多い30都市の顔ぶれがどう入れ替わったかを、柱の高さで見ます。");
+    const lead = el("p", "intro__lead", 
+      "明治19年（1886年）から令和7年（2025年）まで、おおむね20〜30年おきの9つの年（戦争の前後の1940・1945・1950年は5年おき）で、人口の多い30都市の顔ぶれがどう入れ替わったかを、3D地図 Navara の上に立てた柱の高さで見ます。",
+    );
     lead.id = "intro-lead";
 
     const how = el("ul", "intro__how");
