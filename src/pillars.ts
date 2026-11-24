@@ -88,6 +88,9 @@ export function lerpStates(
 
 type Applied = PillarState & { visible: boolean };
 
+/** まだ一度も入れていない柱の控え。どの値とも等しくならないので、立てるときに位置・高さ・透明度を必ず入れる */
+const UNSET: Applied = { lon: NaN, lat: NaN, height: NaN, opacity: -1, visible: false };
+
 /** 入れ替わりの見せ方（src/main.ts で Navara の効果を足したときの id と、光の色・強さ、外れた柱の色） */
 export type HighlightStyle = {
   /** 入った柱に使う SelectiveBloom の効果の id */
@@ -192,7 +195,9 @@ export class Pillars {
       const visible = s.height >= MIN_VISIBLE_HEIGHT && s.opacity > 0.01;
       if (!visible) {
         if (prev?.visible !== false) handle.update({ visible: false });
-        this.applied.set(id, { ...s, visible: false });
+        // 隠すときは位置・高さ・透明度を入れないので、控えは「実際に入れた値」のままにする（まだ一度も入れていなければ未設定）。
+        // 控えを s で書き換えると、あとで立てるときに位置を入れ直さず、柱が経度0・緯度0に立った（2026-11-25 に直した）
+        this.applied.set(id, { ...(prev ?? UNSET), visible: false });
         continue;
       }
       const update: Parameters<typeof handle.update>[0] = {};
