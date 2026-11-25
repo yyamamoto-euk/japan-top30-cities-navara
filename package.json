@@ -15,6 +15,7 @@
     "data:prefectures": "tsx scripts/build-prefectures-pop.ts",
     "data:prefectures-geo": "node --max-old-space-size=8192 --import tsx scripts/build-prefectures.ts",
     "data:2000": "tsx scripts/build-2000.ts",
+    "data:1965": "tsx scripts/build-1965.ts",
     "data:1990-2010": "tsx scripts/build-timeseries.ts",
     "data:1940-1950": "tsx scripts/build-1940-1950-cities.ts",
     "data:check-1886": "tsx scripts/check-1886.ts",
