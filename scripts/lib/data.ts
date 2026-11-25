@@ -14,7 +14,7 @@ export const PATHS = {
 };
 
 /** SPEC.md の年次 */
-export const YEARS = [1886, 1908, 1925, 1940, 1945, 1950, 1975, 2000, 2025] as const;
+export const YEARS = [1886, 1908, 1925, 1940, 1945, 1950, 1975, 1990, 2000, 2010, 2025] as const;
 
 /** 上位何位までを見せるか */
 export const TOP_N = 30;
