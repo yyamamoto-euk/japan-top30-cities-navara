@@ -59,9 +59,9 @@ export class Intro {
     card.setAttribute("aria-labelledby", "intro-title");
     card.setAttribute("aria-describedby", "intro-lead");
 
-    // 見出しは長いので、折り返すなら全角スペースのところで折る（「（1886〜」で切れないよう、前後を1つずつのかたまりにする）
+    // 見出しは長いので、折り返すなら全角スペースのところで折る（「（1886〜」などで切れないよう、3つのかたまりにする）
     const title = el("h1", "intro__title");
-    title.append(el("span", "intro__title-part", "日本の人口上位30都市"), "　", el("span", "intro__title-part", "明治から令和まで（1886〜2025）"));
+    title.append(el("span", "intro__title-part", "Navaraで見る日本の人口"), "　", el("span", "intro__title-part", "上位30都市の推移"), "　", el("span", "intro__title-part", "明治から令和まで（1886〜2025）"));
     title.id = "intro-title";
     title.tabIndex = -1; // 読み込み中は、開いたときにここへ移る
     const lead = el("p", "intro__lead", 
