@@ -59,7 +59,9 @@ export class Intro {
     card.setAttribute("aria-labelledby", "intro-title");
     card.setAttribute("aria-describedby", "intro-lead");
 
-    const title = el("h1", "intro__title", "日本の人口上位30都市 100年比較");
+    // 見出しは長いので、折り返すなら全角スペースのところで折る（「（1886〜」で切れないよう、前後を1つずつのかたまりにする）
+    const title = el("h1", "intro__title");
+    title.append(el("span", "intro__title-part", "日本の人口上位30都市"), "　", el("span", "intro__title-part", "明治から令和まで（1886〜2025）"));
     title.id = "intro-title";
     title.tabIndex = -1; // 読み込み中は、開いたときにここへ移る
     const lead = el("p", "intro__lead", 
