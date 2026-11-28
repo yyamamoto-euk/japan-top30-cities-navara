@@ -74,9 +74,9 @@ export const SELECT_MIN_DISTANCE = 150_000;
 
 /**
  * 「数え方と条件」（conditions.md）の置き場所。一覧の一言とスタート画面からリンクする。
- * 公開用リポジトリの GitHub 上のファイル。リポジトリを移したら直す
+ * 公開用リポジトリの GitHub 上のファイル。2026-11-28 に、移す先の eukarya-biz にした
  */
-export const CONDITIONS_URL = "https://github.com/yyamamoto-euk/japan-top30-cities-navara/blob/main/conditions.md";
+export const CONDITIONS_URL = "https://github.com/eukarya-biz/japan-top30-cities-navara/blob/main/conditions.md";
 
 /** スタート画面の「はじめる」のあと、遠くから日本へ寄って柱が伸びる長さ（ミリ秒）。アニメーションが ON のとき */
 export const INTRO_MS = 2500;

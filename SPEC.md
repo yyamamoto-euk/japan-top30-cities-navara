@@ -10,8 +10,13 @@
 
 ## 公開（2026-11-22）
 
-- 公開リポジトリは japan-top30-cities-navara（作業用の private リポジトリとは別。履歴を引き継がない）。置き場所は、ゆくゆく eukarya-biz に移す
-- GitHub Pages で公開できる形にした（vite.config.ts の base "./"）。GitHub Actions は使わない（2026-11-28 にワークフローを消した）
+- 公開リポジトリは japan-top30-cities-navara（作業用の private リポジトリとは別。履歴を引き継がない）。置き場所は eukarya-biz（2026-11-28 に決めた）
+- GitHub Pages は「Deploy from a branch」（ブランチ公開）で、gh-pages ブランチのルートから出す（2026-11-28）。main の docs/ は文書とスクリーンショットに使っているので、公開には使わない
+  - GitHub Actions は使わない。.github/workflows/ を置かない（2026-11-28 にワークフローを消した）
+  - ビルド結果（dist の中身）を gh-pages にコミットする。pnpm publish:pages が、ビルド、gh-pages の中身の置き換え、空の .nojekyll、コミットまでを行う。push は手で行う。手順は README の「公開のしかた」
+  - vite.config.ts の base は "./"（リポジトリ名のサブパスで配信されても動くように）
+  - 公開先は https://eukarya-biz.github.io/japan-top30-cities-navara/ 。Settings → Pages の設定は管理者に頼む
+  - Pages は誰でも見られる。社内限定の情報、顧客の情報、パスワードや API キーなどの認証情報を入れない
 - README と見る人向けの文書（conditions.md、data/check/README.md）には、作者の立場（所属など）を書かない
 - 柱の座標は、OpenStreetMap の市役所の点（国土数値情報 P02 から取り込まれた点は使わない）と、OSM に無い市は国土地理院の地名検索の点（2026-11-22）。それまで使っていた国土数値情報 P34 は非商用なので入れ替えた。柱の座標と、それを含む public/data/cities.json は ODbL 1.0（docs/coordinates.md）
 - OpenStreetMap に無い27市の柱の座標は、地理院地図の地名検索で取った点。出典は「電子国土基本図（地名情報）（国土地理院）をもとに作成」と書き、取り方として「地理院地図の地名検索で取得」を添える（国土地理院コンテンツ利用規約の加工の書き方。2026-11-22）

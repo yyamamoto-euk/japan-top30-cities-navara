@@ -41,7 +41,29 @@ pnpm dev
 
 - GitHub Pages はリポジトリ名のサブパス（`/リポジトリ名/`）で配信されるので、`vite.config.ts` で `base: "./"` にし、データも相対パス（`data/cities.json`）で読んでいます。サブパスに置いた `dist` を手元の静的サーバーで開き、読み込みの 404 が無いことを確かめました
 - Navara 0.3.1 の大気・雲などのアセットは、ビルドで `dist/assets` に入ります。前の版（0.1.1・0.2.1）で要った、アセットをコピーするプラグインは入れていません。このアプリは大気の表示を使っていません
-- GitHub Actions は使いません。公開は GitHub Pages のブランチ公開で行います
+- GitHub Actions は使いません。公開は GitHub Pages のブランチ公開で行います（下の「公開のしかた」）
+
+## 公開のしかた
+
+GitHub Pages の「Deploy from a branch」（ブランチ公開）で、`gh-pages` ブランチのルートを公開します。`main` の `docs/` は文書とスクリーンショットに使っているので、公開には使いません。GitHub Actions は使いません。
+
+公開先：https://eukarya-biz.github.io/japan-top30-cities-navara/
+
+1. `main` の変更をコミットしてから、ビルド結果を `gh-pages` ブランチにコミットします。
+
+   ```powershell
+   pnpm publish:pages
+   ```
+
+   `pnpm build` のあと、`gh-pages` の中身を `dist` の中身で置き換え、空の `.nojekyll` を足してコミットします。コミットのメッセージには、元にした `main` のコミットの短いハッシュが入ります。push はしません。コミットしていない変更があるときと、`dist` に 100MB を超えるファイルがあるときは止まります。
+2. 中身を確かめます。`pnpm preview` で `dist`（`gh-pages` と同じ中身）を開くか、`git show --stat gh-pages` でコミットしたファイルを見ます。
+3. 公開します。
+
+   ```powershell
+   git push origin gh-pages
+   ```
+
+最初の1回だけ、リポジトリの Settings → Pages で、Source を「Deploy from a branch」、Branch を `gh-pages` と `/(root)` にします（管理者に依頼）。
 
 ## データ
 
